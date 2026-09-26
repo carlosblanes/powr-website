@@ -53,8 +53,8 @@ window.POWR_PRODUCTS = {
     stripeLink: '',
     shortEn: 'Your phone becomes a velocity tracker on any Olympic bar.',
     shortEs: 'Tu móvil se convierte en un medidor de velocidad en cualquier barra olímpica.',
-    boxEn: ['Phone ring — sticks to your phone or case', 'Double-sided N52 magnet', 'POWR Bar Clip support — fits 50 mm Olympic sleeves'],
-    boxEs: ['Anillo para el móvil — se pega al móvil o a la funda', 'Imán N52 de doble cara', 'Soporte POWR Bar Clip — manguitos olímpicos de 50 mm'],
+    boxEn: ['Phone ring — sticks to your phone or case', 'Double-sided N52 magnet', 'POWR Bar Clip support with 4 silicone grip strips — fits 50 mm Olympic sleeves'],
+    boxEs: ['Anillo para el móvil — se pega al móvil o a la funda', 'Imán N52 de doble cara', 'Soporte POWR Bar Clip con 4 tiras de silicona — manguitos olímpicos de 50 mm'],
     colors: [
       { id: 'black', en: 'Graphite', es: 'Grafito', hex: '#1d2021', img: 'assets/img/clip-hero.jpg' },
       { id: 'chalk', en: 'Chalk', es: 'Tiza', hex: '#e9e6df', img: 'assets/img/clip-chalk.jpg' },

@@ -1,7 +1,8 @@
 /*
  * Interactive 3D viewer for POWR hardware, straight from the CAD STL files.
- * mountViewer(el, { parts: [{url, color}], bar: 'y'|'z', autoRotate, cameraDist })
- * Model frames: bar clip = Z up, bar along Y; collar = bar along Z. Both centred on the bar axis.
+ * mountViewer(el, { parts: [{url, color}], bar: 'x'|'z', autoRotate, cameraDist })
+ * Model frames: bar clip = Z up, bar along X (see hardware/bar_clip/analysis/revF/revF_build.py);
+ * collar = bar along Z. Both centred on the bar axis.
  */
 import * as THREE from 'three';
 import { STLLoader } from 'three/addons/loaders/STLLoader.js';
@@ -23,7 +24,7 @@ export function makeMaterial(hex, finish = 'satin') {
 }
 
 export async function mountViewer(el, opts = {}) {
-  const { parts = [], bar = 'y', autoRotate = true, cameraDist = 150, barLength = 190, zoom = false, tilt = 0.5 } = opts;
+  const { parts = [], bar = 'x', autoRotate = true, cameraDist = 150, barLength = 190, zoom = false, tilt = 0.5, strips = null, barRadius = 24.8 } = opts;
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -44,7 +45,7 @@ export async function mountViewer(el, opts = {}) {
   // Everything lives in a group whose frame is: bar axis along world X, up = world Y.
   const group = new THREE.Group(); scene.add(group);
   const model = new THREE.Group(); group.add(model);
-  if (bar === 'y') { model.rotation.x = -Math.PI / 2; model.rotation.z = Math.PI / 2; } // Z-up, bar along Y  -> Y-up, bar along X
+  if (bar === 'x') { model.rotation.x = -Math.PI / 2; }                                   // Z-up, bar along X -> Y-up, bar along X
   else { model.rotation.y = Math.PI / 2; }                                           // bar along Z -> bar along X
 
   const meshes = [];
@@ -55,10 +56,25 @@ export async function mountViewer(el, opts = {}) {
     model.add(m); meshes.push(m);
   });
 
-  // Ghost barbell sleeve for scale: knurl-less chrome, Ø50.
+  // Silicone grip strips in the bore channels (bar clip only). Each strip is 1.0 mm thick, sits in a
+  // 0.4 mm channel and stands 0.6 mm proud, so the bar touches the strips, not the plastic.
+  // Values from revF_build.py: bore Ø49.8, channels at the given angles from the top, 6 mm wide.
+  if (strips) {
+    const rubber = new THREE.MeshPhysicalMaterial({ color: '#0b0c0c', roughness: 0.9, metalness: 0 });
+    const r = strips.bore / 2;
+    strips.list.forEach(({ angle, half }) => {
+      const g = new THREE.Group();
+      const m = new THREE.Mesh(new THREE.BoxGeometry(2 * half, strips.width, strips.thickness), rubber);
+      m.position.z = r + strips.depth - strips.thickness / 2;   // outer face at the channel floor
+      g.add(m); g.rotation.x = -THREE.MathUtils.degToRad(angle);
+      model.add(g);
+    });
+  }
+
+  // Barbell sleeve for scale: knurl-less chrome.
   if (barLength) {
     const sleeve = new THREE.Mesh(
-      new THREE.CylinderGeometry(24.8, 24.8, barLength, 64, 1, false),
+      new THREE.CylinderGeometry(barRadius, barRadius, barLength, 64, 1, false),
       new THREE.MeshPhysicalMaterial({ color: '#9aa4a4', metalness: 1, roughness: 0.3, side: THREE.DoubleSide })
     );
     sleeve.rotation.z = Math.PI / 2;
@@ -95,3 +111,10 @@ export async function mountViewer(el, opts = {}) {
     renderer, scene, camera, controls, model,
   };
 }
+
+/* The POWR Bar Clip rev F as installed: four silicone strips, bar resting on them. */
+export const CLIP_STRIPS = {
+  bore: 49.8, width: 6.0, thickness: 1.0, depth: 0.4,
+  list: [-90.4, -63.3, 63.3, 90.4].map((angle) => ({ angle, half: 27 })),
+};
+export const CLIP_BAR_RADIUS = 49.8 / 2 + 0.4 - 1.0;   // bar surface touches the strips' inner faces

@@ -55,10 +55,10 @@
   const p = P[id];
 
   const GALLERY = {
-    kit: ['3d', 'assets/img/clip-hero.jpg', 'assets/img/clip-chalk.jpg', 'assets/img/clip-side.jpg', 'assets/img/ring.jpg'],
+    kit: ['3d', 'assets/img/clip-hero.jpg', 'assets/img/clip-strips.jpg', 'assets/img/clip-chalk.jpg', 'assets/img/ring.jpg'],
   };
   const SPECS = {
-    kit: [['Support', 'POWR Bar Clip, PETG, ≈ 42 g', 'POWR Bar Clip, PETG, ≈ 42 g', 'Soporte'], ['Fits', 'Olympic sleeves Ø50 mm', 'Manguitos olímpicos Ø50 mm', 'Compatible'], ['Magnet', 'Double-sided, N52 neodymium', 'Doble cara, neodimio N52', 'Imán'], ['Phone ring', 'Adhesive, MagSafe size (Ø46–54 mm)', 'Adhesivo, tamaño MagSafe (Ø46–54 mm)', 'Anillo'], ['Grip', 'Rubber strips, replaceable', 'Tiras de goma, reemplazables', 'Agarre'], ['Anti-rotation', 'Designed for > 0.9 N·m on the sleeve', 'Diseñado para > 0,9 N·m sobre el manguito', 'Anti-giro'], ['Made in', 'Spain', 'España', 'Fabricado en']],
+    kit: [['Support', 'POWR Bar Clip, PETG, ≈ 42 g', 'POWR Bar Clip, PETG, ≈ 42 g', 'Soporte'], ['Fits', 'Olympic sleeves Ø50 mm', 'Manguitos olímpicos Ø50 mm', 'Compatible'], ['Magnet', 'Double-sided, N52 neodymium', 'Doble cara, neodimio N52', 'Imán'], ['Phone ring', 'Adhesive, MagSafe size (Ø46–54 mm)', 'Adhesivo, tamaño MagSafe (Ø46–54 mm)', 'Anillo'], ['Grip', '4 silicone strips in the bore, replaceable', '4 tiras de silicona en el interior, reemplazables', 'Agarre'], ['Anti-rotation', 'Designed for > 0.9 N·m on the sleeve', 'Diseñado para > 0,9 N·m sobre el manguito', 'Anti-giro'], ['Made in', 'Spain', 'España', 'Fabricado en']],
   };
 
   document.title = `${p.name} — POWR`;
@@ -130,9 +130,9 @@
         viewerEl = document.createElement('div'); viewerEl.style.cssText = 'position:absolute;inset:0';
         stage.appendChild(viewerEl);
         try {
-          const { mountViewer } = await import('./assets/js/viewer.js');
+          const { mountViewer, CLIP_STRIPS, CLIP_BAR_RADIUS } = await import('./assets/js/viewer.js');
           const hex = (p.colors.find((c) => c.id === color) || p.colors[0]).hex;
-          viewer = await mountViewer(viewerEl, { parts: [{ url: p.model, color: hex }], bar: 'y', cameraDist: 270, barLength: 150, tilt: 0.42 });
+          viewer = await mountViewer(viewerEl, { parts: [{ url: p.model, color: hex }], bar: 'x', cameraDist: 270, barLength: 150, tilt: 0.42, strips: CLIP_STRIPS, barRadius: CLIP_BAR_RADIUS });
         } catch { viewerEl.innerHTML = `<img src="${p.img}" alt="" style="width:100%;height:100%;object-fit:cover">`; }
       }
       viewerEl.style.display = '';
@@ -150,7 +150,7 @@
     if (!id.includes('kit')) { ex.style.display = 'none'; return; }
     ex.innerHTML = `<div class="wrap"><div class="head center"><span class="eyebrow">${t('Designed to disappear', 'Diseñado para desaparecer')}</span><h2>${t('Engineered like a barbell collar.', 'Diseñado como un collarín.')}</h2></div>
       <div class="grid g3">
-        <div class="card reveal"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4"/></svg>'}</div><h3>${t('Wraps 200° of the bar', 'Abraza 200° de la barra')}</h3><p>${t('Snaps onto the sleeve and grips with rubber strips, so it does not spin when the bar rolls.', 'Se engancha al manguito y agarra con tiras de goma: no gira cuando la barra rueda.')}</p></div>
+        <div class="card reveal"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4"/></svg>'}</div><h3>${t('Wraps 200° of the bar', 'Abraza 200° de la barra')}</h3><p>${t('Snaps onto the sleeve and grips on four silicone strips, so it does not spin when the bar rolls.', 'Se engancha al manguito y agarra sobre cuatro tiras de silicona: no gira cuando la barra rueda.')}</p></div>
         <div class="card reveal d1"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20h16M6 16l6-12 6 12"/></svg>'}</div><h3>${t('A flat face for the phone', 'Una cara plana para el móvil')}</h3><p>${t('Optimised in 1,600+ simulated shapes so the magnetic face stays flat under load — the phone sits flush and reads true.', 'Optimizado entre más de 1.600 formas simuladas para que la cara magnética siga plana con carga: el móvil apoya bien y mide bien.')}</p></div>
         <div class="card reveal d2"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M5 8l7-5 7 5"/></svg>'}</div><h3>${t('42 grams', '42 gramos')}</h3><p>${t('Light enough to forget. Stays on between sets, comes off in a second.', 'Tan ligero que te olvidas. Se queda puesto entre series y se quita en un segundo.')}</p></div>
       </div></div>`;
