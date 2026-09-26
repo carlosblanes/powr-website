@@ -21,6 +21,10 @@
       if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
       el.innerHTML = lang === 'es' ? el.dataset.es : el.dataset.en;
     });
+    $$('[data-es-svg]', root).forEach((el) => {
+      if (el.dataset.enSvg === undefined) el.dataset.enSvg = el.textContent;
+      el.textContent = lang === 'es' ? el.dataset.esSvg : el.dataset.enSvg;
+    });
     $$('[data-es-ph]', root).forEach((el) => {
       if (el.dataset.enPh === undefined) el.dataset.enPh = el.placeholder;
       el.placeholder = lang === 'es' ? el.dataset.esPh : el.dataset.enPh;
@@ -48,22 +52,22 @@
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   };
   window.POWR_ICONS = I;
-  const LOGO = `<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 21.5 L12 20.5 L15.5 25.5 L20.5 9 L23.5 22 L26.5 15.5 L35 16" fill="none" stroke="#38f0d7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const LOGO = `<img class="logo-mark" src="assets/img/logo-mark.png" alt="" width="34" height="34"><img class="logo-word" src="assets/img/logo-wordmark.png" alt="POWR" height="20">`;
   window.POWR_LOGO = LOGO;
 
   /* ---------------- header / footer ---------------- */
   const page = document.body.dataset.page || '';
   const cur = (p) => (page === p ? ' aria-current="page"' : '');
   const header = `
-  <div class="announce"><span data-es="Kit de lanzamiento desde <b>29 €</b> · Envío gratis desde 40 € · <a href='gyms.html'>Programa gimnasios fundadores</a>">Launch kit from <b>€29</b> · Free shipping over €40 · <a href="gyms.html">Founding gyms programme</a></span></div>
+  <div class="announce"><span data-es="POWR Kit por <b>29 €</b> · Envío gratis desde 40 € · <a href='gyms.html'>Programa gimnasios fundadores</a>">POWR Kit <b>€29</b> · Free shipping over €40 · <a href="gyms.html">Founding gyms programme</a></span></div>
   <header class="nav" id="nav">
     <div class="wrap">
-      <a class="logo" href="index.html" aria-label="POWR home">${LOGO}<span>POWR</span></a>
+      <a class="logo" href="index.html" aria-label="POWR home">${LOGO}</a>
       <nav class="nav-links" aria-label="Main">
         <a href="index.html#how"${cur('home')} data-es="Cómo funciona">How it works</a>
         <a href="shop.html"${cur('shop')} data-es="Tienda">Shop</a>
         <a href="gyms.html"${cur('gyms')} data-es="Gimnasios">For gyms</a>
-        <a href="index.html#sensors" data-es="Sensores Pro">Pro sensors</a>
+        <a href="index.html#app" data-es="La app">The app</a>
         <a href="contact.html"${cur('contact')} data-es="Contacto">Contact</a>
       </nav>
       <div class="nav-right">
@@ -79,9 +83,9 @@
     <a href="index.html#how" data-es="Cómo funciona">How it works</a>
     <a href="shop.html" data-es="Tienda">Shop</a>
     <a href="gyms.html" data-es="Gimnasios">For gyms</a>
-    <a href="index.html#sensors" data-es="Sensores Pro">Pro sensors</a>
+    <a href="index.html#app" data-es="La app">The app</a>
     <a href="contact.html" data-es="Contacto">Contact</a>
-    <a class="btn block" href="shop.html" data-es="Comprar el kit · desde 29 €">Get the kit · from €29</a>
+    <a class="btn block" href="shop.html" data-es="Comprar el kit · 29 €">Get the kit · €29</a>
     <div class="social-row"><a href="${S.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a>${S.email ? `<a href="mailto:${S.email}" aria-label="Email">${I.mail}</a>` : ''}</div>
   </nav>`;
 
@@ -90,7 +94,7 @@
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <a class="logo" href="index.html">${LOGO}<span>POWR</span></a>
+          <a class="logo" href="index.html" aria-label="POWR home">${LOGO}</a>
           <p class="muted small" style="margin-top:16px;max-width:36ch" data-es="Entrenamiento basado en la velocidad con el móvil que ya llevas. Hecho en Madrid.">Velocity-based training with the phone you already own. Made in Madrid.</p>
           <form class="newsletter" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-powr-form>
             <input type="hidden" name="form-name" value="newsletter">
@@ -102,10 +106,10 @@
           <p class="xs muted" style="margin-top:10px" data-es="Lanzamientos y acceso anticipado. Sin spam.">Launches and early access. No spam.</p>
         </div>
         <div><h4 data-es="Producto">Product</h4><ul>
-          <li><a href="product.html?id=clip-kit">Bar Clip Kit</a></li>
-          <li><a href="product.html?id=complete-kit">Complete Kit</a></li>
-          <li><a href="shop.html#accessories" data-es="Accesorios">Accessories</a></li>
-          <li><a href="index.html#sensors" data-es="Sensores Pro (próximamente)">Pro sensors (soon)</a></li>
+          <li><a href="product.html?id=kit">POWR Kit</a></li>
+          <li><a href="shop.html#box" data-es="Qué incluye">What's in the box</a></li>
+          <li><a href="index.html#how" data-es="Cómo funciona">How it works</a></li>
+          <li><a href="index.html#sensors" data-es="POWR Collar (próximamente)">POWR Collar (coming later)</a></li>
         </ul></div>
         <div><h4 data-es="Empresas">Business</h4><ul>
           <li><a href="gyms.html" data-es="POWR para gimnasios">POWR for gyms</a></li>
@@ -192,16 +196,8 @@
       <a class="btn block" href="checkout.html">${t('Checkout', 'Finalizar pedido')} →</a>
       <div class="pay-icons"><span>VISA</span><span>MASTERCARD</span><span>APPLE PAY</span><span>GOOGLE PAY</span><span>BIZUM</span></div>`;
   }
-  function upsell() {
-    const ids = cart.map((l) => l.id);
-    const pick = ['ring', 'nfc-tags', 'band'].find((id) => !ids.includes(id) && !ids.includes('complete-kit'));
-    if (!pick) return '';
-    const p = P[pick];
-    return `<div style="margin:18px 0;padding:14px;border:1px dashed var(--line-2);border-radius:14px;display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center">
-      <img src="${p.img}" alt="" style="width:52px;height:52px;border-radius:10px;object-fit:cover">
-      <div><b style="font-size:14px">${p.name}</b><div class="xs muted">${t(p.shortEn, p.shortEs)}</div></div>
-      <button class="btn sm ghost" data-add="${pick}">+ ${money(p.price)}</button></div>`;
-  }
+  function upsell() { return ''; } // one kit, nothing to upsell
+
 
   function openDrawer() { $('#drawer').classList.add('on'); $('#scrim').classList.add('on'); $('#drawer').setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
   function closeDrawer() { $('#drawer').classList.remove('on'); $('#scrim').classList.remove('on'); $('#drawer').setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }

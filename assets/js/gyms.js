@@ -27,10 +27,10 @@
 
   /* ---- leaderboard demo ---- */
   const EX = [
-    { id: 'bench', en: 'Bench press', es: 'Press banca', base: 1.05 },
-    { id: 'squat', en: 'Back squat', es: 'Sentadilla', base: 1.18 },
-    { id: 'dead', en: 'Deadlift', es: 'Peso muerto', base: 0.98 },
-    { id: 'lat', en: 'Lat pulldown', es: 'Jalón al pecho', base: 1.32 },
+    { id: 'bench', en: 'Bench Press · 80 kg', es: 'Press banca · 80 kg', base: 0.62 },
+    { id: 'squat', en: 'Squat · 100 kg', es: 'Sentadilla · 100 kg', base: 0.78 },
+    { id: 'dead', en: 'Deadlift · 140 kg', es: 'Peso muerto · 140 kg', base: 0.66 },
+    { id: 'lat', en: 'Lat Pulldown · 60 kg', es: 'Jalón al pecho · 60 kg', base: 0.95 },
   ];
   const CAT = [
     { id: 'all', en: 'All', es: 'Todos' },
@@ -59,7 +59,7 @@
     $('catChips').innerHTML = CAT.map((c) => `<button class="chip${c.id === cat ? ' on' : ''}" data-cat="${c.id}">${t(c.en, c.es)}</button>`).join('');
     $('boardRows').innerHTML = rows().map((r, i) => `<div class="board-row${r.n === 'Diego L.' ? ' you' : ''}"><span class="rank">${i + 1}</span><span class="who"><span class="avatar">${r.n.split(' ').map((w) => w[0]).join('')}</span><span>${r.n}${r.n === 'Diego L.' ? ` <span class="teal xs">· ${t('you', 'tú')}</span>` : ''}<small>${r.age} ${t('yrs', 'años')}</small></span></span><span class="val">${r.v.toFixed(2)} m/s</span><span class="delta" style="color:${r.d > 0 ? 'var(--green)' : r.d < 0 ? 'var(--red)' : ''}">${r.d > 0 ? '▲' + r.d : r.d < 0 ? '▼' + -r.d : '—'}</span></div>`).join('')
       || `<div class="board-row"><span></span><span class="muted">${t('No one in this category yet', 'Nadie en esta categoría todavía')}</span></div>`;
-    $('boardPeriod').textContent = t('Fastest rep · this week', 'Rep más rápida · esta semana');
+    $('boardPeriod').textContent = t('Fastest rep · peak m/s · this week', 'Rep más rápida · pico m/s · esta semana');
   }
   document.addEventListener('click', (e) => {
     const a = e.target.closest('[data-ex]'); if (a) { ex = a.dataset.ex; renderBoard(); }
@@ -75,17 +75,17 @@
   /* ---- plans ---- */
   function renderPlans() {
     const feat = {
-      studio: [t('Up to 20 tagged stations', 'Hasta 20 estaciones etiquetadas'), t('Gym listed in the app', 'Gimnasio dado de alta en la app'), t('Leaderboards by age, weight, machine', 'Rankings por edad, peso y máquina'), t('Owner dashboard', 'Panel del gimnasio'), t('Launch kit: posters + staff training', 'Kit de lanzamiento: carteles + formación')],
-      club: [t('Up to 60 tagged stations', 'Hasta 60 estaciones etiquetadas'), t('Everything in Studio', 'Todo lo de Studio'), t('Monthly challenges, run by us', 'Retos mensuales, gestionados por nosotros'), t('Your logo on tags and in the app', 'Tu logo en etiquetas y en la app'), t('Priority support', 'Soporte prioritario')],
-      performance: [t('120 stations included, then €1 each', '120 estaciones incluidas, luego 1 € cada una'), t('Everything in Club', 'Todo lo de Club'), t('Multi-location leaderboards', 'Rankings entre centros'), t('Data export and API', 'Exportación de datos y API'), t('Dedicated account manager', 'Gestor de cuenta dedicado')],
+      gym: [t('Up to 30 tagged stations', 'Hasta 30 estaciones etiquetadas'), t('Your gym listed in the app', 'Tu gimnasio dado de alta en la app'), t('Leaderboards by age, weight and machine', 'Rankings por edad, peso y máquina'), t('Owner dashboard', 'Panel del gimnasio'), t('Launch kit: posters + staff training', 'Kit de lanzamiento: carteles + formación')]
+      ,
+      pro: [t('Unlimited stations (100 included, then €1 each)', 'Estaciones ilimitadas (100 incluidas, luego 1 € cada una)'), t('Everything in Gym', 'Todo lo de Gym'), t('Monthly challenges, run by us', 'Retos mensuales, gestionados por nosotros'), t('Your logo on tags and in the app', 'Tu logo en etiquetas y en la app'), t('Several locations, shared leaderboards', 'Varios centros con rankings compartidos'), t('Priority support', 'Soporte prioritario')],
     };
-    const desc = { studio: t('Boutique gyms and studios', 'Boxes y estudios'), club: t('Full commercial gyms', 'Gimnasios comerciales'), performance: t('Chains and performance centres', 'Cadenas y centros de alto rendimiento') };
-    $('plans').innerHTML = G.plans.map((p) => `<div class="plan reveal${p.id === 'club' ? ' featured' : ''}">
-      <div style="display:flex;justify-content:space-between;align-items:center"><h3>${p.name}</h3>${p.id === 'club' ? `<span class="tag solid">${t('Most chosen', 'Más elegido')}</span>` : ''}</div>
+    const desc = { gym: t('Studios, boxes and neighbourhood gyms', 'Estudios, boxes y gimnasios de barrio'), pro: t('Large gyms and chains', 'Gimnasios grandes y cadenas') };
+    $('plans').innerHTML = G.plans.map((p) => `<div class="plan reveal${p.id === 'pro' ? ' featured' : ''}">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h3>${p.name}</h3>${p.id === 'pro' ? `<span class="tag solid">${t('All included', 'Todo incluido')}</span>` : ''}</div>
       <p class="muted small">${desc[p.id]}</p>
       <div class="price">${money(p.monthly)}<span style="font-size:.42em;color:var(--muted);font-weight:600">/${t('month', 'mes')}</span><small>+ ${money(G.setupPerStation)} ${t('per station, one-off installation', 'por estación, instalación única')}</small></div>
       <ul>${feat[p.id].map((f) => `<li>${f}</li>`).join('')}</ul>
-      <a class="btn ${p.id === 'club' ? '' : 'ghost'}" href="#quote" data-plan="${p.id}">${t('Get a quote', 'Pedir presupuesto')}</a>
+      <a class="btn ${p.id === 'pro' ? '' : 'ghost'}" href="#quote" data-plan="${p.id}">${t('Get a quote', 'Pedir presupuesto')}</a>
     </div>`).join('');
     observe($('plans'));
   }

@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>POWR Bar Clip Kit — POWR</title>
+<title>POWR Kit — POWR</title>
 <meta name="description" content="Turn your phone into a velocity-based training device. The POWR Bar Clip fits any 50 mm Olympic sleeve.">
 <meta name="theme-color" content="#070909">
 <meta property="og:image" content="assets/img/og.jpg">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
@@ -32,8 +32,14 @@
 
 <section class="section alt">
   <div class="wrap">
-    <div class="head"><span class="eyebrow" data-es="Completa tu equipo">Complete your setup</span><h2 style="font-size:clamp(28px,3.6vw,44px)" data-es="También te puede interesar">You might also like</h2></div>
-    <div class="products" id="cross"></div>
+    <div class="cta-band">
+      <div style="position:relative;display:grid;gap:14px">
+        <span class="eyebrow" data-es="Para gimnasios">For gyms</span>
+        <h2 data-es="¿Tienes un gimnasio?">Own a gym?</h2>
+        <p class="lede" data-es="Etiquetamos tus máquinas, damos de alta tu gimnasio en la app y tus socios compiten en rankings.">We tag your machines, list your gym in the app and your members compete on leaderboards.</p>
+      </div>
+      <div class="actions"><a class="btn" href="gyms.html" data-es="POWR para gimnasios →">POWR for gyms →</a></div>
+    </div>
   </div>
 </section>
 
@@ -45,20 +51,15 @@
   const { t, money, add, card, observe, applyLang } = window.POWR;
   const P = window.POWR_PRODUCTS;
   let id = new URLSearchParams(location.search).get('id');
-  if (!P[id]) id = 'clip-kit';
+  if (!P[id]) id = 'kit';
   const p = P[id];
 
   const GALLERY = {
-    'clip-kit': ['3d', 'assets/img/clip-hero.jpg', 'assets/img/clip-chalk.jpg', 'assets/img/clip-side.jpg', 'assets/img/ring.jpg'],
-    'complete-kit': ['3d', 'assets/img/kit-complete.jpg', 'assets/img/clip-hero.jpg', 'assets/img/band.jpg', 'assets/img/nfc-tags.jpg'],
-    'ring': ['assets/img/ring.jpg', 'assets/img/clip-hero.jpg'],
-    'band': ['assets/img/band.jpg'],
-    'nfc-tags': ['assets/img/nfc-tags.jpg', 'assets/img/gym-nfc.jpg'],
+    kit: ['3d', 'assets/img/clip-hero.jpg', 'assets/img/clip-chalk.jpg', 'assets/img/clip-side.jpg', 'assets/img/ring.jpg'],
   };
   const SPECS = {
-    'clip-kit': [['Material', 'PETG, 4 walls', 'PETG, 4 paredes'], ['Mass', '≈ 42 g', '≈ 42 g', 'Peso'], ['Fits', 'Olympic sleeves Ø50 mm', 'Manguitos olímpicos Ø50 mm', 'Compatible'], ['Phone mount', 'MagSafe ring pattern Ø46–54 mm, N52 magnets', 'Patrón MagSafe Ø46–54 mm, imanes N52', 'Sujeción'], ['Grip', '4 rubber strips, replaceable', '4 tiras de goma, reemplazables', 'Agarre'], ['Anti-rotation', 'Designed for > 0.9 N·m on the sleeve', 'Diseñado para > 0,9 N·m sobre el manguito', 'Anti-giro'], ['Made in', 'Spain', 'España', 'Fabricado en']],
+    kit: [['Support', 'POWR Bar Clip, PETG, ≈ 42 g', 'POWR Bar Clip, PETG, ≈ 42 g', 'Soporte'], ['Fits', 'Olympic sleeves Ø50 mm', 'Manguitos olímpicos Ø50 mm', 'Compatible'], ['Magnet', 'Double-sided, N52 neodymium', 'Doble cara, neodimio N52', 'Imán'], ['Phone ring', 'Adhesive, MagSafe size (Ø46–54 mm)', 'Adhesivo, tamaño MagSafe (Ø46–54 mm)', 'Anillo'], ['Grip', 'Rubber strips, replaceable', 'Tiras de goma, reemplazables', 'Agarre'], ['Anti-rotation', 'Designed for > 0.9 N·m on the sleeve', 'Diseñado para > 0,9 N·m sobre el manguito', 'Anti-giro'], ['Made in', 'Spain', 'España', 'Fabricado en']],
   };
-  SPECS['complete-kit'] = SPECS['clip-kit'];
 
   document.title = `${p.name} — POWR`;
   let color = p.colors ? p.colors[0].id : null;
@@ -90,7 +91,7 @@
       <div class="acc">
         <details open><summary>${t("What's in the box", 'Qué incluye')}</summary><div class="acc-body"><ul class="ticks">${box.map((b) => `<li><span>${b}</span></li>`).join('')}</ul></div></details>
         ${specs ? `<details><summary>${t('Specifications', 'Especificaciones')}</summary><div class="acc-body"><table class="spec">${specs.map((s) => `<tr><td>${t(s[0], s[3] || s[0])}</td><td>${t(s[1], s[2])}</td></tr>`).join('')}</table></div></details>` : ''}
-        <details><summary>${t('Compatibility', 'Compatibilidad')}</summary><div class="acc-body"><p>${t('MagSafe iPhones (12 and later) snap on directly. Any other phone works with the magnetic ring stuck to its case. The POWR app is in beta on iPhone — every order includes access. Android is on the way.', 'Los iPhone con MagSafe (12 y posteriores) se enganchan directamente. Cualquier otro móvil funciona con el anillo magnético pegado a su funda. La app POWR está en beta para iPhone — cada pedido incluye acceso. Android está en camino.')}</p></div></details>
+        <details><summary>${t('Compatibility', 'Compatibilidad')}</summary><div class="acc-body"><p>${t('MagSafe iPhones (12 and later) snap on directly. Any other phone works with the magnetic ring stuck to its case. The POWR app is in beta on iPhone — every order includes access.', 'Los iPhone con MagSafe (12 y posteriores) se enganchan directamente. Cualquier otro móvil funciona con el anillo magnético pegado a su funda. La app POWR está en beta para iPhone — cada pedido incluye acceso.')}</p></div></details>
         <details><summary>${t('Shipping & returns', 'Envíos y devoluciones')}</summary><div class="acc-body"><p>${t('Spain (peninsula) 2–4 working days · EU 4–7 days · free pickup in Madrid. Free shipping over €40. Return within 30 days for a full refund.', 'España península 2–4 días laborables · UE 4–7 días · recogida gratis en Madrid. Envío gratis desde 40 €. Devuélvelo en 30 días y te reembolsamos todo.')} <a class="teal" href="legal.html#shipping">${t('Details', 'Detalles')}</a></p></div></details>
       </div>`;
     wire();
@@ -155,12 +156,7 @@
       </div></div>`;
     observe(ex);
   }
-  function renderCross() {
-    const others = window.POWR_SHOP_ORDER.filter((x) => x !== id).slice(0, 3);
-    document.getElementById('cross').innerHTML = others.map((x) => card(x, x === 'complete-kit')).join('');
-    observe();
-  }
-  function all() { renderInfo(); renderExtra(); renderCross(); }
+  function all() { renderInfo(); renderExtra(); }
   all();
   document.addEventListener('powr:lang', all);
 

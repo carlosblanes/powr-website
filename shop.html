@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Shop — POWR</title>
 <meta name="title-es" content="Tienda — POWR">
-<meta name="description" content="POWR kits and accessories: the Bar Clip Kit from €29, the Complete Kit, magnetic rings, NFC tags and forearm bands.">
+<meta name="description" content="The POWR Kit: phone ring, magnet and bar support — everything you need to turn your phone into a velocity-based training coach. €29.">
 <meta name="theme-color" content="#070909">
 <meta property="og:image" content="assets/img/og.jpg">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
@@ -16,18 +16,32 @@
 </head>
 <body data-page="shop">
 
-<section class="page-hero">
+<section class="page-hero" style="padding-bottom:32px">
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="crumbs"><a href="index.html" data-es="Inicio">Home</a><span>/</span><span data-es="Tienda">Shop</span></div>
-    <h1 data-es="Todo lo que necesitas para medir cada rep.">Everything you need to measure every rep.</h1>
-    <p class="lede" data-es="Kits listos para usar. Envío en 2–4 días, gratis desde 40 €. 30 días para devolverlo.">Ready-to-use kits. Ships in 2–4 days, free over €40. 30 days to return.</p>
+    <h1 data-es="Un kit. Todo lo que necesitas.">One kit. Everything you need.</h1>
+    <p class="lede" data-es="Tres piezas y tu móvil. Envío en 2–4 días. 30 días para devolverlo.">Three parts and your phone. Ships in 2–4 days. 30 days to return it.</p>
   </div>
 </section>
 
 <section class="section tight" style="padding-top:0">
   <div class="wrap">
-    <div class="products" id="kits"></div>
+    <div class="shop-hero reveal">
+      <a class="shop-media" href="product.html?id=kit"><img src="assets/img/clip-hero.jpg" alt="POWR Bar Clip on an Olympic sleeve" id="shopImg"><span class="tag solid" data-es="Todo lo que necesitas">Everything you need</span></a>
+      <div class="shop-info" id="shopInfo"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="box">
+  <div class="wrap">
+    <div class="head center"><span class="eyebrow" data-es="Qué incluye">What's in the box</span><h2 data-es="Tres piezas. Diez segundos.">Three parts. Ten seconds.</h2></div>
+    <div class="grid g3 box-grid">
+      <div class="card reveal"><div class="box-ill"><svg viewBox="0 0 120 120" fill="none"><rect x="30" y="8" width="60" height="104" rx="12" stroke="#b9c3c2" stroke-width="2.5"/><circle cx="60" cy="60" r="21" stroke="#38f0d7" stroke-width="4"/><circle cx="60" cy="60" r="13" stroke="#38f0d7" stroke-width="1.5" stroke-dasharray="2 3"/></svg></div><span class="tag teal" style="width:fit-content">01</span><h3 data-es="Anillo para el móvil">Phone ring</h3><p data-es="Se pega al móvil o a la funda. Si tu iPhone tiene MagSafe, no lo necesitas.">Sticks to your phone or case. If your iPhone has MagSafe, you don't even need it.</p></div>
+      <div class="card reveal d1"><div class="box-ill"><img src="assets/img/ring.jpg" alt=""></div><span class="tag teal" style="width:fit-content">02</span><h3 data-es="Imán">Magnet</h3><p data-es="Neodimio N52 de doble cara. Une el móvil al soporte y lo suelta con un giro.">Double-sided N52 neodymium. Joins phone and support, and lets go with a twist.</p></div>
+      <div class="card reveal d2"><div class="box-ill"><img src="assets/img/clip-side.jpg" alt=""></div><span class="tag teal" style="width:fit-content">03</span><h3 data-es="Soporte para la barra">Bar support</h3><p data-es="El POWR Bar Clip abraza el manguito olímpico de 50 mm y no gira cuando la barra rueda.">The POWR Bar Clip hugs any 50 mm Olympic sleeve and doesn't spin when the bar rolls.</p></div>
+    </div>
   </div>
 </section>
 
@@ -42,40 +56,13 @@
   </div>
 </section>
 
-<section class="section alt" id="accessories">
-  <div class="wrap">
-    <div class="head"><span class="eyebrow" data-es="Accesorios">Accessories</span><h2 data-es="Completa tu equipo.">Complete your setup.</h2></div>
-    <div class="products" id="acc"></div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="head center"><span class="eyebrow" data-es="Comparar kits">Compare kits</span><h2 data-es="¿Qué kit es para ti?">Which kit is for you?</h2></div>
-    <div class="compare-wrap">
-      <table class="compare">
-        <thead><tr><th></th><th>Bar Clip Kit</th><th class="us">Complete Kit</th></tr></thead>
-        <tbody>
-          <tr><td data-es="Precio">Price</td><td id="p1"></td><td class="us" id="p2"></td></tr>
-          <tr><td data-es="Barra olímpica">Olympic barbell</td><td class="yes">●</td><td class="us yes">●</td></tr>
-          <tr><td data-es="Dos barras a la vez (p. ej. rack + banco)">Two bars at once (e.g. rack + bench)</td><td class="no">—</td><td class="us yes">●</td></tr>
-          <tr><td data-es="Mancuernas, poleas y máquinas">Dumbbells, cables &amp; machines</td><td class="no">—</td><td class="us yes">●</td></tr>
-          <tr><td data-es="Etiquetas NFC para casa">NFC tags for your home gym</td><td class="no">—</td><td class="us" data-es="5 incluidas">5 included</td></tr>
-          <tr><td>POWR Premium</td><td data-es="3 meses">3 months</td><td class="us" data-es="6 meses">6 months</td></tr>
-          <tr><td data-es="Ideal para">Best for</td><td data-es="Powerlifting básico">Core barbell lifts</td><td class="us" data-es="Entreno completo">Full-body training</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
 <section class="section tight">
   <div class="wrap">
     <div class="cta-band">
       <div style="position:relative;display:grid;gap:14px">
         <span class="eyebrow" data-es="Para gimnasios y entrenadores">For gyms &amp; coaches</span>
-        <h2 data-es="¿Necesitas 20 clips o más?">Need 20 clips or more?</h2>
-        <p class="lede" data-es="Precios por volumen, instalación en tu gimnasio y rankings para tus socios.">Volume pricing, on-site installation and leaderboards for your members.</p>
+        <h2 data-es="¿Tienes un gimnasio o entrenas a un equipo?">Own a gym or coach a team?</h2>
+        <p class="lede" data-es="Dos planes para gimnasios, con instalación y rankings para tus socios.">Two gym plans, with installation and leaderboards for your members.</p>
       </div>
       <div class="actions"><a class="btn" href="gyms.html" data-es="POWR para gimnasios →">POWR for gyms →</a><a class="btn ghost" href="contact.html?topic=coach" data-es="Soy entrenador">I'm a coach</a></div>
     </div>
@@ -86,22 +73,36 @@
 <script src="assets/js/app.js"></script>
 <script>
   (() => {
-    const { card, money, observe } = window.POWR;
+    const { t, money, add } = window.POWR;
+    const p = POWR_PRODUCTS.kit;
+    let color = p.colors[0];
     const render = () => {
-      document.getElementById('kits').innerHTML = card('clip-kit') + card('complete-kit', true) +
-        `<article class="product reveal"><a class="product-media" href="index.html#sensors"><img src="assets/img/b_exploded.jpg" alt="" loading="lazy"><span class="tag">${POWR.t('Coming soon', 'Próximamente')}</span></a>
-        <div class="product-body"><h3>POWR Collar · ${POWR.t('pair', 'pareja')}</h3><p>${POWR.t('Dual clamp with built-in sensors. No phone on the bar, left–right balance.', 'Doble abrazadera con sensores. Sin móvil en la barra y con equilibrio izquierda–derecha.')}</p>
-        <ul><li>${POWR.t('Replaces your barbell collars', 'Sustituye a tus collarines')}</li><li>${POWR.t('Left–right imbalance', 'Desequilibrio izquierda–derecha')}</li><li>${POWR.t('Magnetic face for weight stacks', 'Cara magnética para columnas de peso')}</li></ul>
-        <div class="price-row"><div class="price" style="font-size:20px">${POWR.t('Founder price', 'Precio fundador')}<small>${POWR.t('for waitlist members', 'para la lista de espera')}</small></div><a class="btn sm ghost" href="index.html#waitlist">${POWR.t('Join waitlist', 'Apuntarme')}</a></div></div></article>`;
-      document.getElementById('acc').innerHTML = card('ring') + card('band') + card('nfc-tags');
-      document.getElementById('p1').textContent = money(POWR_PRODUCTS['clip-kit'].price);
-      document.getElementById('p2').textContent = money(POWR_PRODUCTS['complete-kit'].price);
-      observe();
+      const box = POWR.lang() === 'es' ? p.boxEs : p.boxEn;
+      document.getElementById('shopInfo').innerHTML = `
+        <h2>${p.name}</h2>
+        <p class="lede">${t(p.shortEn, p.shortEs)}</p>
+        <ul class="ticks">${box.map((b) => `<li><span>${b}</span></li>`).join('')}</ul>
+        <div class="opt-group"><span>${t('Colour', 'Color')}: <b style="color:var(--text)">${t(color.en, color.es)}</b></span><div class="swatches">${p.colors.map((c) => `<button class="swatch${c.id === color.id ? ' on' : ''}" data-c="${c.id}"><i style="background:${c.hex}"></i>${t(c.en, c.es)}</button>`).join('')}</div></div>
+        <div class="price" style="font-size:44px">${money(p.price)}<small>${t('VAT included · Free returns', 'IVA incluido · Devolución gratis')}</small></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn" id="shopAdd">${t('Add to cart', 'Añadir al carrito')}</button><a class="btn ghost" href="product.html?id=kit">${t('Details & 3D view', 'Detalles y vista 3D')}</a></div>`;
+      document.getElementById('shopImg').src = color.img;
+      document.querySelectorAll('[data-c]').forEach((b) => b.onclick = () => { color = p.colors.find((c) => c.id === b.dataset.c); render(); });
+      document.getElementById('shopAdd').onclick = () => add('kit', 1, color.id);
     };
     render(); document.addEventListener('powr:lang', render);
   })();
 </script>
 <style>
+  .shop-hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .shop-media { aspect-ratio: 4/3; border-radius: calc(var(--radius) + 6px); overflow: hidden; border: 1px solid var(--line); position: relative; background: #0e1112; }
+  .shop-media img { width: 100%; height: 100%; object-fit: cover; }
+  .shop-media .tag { position: absolute; top: 16px; left: 16px; }
+  .shop-info { display: grid; gap: 20px; }
+  .box-ill { aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; background: radial-gradient(circle at 50% 55%, #1a2122, #0e1112 70%); display: grid; place-items: center; margin-bottom: 18px; }
+  .box-ill img { width: 100%; height: 100%; object-fit: cover; }
+  .box-ill svg { width: 46%; }
+  .box-grid .card h3 { margin-top: 12px; }
+  @media (max-width: 900px) { .shop-hero { grid-template-columns: 1fr; } }
   #assure div { grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; padding: 18px; }
   #assure svg { grid-row: span 2; width: 26px; height: 26px; }
   #assure b { color: var(--text); font-size: 14.5px; }
