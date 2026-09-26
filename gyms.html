@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>POWR for Gyms — Tap-to-train machines and member leaderboards</title>
+<meta name="title-es" content="POWR para gimnasios — Máquinas con NFC y rankings de socios">
+<meta name="description" content="We tag every machine in your gym with NFC and QR, list your gym in the POWR app and give your members leaderboards by age, weight and machine. Transparent pricing and on-site installation.">
+<meta name="theme-color" content="#070909">
+<meta property="og:image" content="assets/img/gym-board.jpg">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  .gym-hero { position: relative; min-height: min(86vh, 820px); display: flex; align-items: flex-end; overflow: hidden; }
+  .gym-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .gym-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,9,.3) 0%, rgba(7,9,9,.55) 45%, #070909 96%), linear-gradient(90deg, rgba(7,9,9,.85), transparent 70%); }
+  .gym-hero .wrap { position: relative; z-index: 2; padding-bottom: clamp(48px, 7vw, 96px); display: grid; gap: 24px; }
+  .gym-hero h1 { max-width: 14ch; }
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+  .tl { display: grid; gap: 12px; align-content: start; position: relative; padding-top: 44px; }
+  .tl::before { content: attr(data-n); position: absolute; top: 0; left: 0; width: 32px; height: 32px; border-radius: 99px; border: 1px solid var(--teal); color: var(--teal); display: grid; place-items: center; font: 600 13px/1 var(--f-mono); background: var(--bg); z-index: 1; }
+  .tl::after { content: ""; position: absolute; top: 16px; left: 40px; right: -12px; height: 1px; background: linear-gradient(90deg, var(--teal), var(--line-2)); }
+  .tl:last-child::after { display: none; }
+  .tl .when { font: 600 12px/1 var(--f-mono); letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+  .tl p { color: var(--text-2); font-size: 15px; }
+  @media (max-width: 900px) { .timeline { grid-template-columns: 1fr; gap: 28px; } .tl { padding: 0 0 0 52px; } .tl::after { top: 40px; bottom: -24px; left: 16px; right: auto; width: 1px; height: auto; background: var(--line-2); } }
+  .demo-phone .screen { background: #0d0d0d; }
+  .ex-card { margin: 8% 6%; border-radius: 1.1em; overflow: hidden; background: #141414; border: 1px solid #262626; }
+  .ex-card .ex-img { aspect-ratio: 16/10; background: linear-gradient(135deg, #12302c, #0b0e0f); display: grid; place-items: center; color: #38f0d7; font-size: 2.2em; }
+  .ex-card .ex-body { padding: 7%; display: grid; gap: .5em; }
+  .ex-card b { font-size: 1.3em; }
+  .ex-card small { color: #a6a6a6; font-size: .75em; }
+  .tap-toast { margin: 0 6%; padding: .8em 1em; border-radius: .9em; background: #203c38; color: #75f0df; font-size: .78em; font-weight: 700; display: flex; gap: .6em; align-items: center; opacity: 0; transform: translateY(-6px); transition: all .4s var(--ease); }
+  .demo-on .tap-toast { opacity: 1; transform: none; }
+  .demo-phone .screen > .idle { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; color: #737373; font-size: .85em; padding: 20%; transition: opacity .4s; background: #0d0d0d; z-index: 2; }
+  .demo-on .screen > .idle { opacity: 0; pointer-events: none; }
+  .dash { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: grid; gap: 18px; }
+  .dash-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .dash-kpis div { border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+  .dash-kpis b { display: block; font: 800 26px/1.1 var(--f-display); font-stretch: 110%; }
+  .dash-kpis span { font-size: 12px; color: var(--muted); }
+  .usage { display: grid; gap: 10px; }
+  .usage div { display: grid; grid-template-columns: 110px 1fr 40px; gap: 12px; align-items: center; font-size: 13px; color: var(--text-2); }
+  .usage i { height: 8px; border-radius: 99px; background: linear-gradient(90deg, var(--teal-2), var(--teal)); display: block; }
+  .usage em { font-style: normal; font-family: var(--f-mono); color: var(--muted); text-align: right; }
+  .demo-note { font: 600 11px/1 var(--f-mono); letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+</style>
+</head>
+<body data-page="gyms">
+
+<section class="gym-hero">
+  <img src="assets/img/gym-board.jpg" alt="Live POWR leaderboard on a screen in a strength gym">
+  <div class="wrap">
+    <span class="eyebrow" data-es="POWR para gimnasios">POWR for gyms</span>
+    <h1 data-es="Convierte cada máquina en un marcador.">Turn every machine into a scoreboard.</h1>
+    <p class="lede" data-es="Etiquetamos tus máquinas con NFC y QR, damos de alta tu gimnasio en la app y tus socios compiten en rankings por edad, peso y máquina. Una razón más para volver mañana.">We tag your machines with NFC and QR, list your gym in the app, and your members compete on leaderboards by age, weight class and machine. One more reason to come back tomorrow.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#quote" data-es="Pedir presupuesto">Get a quote</a>
+      <a class="btn ghost" href="#pricing" data-es="Ver precios">See pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- value -->
+<section class="section">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" data-es="Por qué">Why POWR</span>
+      <h2 data-es="Lo que tus socios notan. Y lo que tú ganas.">What members feel. What you gain.</h2>
+      <p class="lede" data-es="Las plataformas de gimnasio conectado se centran en el cardio. El suelo de fuerza — donde pasan horas tus socios más fieles — sigue siendo analógico. POWR lo conecta.">Connected-gym platforms focus on cardio. The strength floor — where your most loyal members spend hours — is still analogue. POWR connects it.</p>
+    </div>
+    <div class="grid g4">
+      <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0V4zM17 5h3v2a3 3 0 01-3 3M7 5H4v2a3 3 0 003 3"/></svg></div><h3 data-es="Competición que engancha">Competition that sticks</h3><p data-es="Rankings semanales por máquina, edad y categoría de peso. Los socios vuelven para defender su puesto.">Weekly leaderboards by machine, age and weight class. Members come back to defend their spot.</p></div>
+      <div class="card reveal d1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12a7 7 0 0114 0M8.5 12a3.5 3.5 0 017 0"/><circle cx="12" cy="12" r="1"/></svg></div><h3 data-es="Acercar y entrenar">Tap and train</h3><p data-es="Acercar el móvil a la etiqueta abre ese ejercicio en la app. Sin buscar, sin escribir.">Tapping a phone on the tag opens that exercise in the app. No searching, no typing.</p></div>
+      <div class="card reveal d2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 19V5M4 19h16M8 15V11M12 15V8M16 15v-5"/></svg></div><h3 data-es="Datos de tu sala">Data on your floor</h3><p data-es="Qué máquinas se usan, a qué horas y cuáles sobran. Decide compras y distribución con datos.">Which machines get used, when, and which don't. Plan purchases and layout on data.</p></div>
+      <div class="card reveal d3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19l1-5.8L3.5 9.2l5.9-.9z"/></svg></div><h3 data-es="Diferénciate">Stand out</h3><p data-es="Sé el primer gimnasio VBT de tu ciudad. Y gana un margen vendiendo o prestando clips en recepción.">Be the first VBT gym in your city. And earn margin selling or lending clips at reception.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- NFC demo -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy">
+        <span class="eyebrow" data-es="Cómo lo usan tus socios">How members use it</span>
+        <h2 data-es="Acercar. Entrenar. Subir en el ranking.">Tap. Train. Climb the board.</h2>
+        <p class="lede" data-es="Cada estación lleva una etiqueta con NFC y QR. El socio acerca el móvil (o escanea el código), el ejercicio se abre con la máquina ya configurada, y su serie cuenta para el ranking de tu gimnasio.">Every station carries a tag with NFC and QR. The member taps their phone (or scans the code), the exercise opens with the machine already set, and the set counts toward your gym's leaderboard.</p>
+        <ul class="ticks">
+          <li><span data-es="<b>NFC y QR en la misma etiqueta.</b> Funciona con cualquier móvil moderno.">
+            <b>NFC and QR on one tag.</b> Works with any modern phone.</span></li>
+          <li><span data-es="<b>Sin wifi, sin cables, sin tablets.</b> La etiqueta no necesita batería.">
+            <b>No wifi, cables or tablets.</b> The tag needs no battery.</span></li>
+          <li><span data-es="<b>Adhesivo industrial resistente al sudor.</b> Se retira sin dejar marcas.">
+            <b>Sweat-proof industrial adhesive.</b> Removes without marks.</span></li>
+        </ul>
+        <div><button class="btn ghost sm" id="replay" data-es="▶ Ver la demo otra vez">▶ Replay the demo</button></div>
+      </div>
+      <div class="nfc-demo" id="nfcDemo">
+        <div class="station">
+          <div class="station-tag"><svg class="qr" viewBox="0 0 29 29" shape-rendering="crispEdges" id="qr"></svg><span class="nfc-ring"></span><span class="nfc-ring r2"></span></div>
+          <span class="station-label" data-es="ESTACIÓN 07 · JALÓN AL PECHO">STATION 07 · LAT PULLDOWN</span>
+        </div>
+        <div class="tap-arrow"><svg viewBox="0 0 56 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12h48M42 4l8 8-8 8"/></svg><span data-es="ACERCAR">TAP</span></div>
+        <div class="phone demo-phone" style="--w:230px">
+          <div class="screen">
+            <div class="idle"><span data-es="Acerca el móvil a la etiqueta">Tap the phone on the tag</span></div>
+            <div class="app-top" style="padding-top:18%"><span>POWR</span></div>
+            <div class="tap-toast">● <span data-es="Estación 07 · Gimnasio Norte">Station 07 · North Gym</span></div>
+            <div class="ex-card">
+              <div class="ex-img"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16M8 4v3l4 3 4-3V4M12 10v6M9 20l3-4 3 4"/></svg></div>
+              <div class="ex-body"><small data-es="MÁQUINA · POLEA ALTA">MACHINE · HIGH PULLEY</small><b data-es="Jalón al pecho">Lat Pulldown</b><small data-es="Tu mejor: 0,74 m/s · Puesto 4 de 38">Your best: 0.74 m/s · Rank 4 of 38</small></div>
+            </div>
+            <div class="app-foot" style="margin-top:auto"><div class="app-btn" style="background:#38f0d7;color:#04201c;border-color:#38f0d7" data-es="EMPEZAR SERIE">START SET</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- leaderboard -->
+<section class="section">
+  <div class="wrap">
+    <div class="split rev">
+      <div class="split-copy">
+        <span class="eyebrow" data-es="Rankings">Leaderboards</span>
+        <h2 data-es="Tu gimnasio, en la app.">Your gym, in the app.</h2>
+        <p class="lede" data-es="Tu gimnasio aparece en POWR con su propia comunidad. Los socios se comparan por ejercicio, máquina, edad, peso corporal y periodo. En pantalla grande, si quieres.">Your gym appears in POWR with its own community. Members compare by exercise, machine, age, body weight and period. On the big screen, if you like.</p>
+        <ul class="ticks">
+          <li><span data-es="<b>Justo:</b> categorías por edad y por peso corporal, como en competición.">
+            <b>Fair:</b> age and body-weight categories, like in competition.</span></li>
+          <li><span data-es="<b>Privado por defecto:</b> cada socio decide si aparece (cumple RGPD).">
+            <b>Private by default:</b> each member opts in (GDPR-compliant).</span></li>
+          <li><span data-es="<b>Retos:</b> lanza el reto del mes y premia al ganador en recepción.">
+            <b>Challenges:</b> run a monthly challenge and reward the winner at reception.</span></li>
+        </ul>
+      </div>
+      <div class="board reveal">
+        <div class="board-head" id="exChips"></div>
+        <div class="board-head" id="catChips" style="border-top:0;padding-top:0"></div>
+        <div id="boardRows"></div>
+        <div style="padding:12px 18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center"><span class="demo-note" data-es="Datos de demostración">Demo data</span><span class="demo-note" id="boardPeriod"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- dashboard -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy">
+        <span class="eyebrow" data-es="Panel del gimnasio">Owner dashboard</span>
+        <h2 data-es="Mira tu sala de fuerza con datos.">See your strength floor in data.</h2>
+        <p class="lede" data-es="Socios activos, sesiones, horas punta y uso por máquina. Para saber qué funciona antes de comprar la próxima máquina.">Active members, sessions, peak hours and usage per machine. Know what works before you buy the next machine.</p>
+      </div>
+      <div class="dash reveal">
+        <div style="display:flex;justify-content:space-between;align-items:center"><b data-es="Gimnasio Norte · últimos 30 días">North Gym · last 30 days</b><span class="demo-note" data-es="Demo">Demo</span></div>
+        <div class="dash-kpis">
+          <div><b class="teal">214</b><span data-es="Socios activos">Active members</span></div>
+          <div><b>1,386</b><span data-es="Sesiones">Sessions</span></div>
+          <div><b>18–20h</b><span data-es="Hora punta">Peak hours</span></div>
+        </div>
+        <div class="usage" id="usage"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- install -->
+<section class="section">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow" data-es="Instalación">Installation</span><h2 data-es="De la visita al lanzamiento en 2 semanas.">From first visit to launch in 2 weeks.</h2></div>
+    <div class="timeline">
+      <div class="tl reveal" data-n="1"><span class="when" data-es="Día 1">Day 1</span><h3 data-es="Visita y mapa">Visit &amp; map</h3><p data-es="Recorremos la sala, inventariamos cada máquina y estación, y diseñamos tu mapa.">We walk your floor, inventory every machine and station, and build your map.</p></div>
+      <div class="tl reveal d1" data-n="2"><span class="when" data-es="Semana 1">Week 1</span><h3 data-es="Etiquetado">Tagging</h3><p data-es="Instalamos una etiqueta NFC + QR con tu marca en cada estación. Una mañana, sin cerrar.">We fit a branded NFC + QR tag on every station. One morning, no closing.</p></div>
+      <div class="tl reveal d2" data-n="3"><span class="when" data-es="Semana 2">Week 2</span><h3 data-es="Alta en la app">Go live in the app</h3><p data-es="Tu gimnasio aparece en POWR con rankings, retos y tu panel de control.">Your gym appears in POWR with leaderboards, challenges and your dashboard.</p></div>
+      <div class="tl reveal d3" data-n="4"><span class="when" data-es="Lanzamiento">Launch</span><h3 data-es="Kit de lanzamiento">Launch kit</h3><p data-es="Carteles, formación al staff y un reto inaugural para arrancar con fuerza.">Posters, staff training and an opening challenge to start strong.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- pricing -->
+<section class="section alt" id="pricing">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow" data-es="Precios">Pricing</span>
+      <h2 data-es="Precios claros. Sin demos obligatorias.">Transparent pricing. No mandatory demo.</h2>
+      <p class="lede" data-es="Una instalación única por estación y una cuota mensual. Precios orientativos, IVA no incluido.">One-off installation per station plus a monthly plan. Indicative prices, VAT excluded.</p>
+    </div>
+    <div class="plans" id="plans"></div>
+
+    <div class="head" style="margin:clamp(56px,8vw,96px) 0 32px"><span class="eyebrow" data-es="Calculadora">Estimator</span><h2 style="font-size:clamp(28px,3.6vw,44px)" data-es="Calcula tu gimnasio.">Price your gym.</h2></div>
+    <div class="estimator">
+      <div class="est-controls">
+        <div class="range-row"><label for="st"><span data-es="Estaciones / máquinas a etiquetar">Stations / machines to tag</span><output id="stO">30</output></label><input type="range" id="st" min="5" max="150" step="1" value="30"></div>
+        <div class="range-row"><label for="cl"><span data-es="Clips para prestar o vender en recepción">Clips to lend or sell at reception</span><output id="clO">10</output></label><input type="range" id="cl" min="0" max="80" step="1" value="10"></div>
+        <div class="range-row"><label for="sc"><span data-es="Pantallas con ranking en directo">Live leaderboard screens</span><output id="scO">1</output></label><input type="range" id="sc" min="0" max="6" step="1" value="1"></div>
+        <div class="range-row"><label for="lo"><span data-es="Centros">Locations</span><output id="loO">1</output></label><input type="range" id="lo" min="1" max="10" step="1" value="1"></div>
+      </div>
+      <div class="est-out">
+        <span class="tag teal" id="estPlan" style="width:fit-content"></span>
+        <div class="est-line"><span data-es="Instalación (única)">Installation (one-off)</span><b id="eSetup"></b></div>
+        <div class="est-line"><span data-es="Clips (única)">Clips (one-off)</span><b id="eClips"></b></div>
+        <div class="est-line"><span data-es="Cuota mensual">Monthly plan</span><b id="eMonthly"></b></div>
+        <div class="est-total"><span data-es="Primer año">First year</span><span class="num" id="eYear"></span></div>
+        <p class="xs muted" data-es="Estimación orientativa, IVA no incluido. Te enviamos el presupuesto cerrado tras la visita.">Indicative estimate, VAT excluded. You get a fixed quote after the visit.</p>
+        <a class="btn block" href="#quote" id="estCta" data-es="Pedir este presupuesto">Request this quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- quote form -->
+<section class="section" id="quote">
+  <div class="wrap">
+    <div class="split" style="align-items:start">
+      <div class="split-copy">
+        <span class="eyebrow" data-es="Presupuesto">Get a quote</span>
+        <h2 data-es="Hablemos de tu gimnasio.">Let's talk about your gym.</h2>
+        <p class="lede" data-es="Rellena el formulario y te respondemos en 24 horas laborables con un presupuesto y fecha para la visita.">Fill in the form and we'll reply within one working day with a quote and a date for the visit.</p>
+        <div class="card" style="margin-top:12px">
+          <span class="tag solid" style="width:fit-content;margin-bottom:14px" data-es="Plazas limitadas">Limited places</span>
+          <h3 data-es="Programa gimnasios fundadores">Founding gyms programme</h3>
+          <p data-es="Los primeros gimnasios que se unan tendrán condiciones especiales y participarán en el diseño de las funciones para gimnasios. Pregúntanos.">The first gyms to join get special conditions and help shape the gym features. Ask us about it.</p>
+        </div>
+      </div>
+      <div class="card">
+        <form class="form" name="gym-quote" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-powr-form data-ok="Thanks! We'll reply within one working day." data-ok-es="¡Gracias! Te respondemos en un día laborable.">
+          <input type="hidden" name="form-name" value="gym-quote">
+          <input type="hidden" name="estimate" id="estHidden">
+          <p class="hp"><label>Leave empty <input name="bot-field"></label></p>
+          <div class="form-row">
+            <div class="field"><label for="q-name" data-es="Nombre">Name</label><input id="q-name" name="name" required autocomplete="name"></div>
+            <div class="field"><label for="q-role" data-es="Cargo">Role</label><select id="q-role" name="role"><option data-es="Propietario/a">Owner</option><option data-es="Gerente">Manager</option><option data-es="Entrenador/a">Head coach</option><option data-es="Otro">Other</option></select></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="q-gym" data-es="Gimnasio">Gym name</label><input id="q-gym" name="gym" required autocomplete="organization"></div>
+            <div class="field"><label for="q-city" data-es="Ciudad">City</label><input id="q-city" name="city" required autocomplete="address-level2"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="q-email">Email</label><input id="q-email" type="email" name="email" required autocomplete="email"></div>
+            <div class="field"><label for="q-phone"><span data-es="Teléfono">Phone</span> <span class="opt" data-es="(opcional)">(optional)</span></label><input id="q-phone" type="tel" name="phone" autocomplete="tel"></div>
+          </div>
+          <div class="form-row three">
+            <div class="field"><label for="q-members" data-es="Socios">Members</label><select id="q-members" name="members"><option>&lt; 300</option><option>300–800</option><option>800–2,000</option><option>2,000+</option></select></div>
+            <div class="field"><label for="q-stations" data-es="Estaciones">Stations</label><input id="q-stations" name="stations" type="number" min="1" value="30"></div>
+            <div class="field"><label for="q-loc" data-es="Centros">Locations</label><input id="q-loc" name="locations" type="number" min="1" value="1"></div>
+          </div>
+          <div class="field"><label for="q-when" data-es="¿Cuándo te gustaría empezar?">When would you like to start?</label><select id="q-when" name="timeline"><option data-es="Lo antes posible">As soon as possible</option><option data-es="En 1–3 meses">In 1–3 months</option><option data-es="Solo estoy mirando">Just exploring</option></select></div>
+          <div class="field"><label for="q-msg"><span data-es="Mensaje">Message</span> <span class="opt" data-es="(opcional)">(optional)</span></label><textarea id="q-msg" name="message" placeholder="Tell us about your gym" data-es-ph="Cuéntanos sobre tu gimnasio"></textarea></div>
+          <label class="check"><input type="checkbox" name="privacy" required><span data-es="Acepto la <a href='legal.html#privacy'>política de privacidad</a>.">I accept the <a href="legal.html#privacy">privacy policy</a>.</span></label>
+          <button class="btn block" type="submit" data-es="Enviar solicitud">Send request</button>
+          <p class="form-status"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- faq -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="head center"><span class="eyebrow">FAQ</span><h2 data-es="Preguntas de gimnasios">Gym questions</h2></div>
+    <div class="faq">
+      <details><summary data-es="¿Mis socios tienen que pagar algo?">Do my members have to pay?</summary><p data-es="No. La app y los rankings son gratis para tus socios. Pueden comprar su propio kit o usar los clips que tú prestes o vendas en recepción.">No. The app and leaderboards are free for your members. They can buy their own kit or use the clips you lend or sell at reception.</p></details>
+      <details><summary data-es="¿Necesito wifi o instalar algo eléctrico?">Do I need wifi or any wiring?</summary><p data-es="No. Las etiquetas NFC no llevan batería y la app usa los datos del móvil del socio. Solo las pantallas de ranking necesitan una TV con navegador.">No. NFC tags have no battery and the app runs on each member's phone. Only the leaderboard screens need a TV with a browser.</p></details>
+      <details><summary data-es="¿Qué pasa con la privacidad?">What about privacy?</summary><p data-es="Cada socio decide si aparece en los rankings y con qué nombre. Los datos se tratan según el RGPD y tú solo ves datos agregados de uso.">Each member chooses whether to appear on the leaderboards and under what name. Data is handled under GDPR, and you see aggregated usage only.</p></details>
+      <details><summary data-es="¿Estropea las máquinas?">Will it damage my machines?</summary><p data-es="No. Las etiquetas se pegan con adhesivo industrial resistente al sudor y se retiran sin dejar marca.">No. Tags use a sweat-proof industrial adhesive and come off without marks.</p></details>
+      <details><summary data-es="¿Instaláis fuera de Madrid?">Do you install outside Madrid?</summary><p data-es="Sí, en toda España. Fuera de Madrid puede aplicarse un suplemento de desplazamiento, que verás en el presupuesto.">Yes, across Spain. Outside Madrid a travel fee may apply — it will be in your quote.</p></details>
+      <details><summary data-es="¿Hay permanencia?">Is there a minimum term?</summary><p data-es="La cuota es mensual. Te proponemos 12 meses para amortizar la instalación, pero lo hablamos en el presupuesto.">The plan is monthly. We suggest 12 months to make the installation worthwhile, but we'll agree it in your quote.</p></details>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/gyms.js"></script>
+</body>
+</html>

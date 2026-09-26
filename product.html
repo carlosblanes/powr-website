@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>POWR Bar Clip Kit — POWR</title>
+<meta name="description" content="Turn your phone into a velocity-based training device. The POWR Bar Clip fits any 50 mm Olympic sleeve.">
+<meta name="theme-color" content="#070909">
+<meta property="og:image" content="assets/img/og.jpg">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+</head>
+<body data-page="shop">
+
+<main class="wrap">
+  <div class="crumbs" style="padding-top:28px"><a href="index.html" data-es="Inicio">Home</a><span>/</span><a href="shop.html" data-es="Tienda">Shop</a><span>/</span><span id="crumbName"></span></div>
+  <div class="pdp">
+    <div class="gallery">
+      <div class="gallery-main" id="stage"></div>
+      <div class="thumbs" id="thumbs"></div>
+      <p class="xs muted" data-es="Renders del CAD real y fotografías ilustrativas. El acabado final puede variar ligeramente.">Renders from the production CAD plus illustrative photography. Final finish may vary slightly.</p>
+    </div>
+    <div class="pdp-info" id="info"></div>
+  </div>
+</main>
+
+<section class="section" id="extra"></section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow" data-es="Completa tu equipo">Complete your setup</span><h2 style="font-size:clamp(28px,3.6vw,44px)" data-es="También te puede interesar">You might also like</h2></div>
+    <div class="products" id="cross"></div>
+  </div>
+</section>
+
+<div class="sticky-buy" id="stickyBuy"><div><b id="sbName" style="display:block;font-size:14px"></b><span class="mono" id="sbPrice" style="color:var(--teal)"></span></div><button class="btn" id="sbAdd" data-es="Añadir al carrito">Add to cart</button></div>
+
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/app.js"></script>
+<script type="module">
+  const { t, money, add, card, observe, applyLang } = window.POWR;
+  const P = window.POWR_PRODUCTS;
+  let id = new URLSearchParams(location.search).get('id');
+  if (!P[id]) id = 'clip-kit';
+  const p = P[id];
+
+  const GALLERY = {
+    'clip-kit': ['3d', 'assets/img/clip-hero.jpg', 'assets/img/clip-chalk.jpg', 'assets/img/clip-side.jpg', 'assets/img/ring.jpg'],
+    'complete-kit': ['3d', 'assets/img/kit-complete.jpg', 'assets/img/clip-hero.jpg', 'assets/img/band.jpg', 'assets/img/nfc-tags.jpg'],
+    'ring': ['assets/img/ring.jpg', 'assets/img/clip-hero.jpg'],
+    'band': ['assets/img/band.jpg'],
+    'nfc-tags': ['assets/img/nfc-tags.jpg', 'assets/img/gym-nfc.jpg'],
+  };
+  const SPECS = {
+    'clip-kit': [['Material', 'PETG, 4 walls', 'PETG, 4 paredes'], ['Mass', '≈ 42 g', '≈ 42 g', 'Peso'], ['Fits', 'Olympic sleeves Ø50 mm', 'Manguitos olímpicos Ø50 mm', 'Compatible'], ['Phone mount', 'MagSafe ring pattern Ø46–54 mm, N52 magnets', 'Patrón MagSafe Ø46–54 mm, imanes N52', 'Sujeción'], ['Grip', '4 rubber strips, replaceable', '4 tiras de goma, reemplazables', 'Agarre'], ['Anti-rotation', 'Designed for > 0.9 N·m on the sleeve', 'Diseñado para > 0,9 N·m sobre el manguito', 'Anti-giro'], ['Made in', 'Spain', 'España', 'Fabricado en']],
+  };
+  SPECS['complete-kit'] = SPECS['clip-kit'];
+
+  document.title = `${p.name} — POWR`;
+  let color = p.colors ? p.colors[0].id : null;
+  let qty = 1;
+  let viewer = null;
+
+  function renderInfo() {
+    document.getElementById('crumbName').textContent = p.name;
+    const box = (POWR.lang() === 'es' ? p.boxEs : p.boxEn) || [];
+    const specs = SPECS[id];
+    document.getElementById('info').innerHTML = `
+      <div style="display:grid;gap:14px">
+        <span class="tag teal" style="width:fit-content">${t(p.tagEn, p.tagEs)}</span>
+        <h1>${p.name}</h1>
+        <p class="lede">${t(p.shortEn, p.shortEs)}</p>
+      </div>
+      <div class="price" style="font-size:40px">${money(p.price)}${p.compareAt ? `<s>${money(p.compareAt)}</s> <span class="tag solid" style="vertical-align:middle">−${Math.round((1 - p.price / p.compareAt) * 100)}%</span>` : ''}<small>${t('VAT included · Free shipping over €40', 'IVA incluido · Envío gratis desde 40 €')}</small></div>
+      ${p.colors ? `<div class="opt-group"><span>${t('Colour', 'Color')}: <b style="color:var(--text)" id="colorName">${POWR.colorName(id, color)}</b></span><div class="swatches">${p.colors.map((c) => `<button class="swatch${c.id === color ? ' on' : ''}" data-color="${c.id}" data-hex="${c.hex}"><i style="background:${c.hex}"></i>${t(c.en, c.es)}</button>`).join('')}</div></div>` : ''}
+      <div class="buy-row">
+        <div class="qty"><button id="qm" aria-label="-">−</button><span id="qv">${qty}</span><button id="qp" aria-label="+">+</button></div>
+        <button class="btn" id="addBtn">${t('Add to cart', 'Añadir al carrito')} · <span id="addPrice">${money(p.price * qty)}</span></button>
+      </div>
+      <a class="btn ghost block" href="checkout.html" id="buyNow">${t('Buy now', 'Comprar ahora')}</a>
+      <div class="assure">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>${t('Ships in 2–4 days', 'Envío en 2–4 días')}</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></svg>${t('30-day returns', '30 días de devolución')}</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/></svg>${t('3-year warranty', '3 años de garantía')}</div>
+      </div>
+      <div class="acc">
+        <details open><summary>${t("What's in the box", 'Qué incluye')}</summary><div class="acc-body"><ul class="ticks">${box.map((b) => `<li><span>${b}</span></li>`).join('')}</ul></div></details>
+        ${specs ? `<details><summary>${t('Specifications', 'Especificaciones')}</summary><div class="acc-body"><table class="spec">${specs.map((s) => `<tr><td>${t(s[0], s[3] || s[0])}</td><td>${t(s[1], s[2])}</td></tr>`).join('')}</table></div></details>` : ''}
+        <details><summary>${t('Compatibility', 'Compatibilidad')}</summary><div class="acc-body"><p>${t('MagSafe iPhones (12 and later) snap on directly. Any other phone works with the magnetic ring stuck to its case. The POWR app is in beta on iPhone — every order includes access. Android is on the way.', 'Los iPhone con MagSafe (12 y posteriores) se enganchan directamente. Cualquier otro móvil funciona con el anillo magnético pegado a su funda. La app POWR está en beta para iPhone — cada pedido incluye acceso. Android está en camino.')}</p></div></details>
+        <details><summary>${t('Shipping & returns', 'Envíos y devoluciones')}</summary><div class="acc-body"><p>${t('Spain (peninsula) 2–4 working days · EU 4–7 days · free pickup in Madrid. Free shipping over €40. Return within 30 days for a full refund.', 'España península 2–4 días laborables · UE 4–7 días · recogida gratis en Madrid. Envío gratis desde 40 €. Devuélvelo en 30 días y te reembolsamos todo.')} <a class="teal" href="legal.html#shipping">${t('Details', 'Detalles')}</a></p></div></details>
+      </div>`;
+    wire();
+    document.getElementById('sbName').textContent = p.name;
+    document.getElementById('sbPrice').textContent = money(p.price);
+  }
+
+  function wire() {
+    document.querySelectorAll('.swatch').forEach((b) => b.addEventListener('click', () => {
+      color = b.dataset.color;
+      document.querySelectorAll('.swatch').forEach((x) => x.classList.toggle('on', x === b));
+      document.getElementById('colorName').textContent = POWR.colorName(id, color);
+      if (viewer) { viewer.setColor(b.dataset.hex); show(0); }
+    }));
+    const upd = () => { document.getElementById('qv').textContent = qty; document.getElementById('addPrice').textContent = money(p.price * qty); };
+    document.getElementById('qm').onclick = () => { qty = Math.max(1, qty - 1); upd(); };
+    document.getElementById('qp').onclick = () => { qty = Math.min(20, qty + 1); upd(); };
+    document.getElementById('addBtn').onclick = () => add(id, qty, color);
+    document.getElementById('buyNow').onclick = (e) => { e.preventDefault(); add(id, qty, color); location.href = 'checkout.html'; };
+  }
+  document.getElementById('sbAdd').onclick = () => add(id, qty, color);
+
+  /* ---- gallery ---- */
+  const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs');
+  const items = GALLERY[id] || [p.img];
+  let viewerEl = null;
+  thumbs.innerHTML = items.map((src, i) => `<button class="thumb${i === 0 ? ' on' : ''}" data-i="${i}" aria-label="View ${i + 1}">${src === '3d' ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg>' : `<img src="${src}" alt="" loading="lazy">`}</button>`).join('');
+  thumbs.addEventListener('click', (e) => { const b = e.target.closest('.thumb'); if (b) show(+b.dataset.i); });
+
+  async function show(i) {
+    thumbs.querySelectorAll('.thumb').forEach((b, j) => b.classList.toggle('on', i === j));
+    const src = items[i];
+    [...stage.children].forEach((c) => { if (c !== viewerEl) c.remove(); });
+    if (src === '3d') {
+      if (!viewerEl) {
+        viewerEl = document.createElement('div'); viewerEl.style.cssText = 'position:absolute;inset:0';
+        stage.appendChild(viewerEl);
+        try {
+          const { mountViewer } = await import('./assets/js/viewer.js');
+          const hex = (p.colors.find((c) => c.id === color) || p.colors[0]).hex;
+          viewer = await mountViewer(viewerEl, { parts: [{ url: p.model, color: hex }], bar: 'y', cameraDist: 270, barLength: 150, tilt: 0.42 });
+        } catch { viewerEl.innerHTML = `<img src="${p.img}" alt="" style="width:100%;height:100%;object-fit:cover">`; }
+      }
+      viewerEl.style.display = '';
+      stage.insertAdjacentHTML('beforeend', `<span class="tag solid">3D · ${t('real CAD', 'CAD real')}</span><span class="tag hint">${t('Drag to rotate', 'Arrastra para girar')}</span>`);
+    } else {
+      if (viewerEl) viewerEl.style.display = 'none';
+      stage.insertAdjacentHTML('beforeend', `<img src="${src}" alt="${p.name}">`);
+    }
+  }
+  show(0);
+
+  /* ---- extra content for kits ---- */
+  function renderExtra() {
+    const ex = document.getElementById('extra');
+    if (!id.includes('kit')) { ex.style.display = 'none'; return; }
+    ex.innerHTML = `<div class="wrap"><div class="head center"><span class="eyebrow">${t('Designed to disappear', 'Diseñado para desaparecer')}</span><h2>${t('Engineered like a barbell collar.', 'Diseñado como un collarín.')}</h2></div>
+      <div class="grid g3">
+        <div class="card reveal"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4"/></svg>'}</div><h3>${t('Wraps 200° of the bar', 'Abraza 200° de la barra')}</h3><p>${t('Snaps onto the sleeve and grips with rubber strips, so it does not spin when the bar rolls.', 'Se engancha al manguito y agarra con tiras de goma: no gira cuando la barra rueda.')}</p></div>
+        <div class="card reveal d1"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20h16M6 16l6-12 6 12"/></svg>'}</div><h3>${t('A flat face for the phone', 'Una cara plana para el móvil')}</h3><p>${t('Optimised in 1,600+ simulated shapes so the magnetic face stays flat under load — the phone sits flush and reads true.', 'Optimizado entre más de 1.600 formas simuladas para que la cara magnética siga plana con carga: el móvil apoya bien y mide bien.')}</p></div>
+        <div class="card reveal d2"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M5 8l7-5 7 5"/></svg>'}</div><h3>${t('42 grams', '42 gramos')}</h3><p>${t('Light enough to forget. Stays on between sets, comes off in a second.', 'Tan ligero que te olvidas. Se queda puesto entre series y se quita en un segundo.')}</p></div>
+      </div></div>`;
+    observe(ex);
+  }
+  function renderCross() {
+    const others = window.POWR_SHOP_ORDER.filter((x) => x !== id).slice(0, 3);
+    document.getElementById('cross').innerHTML = others.map((x) => card(x, x === 'complete-kit')).join('');
+    observe();
+  }
+  function all() { renderInfo(); renderExtra(); renderCross(); }
+  all();
+  document.addEventListener('powr:lang', all);
+
+  /* ---- sticky buy on mobile once the main button scrolls away ---- */
+  const sb = document.getElementById('stickyBuy');
+  new IntersectionObserver(([e]) => sb.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0)).observe(document.querySelector('.buy-row') || document.body);
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checkout — POWR</title>
+<meta name="title-es" content="Finalizar pedido — POWR">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#070909">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body data-page="checkout">
+
+<main class="wrap">
+  <div class="checkout" id="checkout">
+    <div>
+      <div class="stepper" id="stepper">
+        <span data-s="1" class="on"><span class="dot">1</span><b data-es="Datos">Details</b></span><span class="sep"></span>
+        <span data-s="2"><span class="dot">2</span><b data-es="Envío y pago">Delivery &amp; payment</b></span><span class="sep"></span>
+        <span data-s="3"><span class="dot">3</span><b data-es="Revisar">Review</b></span>
+      </div>
+
+      <!-- One form holds all three steps; submitted by assets/js/checkout.js. -->
+      <form name="order" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="orderForm" novalidate>
+        <input type="hidden" name="form-name" value="order">
+        <p class="hp"><label>Leave empty <input name="bot-field"></label></p>
+        <input type="hidden" name="order_id"><input type="hidden" name="items"><input type="hidden" name="subtotal"><input type="hidden" name="discount"><input type="hidden" name="shipping_cost"><input type="hidden" name="total"><input type="hidden" name="language"><input type="hidden" name="shipping_method"><input type="hidden" name="payment_method"><input type="hidden" name="promo_code">
+
+        <section class="co-panel on" data-p="1">
+          <h2 data-es="¿A quién se lo enviamos?">Who's it for?</h2>
+          <div class="form-row">
+            <div class="field"><label for="c-first" data-es="Nombre">First name</label><input id="c-first" name="first_name" required autocomplete="given-name"></div>
+            <div class="field"><label for="c-last" data-es="Apellidos">Last name</label><input id="c-last" name="last_name" required autocomplete="family-name"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" name="email" required autocomplete="email"></div>
+            <div class="field"><label for="c-phone" data-es="Teléfono">Phone</label><input id="c-phone" type="tel" name="phone" required autocomplete="tel"></div>
+          </div>
+          <div class="field"><label for="c-addr" data-es="Dirección">Address</label><input id="c-addr" name="address" required autocomplete="street-address"></div>
+          <div class="form-row three">
+            <div class="field"><label for="c-city" data-es="Ciudad">City</label><input id="c-city" name="city" required autocomplete="address-level2"></div>
+            <div class="field"><label for="c-zip" data-es="Código postal">Postcode</label><input id="c-zip" name="postcode" required autocomplete="postal-code"></div>
+            <div class="field"><label for="c-country" data-es="País">Country</label><select id="c-country" name="country" autocomplete="country-name"><option>España</option><option>Portugal</option><option>France</option><option>Italia</option><option>Deutschland</option><option>Nederland</option><option>Belgique</option><option>Ireland</option><option>Österreich</option><option data-es="Otro país UE">Other EU country</option></select></div>
+          </div>
+          <div class="field"><label for="c-nif"><span data-es="NIF / CIF para factura">VAT / tax ID for invoice</span> <span class="opt" data-es="(opcional)">(optional)</span></label><input id="c-nif" name="tax_id"></div>
+          <div class="co-actions"><a href="shop.html" class="muted small" data-es="← Seguir comprando">← Continue shopping</a><button type="button" class="btn" data-next="2" data-es="Continuar →">Continue →</button></div>
+        </section>
+
+        <section class="co-panel" data-p="2">
+          <h2 data-es="Envío">Delivery</h2>
+          <div class="radio-cards" id="shipOpts"></div>
+          <h2 style="margin-top:12px" data-es="Pago">Payment</h2>
+          <div class="radio-cards" id="payOpts"></div>
+          <div class="field"><label for="c-notes"><span data-es="Notas del pedido">Order notes</span> <span class="opt" data-es="(opcional)">(optional)</span></label><textarea id="c-notes" name="notes" style="min-height:80px"></textarea></div>
+          <div class="co-actions"><button type="button" class="btn ghost" data-next="1" data-es="← Atrás">← Back</button><button type="button" class="btn" data-next="3" data-es="Revisar pedido →">Review order →</button></div>
+        </section>
+
+        <section class="co-panel" data-p="3">
+          <h2 data-es="Revisa tu pedido">Review your order</h2>
+          <div id="review" style="display:grid;gap:10px"></div>
+          <label class="check"><input type="checkbox" name="accept_terms" required id="terms"><span data-es="He leído y acepto las <a href='legal.html#terms' target='_blank'>condiciones de venta</a> y la <a href='legal.html#privacy' target='_blank'>política de privacidad</a>.">I have read and accept the <a href="legal.html#terms" target="_blank">terms of sale</a> and the <a href="legal.html#privacy" target="_blank">privacy policy</a>.</span></label>
+          <label class="check"><input type="checkbox" name="newsletter" value="yes"><span data-es="Quiero recibir novedades y acceso anticipado.">Send me news and early access.</span></label>
+          <p class="form-status" id="coStatus"></p>
+          <div class="co-actions"><button type="button" class="btn ghost" data-next="2" data-es="← Atrás">← Back</button><button type="submit" class="btn" id="placeBtn"></button></div>
+          <p class="xs muted" id="payNote"></p>
+        </section>
+      </form>
+
+      <section class="co-panel" data-p="done">
+        <div class="success">
+          <div class="check-big"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h2 data-es="¡Pedido recibido!">Order received!</h2>
+          <p class="lede" id="doneMsg"></p>
+          <div class="card" style="text-align:left;max-width:520px;width:100%">
+            <h4 data-es="Qué pasa ahora">What happens next</h4>
+            <ul class="ticks" style="margin-top:14px">
+              <li><span id="doneStep1"></span></li>
+              <li><span data-es="Preparamos y enviamos tu pedido en 24–48 h tras el pago.">We pack and ship within 24–48 h of payment.</span></li>
+              <li><span data-es="Recibirás acceso a la app POWR y una guía de inicio de 2 minutos.">You'll get access to the POWR app and a 2-minute start guide.</span></li>
+            </ul>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center"><a class="btn" href="index.html" data-es="Volver al inicio">Back to home</a><a class="btn ghost" href="https://www.instagram.com/powr.app/" target="_blank" rel="noopener" data-es="Síguenos en Instagram">Follow us on Instagram</a></div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="summary" id="summary">
+      <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:20px" data-es="Resumen">Summary</h3><button type="button" class="link-arrow" id="editCart" style="background:none;border:0;font-size:14px" data-es="Editar">Edit</button></div>
+      <div id="sumLines"></div>
+      <div class="promo"><input id="promo" placeholder="Promo code" data-es-ph="Código promocional" aria-label="Promo code"><button type="button" class="btn sm ghost" id="promoBtn" data-es="Aplicar">Apply</button></div>
+      <p class="xs" id="promoMsg"></p>
+      <div class="sum-row"><span data-es="Subtotal">Subtotal</span><span class="mono" id="sSub"></span></div>
+      <div class="sum-row" id="sDiscRow" style="display:none"><span data-es="Descuento">Discount</span><span class="mono teal" id="sDisc"></span></div>
+      <div class="sum-row"><span data-es="Envío">Shipping</span><span class="mono" id="sShip"></span></div>
+      <div class="sum-row total" style="padding-top:12px;border-top:1px solid var(--line)"><span>Total</span><b id="sTotal"></b></div>
+      <p class="xs muted" data-es="IVA incluido.">VAT included.</p>
+      <div class="pay-icons"><span>VISA</span><span>MASTERCARD</span><span>APPLE PAY</span><span>GOOGLE PAY</span><span>BIZUM</span></div>
+    </aside>
+  </div>
+</main>
+
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>

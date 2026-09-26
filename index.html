@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>POWR — Velocity-based training with your phone</title>
+<meta name="title-es" content="POWR — Entrenamiento basado en la velocidad con tu móvil">
+<meta name="description" content="POWR turns your phone into a velocity-based training coach. Clip it to the bar, lift, and get bar speed, power, fatigue and 1RM on every rep. Kits from €29. Installations for gyms.">
+<meta name="theme-color" content="#070909">
+<meta property="og:title" content="POWR — Your phone is now a VBT coach">
+<meta property="og:description" content="Bar speed, power, fatigue and 1RM on every rep. Kits from €29. Installations for gyms.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+<style>
+  .hero.photo { background: #050606; }
+  .hero.photo .bgimg { position: absolute; inset: 0; background: url(assets/img/hero-gym.jpg) 70% center / cover no-repeat; opacity: .55; }
+  .hero.photo .bgimg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #050606 8%, rgba(5,6,6,.82) 42%, rgba(5,6,6,.35) 75%, rgba(5,6,6,.6)), linear-gradient(0deg, #070909 0%, transparent 30%); }
+  @media (max-width: 1080px) { .hero.photo .bgimg { background-position: 80% top; opacity: .35; } .hero.photo .bgimg::after { background: linear-gradient(180deg, rgba(5,6,6,.5), #070909 70%); } }
+  .price-inline { display: inline-flex; align-items: baseline; gap: 10px; padding: 8px 14px 8px 8px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid var(--line-2); font-size: 14px; color: var(--text-2); width: fit-content; }
+  .price-inline b { white-space: nowrap; background: var(--teal); color: var(--teal-ink); border-radius: 999px; padding: 4px 10px; font-family: var(--f-mono); font-size: 13px; }
+  .decide-mock { width: 100%; height: 100%; padding: 22px; display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+  .decide-mock .row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  .decide-mock .row span { color: var(--muted); font-size: 13px; }
+  .decide-mock .row b { font: 700 20px/1 var(--f-mono); }
+  .verdict { display: inline-flex; gap: 8px; align-items: center; background: var(--teal-glow); color: var(--teal); border: 1px solid rgba(56,240,215,.3); border-radius: 999px; padding: 8px 14px; font-weight: 700; font-size: 14px; width: fit-content; }
+  .ig-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .ig-grid a { aspect-ratio: 1; border-radius: 14px; overflow: hidden; position: relative; display: block; }
+  .ig-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease), opacity .3s; }
+  .ig-grid a:hover img { transform: scale(1.05); opacity: .7; }
+  .ig-grid a::after { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.8'%3E%3Crect x='3' y='3' width='18' height='18' rx='5'/%3E%3Ccircle cx='12' cy='12' r='4.2'/%3E%3C/svg%3E") center/32px no-repeat; opacity: 0; transition: opacity .3s; }
+  .ig-grid a:hover::after { opacity: 1; }
+  @media (max-width: 640px) { .ig-grid { grid-template-columns: repeat(2, 1fr); } }
+  .cite { font-size: 13px; color: var(--muted); border-left: 2px solid var(--teal); padding-left: 14px; margin-top: 8px; }
+  .audience { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .aud { position: relative; border-radius: calc(var(--radius) + 6px); overflow: hidden; min-height: 460px; display: flex; align-items: flex-end; border: 1px solid var(--line); }
+  .aud img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+  .aud:hover img { transform: scale(1.04); }
+  .aud::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(5,6,6,.92) 78%); z-index: 1; }
+  .aud-body { position: relative; z-index: 2; padding: clamp(24px, 3vw, 40px); display: grid; gap: 14px; }
+  .aud-body p { color: var(--text-2); max-width: 44ch; }
+  @media (max-width: 900px) { .audience { grid-template-columns: 1fr; } .aud { min-height: 400px; } }
+</style>
+</head>
+<body data-page="home">
+
+<!-- ================= HERO ================= -->
+<section class="hero photo">
+  <div class="bgimg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="price-inline reveal"><b data-es="Desde 29 €">From €29</b><span data-es="Entrenamiento basado en la velocidad">Velocity-based training</span></span>
+      <h1 class="reveal d1"><span class="line" data-es="Tu móvil.">Your phone.</span><span class="line" data-es="Ahora un <em>coach VBT.</em>">Now a <em>VBT coach.</em></span></h1>
+      <p class="lede reveal d2" data-es="Engancha el móvil a la barra y levanta. POWR mide la velocidad, la potencia y la fatiga de cada repetición, y te dice cuándo parar, cuándo subir peso y cuánto tienes hoy. Lo que antes costaba 500 € en sensores, ahora en tu bolsillo.">Clip your phone to the bar and lift. POWR measures the speed, power and fatigue of every rep — then tells you when to stop, when to add weight, and what you have in the tank today. What used to take a €500 sensor, now in your pocket.</p>
+      <div class="hero-cta reveal d3">
+        <a class="btn" href="shop.html"><span data-es="Comprar el kit">Get the kit</span> →</a>
+        <a class="btn ghost" href="gyms.html" data-es="POWR para gimnasios">POWR for gyms</a>
+      </div>
+      <div class="hero-proof reveal d3">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-es="Sin sensor extra">No extra sensor</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-es="Avisos por audio en cada rep">Audio cue on every rep</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-es="Devolución en 30 días">30-day returns</span></span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal d2">
+      <div class="float-chip c1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div><div><b id="chipVel">0.62 m/s</b><small data-es="Velocidad media">Mean velocity</small></div></div>
+      <div class="phone" aria-label="POWR app recording a set">
+        <div class="screen" id="liveScreen">
+          <div class="app-top"><span class="back">←</span><span data-es="Press banca">Bench Press</span></div>
+          <div style="text-align:center"><span class="app-pill"><i></i><span data-es="GRABANDO">RECORDING</span></span></div>
+          <div class="app-card">
+            <div class="app-big" id="liveBig">0.00</div>
+            <div class="app-lbl" data-es="ÚLTIMA REP M/S">LAST REP M/S</div>
+            <div class="app-stats">
+              <div class="app-stat"><b id="liveLoss">0%</b><small data-es="FATIGA">FATIGUE</small></div>
+              <div class="app-stat"><b id="livePeak">0.00</b><small data-es="PICO">PEAK</small></div>
+              <div class="app-stat"><b id="liveRom">0<small style="font-size:.6em">cm</small></b><small>ROM</small></div>
+            </div>
+            <div class="app-bars" id="liveBars"><div class="cut" style="bottom:46%"></div></div>
+          </div>
+          <div class="app-foot"><div class="app-btn red" data-es="TERMINAR SERIE">FINISH SET</div></div>
+        </div>
+      </div>
+      <div class="float-chip c2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></div><div><b id="chipCue">“Rep 1 — 0.62”</b><small data-es="Aviso por audio">Audio cue</small></div></div>
+      <div class="float-chip c3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg></div><div><b>e1RM 102 kg</b><small data-es="Estimado hoy">Estimated today</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STRIP ================= -->
+<div class="strip">
+  <div class="wrap">
+    <div class="strip-item"><div class="num">€29</div><span data-es="Para empezar, frente a 329–587 € de un sensor">To start, vs €329–587 for a sensor</span></div>
+    <div class="strip-item"><div class="num">200<small>Hz</small></div><span data-es="Muestreo de acelerómetro y giroscopio">Accelerometer + gyro sampling</span></div>
+    <div class="strip-item"><div class="num">6</div><span data-es="Métricas por repetición">Metrics per rep</span></div>
+    <div class="strip-item"><div class="num">&lt;10<small>s</small></div><span data-es="Del bolsillo a la barra">Pocket to bar</span></div>
+    <div class="strip-item"><div class="num">50<small>mm</small></div><span data-es="Encaja en cualquier barra olímpica">Fits any Olympic sleeve</span></div>
+  </div>
+</div>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow reveal" data-es="Cómo funciona">How it works</span>
+      <h2 class="reveal d1" data-es="Tres pasos. Cero cables.">Three steps. Zero cables.</h2>
+      <p class="lede reveal d2" data-es="El VBT (entrenamiento basado en la velocidad) usa la velocidad de la barra para medir el esfuerzo real. Si la barra se frena, estás cansado — aunque sientas que no. POWR lo mide por ti.">VBT (velocity-based training) uses bar speed to measure real effort. When the bar slows down, you're fatigued — even when it doesn't feel like it. POWR measures it for you.</p>
+    </div>
+    <div class="steps">
+      <div class="reveal">
+        <div class="step-visual"><img src="assets/img/clip-hero.jpg" alt="POWR Bar Clip on an Olympic sleeve" loading="lazy"></div>
+        <div class="step"><h3 data-es="Engancha">Clip</h3><p data-es="El Bar Clip se abraza al manguito de la barra. El móvil se pega con el anillo magnético. Menos de 10 segundos.">The Bar Clip hugs the bar sleeve. Your phone snaps on with the magnetic ring. Under 10 seconds.</p></div>
+      </div>
+      <div class="reveal d1">
+        <div class="step-visual"><img src="assets/img/hero-gym.jpg" alt="Phone on a loaded barbell in a gym" loading="lazy" style="object-position:72% center"></div>
+        <div class="step"><h3 data-es="Levanta">Lift</h3><p data-es="Los sensores del móvil registran cada repetición a 200 Hz. Oyes la velocidad en voz alta, sin mirar la pantalla.">Your phone's motion sensors capture every rep at 200 Hz. You hear the speed out loud — no need to look at the screen.</p></div>
+      </div>
+      <div class="reveal d2">
+        <div class="step-visual">
+          <div class="decide-mock">
+            <div class="row"><span data-es="Pérdida de velocidad">Velocity loss</span><b style="color:var(--amber)">18%</b></div>
+            <div class="row"><span data-es="Mejor rep">Best rep</span><b class="teal">0.71 m/s</b></div>
+            <div class="row"><span data-es="1RM estimado">Estimated 1RM</span><b>102 kg</b></div>
+            <span class="verdict">▲ <span data-es="Sube 2,5 kg la próxima serie">Add 2.5 kg next set</span></span>
+          </div>
+        </div>
+        <div class="step"><h3 data-es="Decide">Decide</h3><p data-es="POWR convierte los números en una decisión: sigue, para o sube peso. Sin adivinar, sin RPE a ojo.">POWR turns the numbers into a decision: keep going, stop, or add weight. No guessing, no eyeballed RPE.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= METRICS ================= -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy">
+        <span class="eyebrow reveal" data-es="Qué mide">What it measures</span>
+        <h2 class="reveal d1" data-es="Cada rep, en números que entiendes.">Every rep, in numbers you understand.</h2>
+        <p class="lede reveal d2" data-es="Lo que antes solo veían los preparadores físicos de equipos profesionales, ahora en tu entreno de martes por la tarde.">What only pro-team strength coaches used to see — now in your Tuesday-evening session.</p>
+        <div class="reveal d3"><a class="link-arrow" href="shop.html" data-es="Empieza por 29 €">Start for €29</a></div>
+      </div>
+      <div class="metrics reveal d1">
+        <div class="metric"><div class="num">0.62<small>m/s</small></div><h4 data-es="Velocidad media">Mean velocity</h4><p data-es="La métrica principal del VBT. Cuánto de rápido sube la barra.">The core VBT number: how fast the bar moves up.</p></div>
+        <div class="metric"><div class="num">1.03<small>m/s</small></div><h4 data-es="Velocidad pico">Peak velocity</h4><p data-es="Tu punto más explosivo, clave para potencia y halterofilia.">Your most explosive point — key for power and Olympic lifts.</p></div>
+        <div class="metric"><div class="num">612<small>W</small></div><h4 data-es="Potencia">Power</h4><p data-es="Fuerza × velocidad. Lo que de verdad mueves.">Force × speed. What you actually produce.</p></div>
+        <div class="metric"><div class="num">42<small>cm</small></div><h4 data-es="Recorrido (ROM)">Range of motion</h4><p data-es="Detecta repeticiones cortas y técnica que cambia con la fatiga.">Spots short reps and technique that drifts with fatigue.</p></div>
+        <div class="metric"><div class="num" style="color:var(--amber)">18<small>%</small></div><h4 data-es="Pérdida de velocidad">Velocity loss</h4><p data-es="Tu medidor de fatiga. En color: verde, ámbar, rojo.">Your fatigue gauge. Colour-coded green, amber, red.</p></div>
+        <div class="metric"><div class="num">102<small>kg</small></div><h4 data-es="1RM estimado">Estimated 1RM</h4><p data-es="Tu máximo de hoy, sin tener que probarlo.">Today's max — without having to test it.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COACH ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="split rev">
+      <div class="split-copy">
+        <span class="eyebrow reveal" data-es="La app">The app</span>
+        <h2 class="reveal d1" data-es="Un entrenador que no se distrae.">A coach that never looks away.</h2>
+        <p class="lede reveal d2" data-es="Diseñada para usarse entre series, con una mano y tiza en los dedos: un número, un color, un botón.">Built to be used between sets, one-handed, with chalk on your fingers: one number, one colour, one button.</p>
+        <ul class="ticks reveal d3">
+          <li><span data-es="<b>Corte por pérdida de velocidad.</b> Elige tu límite (p. ej. 20 %) y POWR te avisa cuando toca terminar la serie.">
+            <b>Velocity-loss cutoffs.</b> Pick your limit (e.g. 20%) and POWR tells you when the set is done.</span></li>
+          <li><span data-es="<b>Avisos por audio.</b> Oyes la velocidad de cada rep sin mirar el móvil.">
+            <b>Live audio cues.</b> Hear every rep's speed without looking at your phone.</span></li>
+          <li><span data-es="<b>Perfil carga-velocidad.</b> Tu 1RM estimado se actualiza cada sesión.">
+            <b>Load–velocity profile.</b> Your estimated 1RM updates every session.</span></li>
+          <li><span data-es="<b>Progreso y récords.</b> Historial, rachas y tus mejores reps por peso.">
+            <b>Progress and PRs.</b> History, streaks, and your fastest rep at every load.</span></li>
+          <li><span data-es="<b>Comunidad.</b> Compite con amigos y con tu gimnasio.">
+            <b>Community.</b> Compare with friends and with your gym.</span></li>
+        </ul>
+      </div>
+      <div class="media-frame reveal" style="aspect-ratio:4/5;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#12302c,#0b0e0f 65%)">
+        <div class="phone" style="--w:270px">
+          <div class="screen">
+            <div class="app-top"><span data-es="Progreso">Progress</span></div>
+            <div style="padding:4% 7%;display:grid;gap:.9em">
+              <div style="font-size:.7em;color:#a6a6a6;letter-spacing:.12em;font-weight:700" data-es="SENTADILLA · 1RM ESTIMADO">SQUAT · ESTIMATED 1RM</div>
+              <div style="font:800 2.6em/1 var(--f-display);font-stretch:105%;color:#38f0d7">142 <span style="font-size:.4em;color:#a6a6a6">kg</span></div>
+              <svg viewBox="0 0 200 90" style="width:100%"><defs><linearGradient id="g1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#38f0d7" stop-opacity=".35"/><stop offset="1" stop-color="#38f0d7" stop-opacity="0"/></linearGradient></defs><path d="M0 75 L20 70 L40 72 L60 60 L80 62 L100 50 L120 47 L140 40 L160 36 L180 28 L200 22 L200 90 L0 90Z" fill="url(#g1)"/><path d="M0 75 L20 70 L40 72 L60 60 L80 62 L100 50 L120 47 L140 40 L160 36 L180 28 L200 22" fill="none" stroke="#38f0d7" stroke-width="2.5" stroke-linejoin="round"/><circle cx="200" cy="22" r="4" fill="#38f0d7"/></svg>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5em">
+                <div class="app-stat"><b>+11 kg</b><small data-es="12 SEMANAS">12 WEEKS</small></div>
+                <div class="app-stat"><b>0.48</b><small data-es="M/S A 120 KG">M/S @ 120 KG</small></div>
+                <div class="app-stat"><b>9 🔥</b><small data-es="RACHA SEMANAS">WEEK STREAK</small></div>
+                <div class="app-stat"><b>34</b><small data-es="SESIONES">SESSIONS</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMPARISON ================= -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow reveal" data-es="Comparativa">Compare</span>
+      <h2 class="reveal d1" data-es="El VBT, sin el precio del VBT.">VBT without the VBT price tag.</h2>
+      <p class="lede reveal d2" data-es="Precios públicos de septiembre de 2026.">Public list prices, September 2026.</p>
+    </div>
+    <div class="compare-wrap reveal">
+      <table class="compare">
+        <thead><tr><th></th><th class="us">POWR</th><th data-es="Sensor IMU">IMU sensor</th><th data-es="Encoder lineal">Linear encoder</th><th data-es="App de cámara">Camera app</th></tr></thead>
+        <tbody>
+          <tr><td data-es="Precio para empezar">Price to start</td><td class="us">€29</td><td>€329 – €587</td><td>€2,000+</td><td data-es="~90 $/año">~$90 / year</td></tr>
+          <tr><td data-es="Qué necesitas">What you need</td><td class="us" data-es="Tu móvil + clip">Your phone + clip</td><td data-es="Sensor + móvil">Sensor + phone</td><td data-es="Encoder + cable + tablet">Encoder + tether + tablet</td><td data-es="Móvil + trípode">Phone + tripod</td></tr>
+          <tr><td data-es="Va en la barra">Rides on the bar</td><td class="us yes">●</td><td class="yes">●</td><td class="no" data-es="Cable al suelo">Tether to floor</td><td class="no" data-es="Cámara de lado">Side camera</td></tr>
+          <tr><td data-es="Máquinas con NFC/QR">Tap-to-start machines (NFC/QR)</td><td class="us yes">●</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><td data-es="Rankings de tu gimnasio">In-gym leaderboards</td><td class="us yes">●</td><td class="no" data-es="Solo equipos">Teams only</td><td class="no" data-es="Licencia premium">Premium licence</td><td class="no">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AUDIENCES ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow reveal" data-es="Para quién">Who it's for</span>
+      <h2 class="reveal d1" data-es="Para ti. Y para tu gimnasio.">For you. And for your gym.</h2>
+    </div>
+    <div class="audience">
+      <a class="aud reveal" href="shop.html">
+        <img src="assets/img/clip-hero.jpg" alt="" loading="lazy">
+        <div class="aud-body">
+          <span class="tag teal" data-es="Deportistas">Athletes</span>
+          <h3 style="font-size:clamp(26px,3vw,36px)" data-es="Entrena con datos, no con sensaciones.">Train on data, not on feel.</h3>
+          <p data-es="El kit con el clip y el anillo magnético. Llega en 2–4 días. Úsalo en casa o en cualquier gimnasio.">The kit with the clip and the magnetic ring. Arrives in 2–4 days. Use it at home or in any gym.</p>
+          <span class="link-arrow" data-es="Ver kits desde 29 €">Shop kits from €29</span>
+        </div>
+      </a>
+      <a class="aud reveal d1" href="gyms.html">
+        <img src="assets/img/gym-board.jpg" alt="" loading="lazy">
+        <div class="aud-body">
+          <span class="tag teal" data-es="Gimnasios">Gyms</span>
+          <h3 style="font-size:clamp(26px,3vw,36px)" data-es="Tu gimnasio, convertido en una liga.">Turn your gym floor into a league.</h3>
+          <p data-es="Instalamos etiquetas NFC y QR en tus máquinas. Tus socios acercan el móvil, entrenan y compiten en rankings por edad, peso y máquina.">We install NFC and QR tags on your machines. Members tap, train, and compete on leaderboards by age, weight class and machine.</p>
+          <span class="link-arrow" data-es="Ver POWR para gimnasios">See POWR for gyms</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCTS ================= -->
+<section class="section alt" id="kits">
+  <div class="wrap">
+    <div class="head" style="grid-template-columns:1fr auto;align-items:end">
+      <div style="display:grid;gap:18px">
+        <span class="eyebrow reveal" data-es="Tienda">Shop</span>
+        <h2 class="reveal d1" data-es="Elige tu kit.">Pick your kit.</h2>
+      </div>
+      <a class="link-arrow reveal" href="shop.html" data-es="Ver toda la tienda">See the full shop</a>
+    </div>
+    <div class="products" id="homeProducts"></div>
+  </div>
+</section>
+
+<!-- ================= PRO SENSORS ================= -->
+<section class="section" id="sensors">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow reveal" data-es="Próximamente">Coming next</span>
+      <h2 class="reveal d1" data-es="Sensores Pro. Para ir más allá.">Pro sensors. For those who want more.</h2>
+      <p class="lede reveal d2" data-es="El móvil es el punto de partida. Para más precisión — y para dejar el móvil en el bolsillo — estamos diseñando sensores dedicados. Apúntate y tendrás precio de fundador.">Your phone is the starting point. For more precision — and to keep the phone in your pocket — we're designing dedicated sensors. Join the list for founder pricing.</p>
+    </div>
+    <div class="roadmap">
+      <div class="rm reveal">
+        <div class="rm-media" id="collarViewer"><img src="assets/img/b_exploded.jpg" alt="" id="collarFallback" style="position:absolute;inset:0;opacity:0"><span class="tag solid" data-es="3D · arrastra para girar">3D · drag to rotate</span></div>
+        <div class="rm-body">
+          <span class="tag teal" style="width:fit-content" data-es="En desarrollo">In development</span>
+          <h3>POWR Collar · <span data-es="pareja">pair</span></h3>
+          <p data-es="Doble abrazadera con sensor integrado. Un collarín a cada lado de la barra mide la velocidad del centro y el desequilibrio izquierda–derecha. Sin móvil en la barra. Cara magnética para columnas de peso.">A dual clamp with the sensor built in. One collar on each side of the bar measures centre speed and left–right imbalance. No phone on the bar. A magnetic face for weight stacks.</p>
+        </div>
+      </div>
+      <div class="rm reveal d1">
+        <div class="rm-media"><img src="assets/img/barbell.jpg" alt="POWR Puck concept on a barbell" loading="lazy"><span class="tag" data-es="Render de concepto">Concept render</span></div>
+        <div class="rm-body">
+          <span class="tag" style="width:fit-content" data-es="Concepto">Concept</span>
+          <h3>POWR Puck</h3>
+          <p data-es="Un disco de titanio que se pega a la barra, a la muñeca o a la columna de peso. Para quien quiere precisión de laboratorio en 18 gramos.">A titanium puck that snaps to the bar, the wrist or the weight stack. Lab-grade precision in 18 grams.</p>
+        </div>
+      </div>
+      <div class="rm reveal d2">
+        <div class="rm-media"><img src="assets/img/wrist.jpg" alt="POWR Loop concept on the wrist" loading="lazy"><span class="tag" data-es="Render de concepto">Concept render</span></div>
+        <div class="rm-body">
+          <span class="tag" style="width:fit-content" data-es="Concepto">Concept</span>
+          <h3>POWR Loop</h3>
+          <p data-es="Una banda de muñeca que mide mancuernas, poleas y máquinas, y tu recuperación entre sesiones.">A wrist band that tracks dumbbells, cables and machines — and your recovery between sessions.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card reveal" style="margin-top:20px;display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:center" id="waitlist">
+      <div style="display:grid;gap:8px"><h3 data-es="Apúntate a la lista de espera">Join the waitlist</h3><p data-es="Serás el primero en probarlos, con precio de fundador. Solo te escribiremos para esto.">Be first to try them, at founder pricing. We'll only email you about this.</p></div>
+      <div>
+        <form class="form" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-powr-form data-ok="You're on the list. We'll be in touch before launch." data-ok-es="Estás en la lista. Te escribiremos antes del lanzamiento.">
+          <input type="hidden" name="form-name" value="waitlist">
+          <p class="hp"><label>Leave empty <input name="bot-field"></label></p>
+          <div class="form-row">
+            <div class="field"><select name="product" aria-label="Product"><option value="collar">POWR Collar</option><option value="puck">POWR Puck</option><option value="loop">POWR Loop</option><option value="all" data-es="Todos">All of them</option></select></div>
+            <div class="field"><input type="email" name="email" required placeholder="you@email.com" data-es-ph="tu@email.com" aria-label="Email"></div>
+          </div>
+          <button class="btn" type="submit" data-es="Apuntarme">Join the waitlist</button>
+        </form>
+        <p class="form-status" style="margin-top:12px"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCIENCE ================= -->
+<section class="section chalk">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-copy">
+        <span class="eyebrow" data-es="La ciencia">The science</span>
+        <h2 data-es="Construido sobre 15 años de investigación en VBT.">Built on 15 years of VBT research.</h2>
+        <p class="lede" data-es="POWR no se inventa las reglas. Aplica métodos publicados y revisados por pares, con reglas auditables — no una IA que adivina.">POWR doesn't invent the rules. It applies published, peer-reviewed methods with auditable logic — not an AI that guesses.</p>
+      </div>
+      <div class="grid" style="gap:14px">
+        <div class="card"><h4 data-es="La velocidad predice el %1RM">Velocity predicts %1RM</h4><p data-es="La velocidad media de la barra refleja con mucha precisión qué porcentaje de tu máximo estás moviendo.">Mean bar speed tracks very closely what percentage of your max you're lifting.</p><p class="cite">González-Badillo &amp; Sánchez-Medina, Int J Sports Med, 2010</p></div>
+        <div class="card"><h4 data-es="Menos fatiga, mismas ganancias">Less fatigue, same gains</h4><p data-es="Parar la serie con un 20 % de pérdida de velocidad dio ganancias de fuerza similares a llegar al 40 %, con menos fatiga.">Stopping sets at 20% velocity loss gave similar strength gains to going to 40%, with less fatigue.</p><p class="cite">Pareja-Blanco et al., Scand J Med Sci Sports, 2017</p></div>
+        <div class="card"><h4 data-es="Los sensores del móvil funcionan">Phone sensors work</h4><p data-es="Los acelerómetros y giroscopios de los móviles modernos muestrean a 100–200 Hz, suficiente para medir la velocidad de una repetición.">Modern phone accelerometers and gyroscopes sample at 100–200 Hz, enough to resolve the speed of a rep.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INSTAGRAM ================= -->
+<section class="section tight">
+  <div class="wrap">
+    <div class="head" style="grid-template-columns:1fr auto;align-items:end;margin-bottom:32px">
+      <div style="display:grid;gap:14px"><span class="eyebrow" data-es="Síguenos">Follow the build</span><h2 style="font-size:clamp(28px,3.6vw,44px)">@powr.app</h2></div>
+      <a class="btn ghost sm" href="https://www.instagram.com/powr.app/" target="_blank" rel="noopener" data-es="Seguir en Instagram">Follow on Instagram</a>
+    </div>
+    <div class="ig-grid">
+      <a href="https://www.instagram.com/powr.app/" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/img/hero-gym.jpg" alt="" loading="lazy" style="object-position:75% center"></a>
+      <a href="https://www.instagram.com/powr.app/" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/img/kit-complete.jpg" alt="" loading="lazy"></a>
+      <a href="https://www.instagram.com/powr.app/" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/img/gym-nfc.jpg" alt="" loading="lazy"></a>
+      <a href="https://www.instagram.com/powr.app/" target="_blank" rel="noopener" aria-label="Instagram"><img src="assets/img/hero.jpg" alt="" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section alt" id="faq">
+  <div class="wrap">
+    <div class="head center"><span class="eyebrow" data-es="Preguntas frecuentes">FAQ</span><h2 data-es="Preguntas, respondidas.">Questions, answered.</h2></div>
+    <div class="faq">
+      <details><summary data-es="¿Qué es el entrenamiento basado en la velocidad (VBT)?">What is velocity-based training (VBT)?</summary><p data-es="Es entrenar usando la velocidad de la barra como medida del esfuerzo. Con el mismo peso, un día bueno la barra sube más rápido que un día malo. El VBT lo mide y ajusta el entrenamiento a cómo estás hoy, no a lo que ponía el plan.">Training that uses bar speed as the measure of effort. With the same weight, the bar moves faster on a good day than on a bad one. VBT measures that and adjusts your training to how you are today — not to what the plan said.</p></details>
+      <details><summary data-es="¿Con qué móviles funciona?">Which phones does it work with?</summary><p data-es="Con cualquier iPhone con MagSafe (iPhone 12 o posterior) directamente, y con los demás usando el anillo magnético incluido, que se pega a la funda. La app está ahora en beta para iPhone; cada kit incluye acceso. La versión Android está en camino.">Any MagSafe iPhone (iPhone 12 or later) snaps on directly; other phones use the included magnetic ring, which sticks to your case. The app is currently in beta on iPhone and every kit includes access. Android is on the way.</p></details>
+      <details><summary data-es="¿Es tan preciso como un sensor de 500 €?">Is it as accurate as a €500 sensor?</summary><p data-es="Para lo que importa al entrenar — ver cuándo te frenas y cómo progresas — sí es útil y consistente. Un encoder lineal de laboratorio sigue siendo más preciso en valores absolutos. Por eso diseñamos el POWR Collar: para quien quiere esa precisión extra.">For what matters in training — seeing when you slow down and how you progress — it's useful and consistent. A lab linear encoder is still more accurate in absolute terms. That's why we're building the POWR Collar: for those who want that extra precision.</p></details>
+      <details><summary data-es="¿Se cae el móvil al levantar?">Will my phone fall off?</summary><p data-es="El clip se agarra a la barra con tiras de goma y el anillo magnético es N52 de doble cara. Lo probamos con cargas, tirones y calor. Aun así, no lo recomendamos para halterofilia con caídas de barra desde arriba.">The clip grips the bar with rubber strips and the magnetic ring is double-sided N52. We test it for load, pull-off and heat. We still don't recommend it for Olympic lifts where the bar is dropped from overhead.</p></details>
+      <details><summary data-es="¿Hay que pagar una suscripción?">Do I need a subscription?</summary><p data-es="No. La medición y el historial son gratis. POWR Premium añade análisis avanzado; cada kit incluye meses de Premium de regalo.">No. Tracking and history are free. POWR Premium adds deeper analysis, and every kit includes free months of Premium.</p></details>
+      <details><summary data-es="¿Cuánto tarda el envío? ¿Puedo devolverlo?">How fast is shipping? Can I return it?</summary><p data-es="España península en 2–4 días laborables, UE en 4–7. Envío gratis desde 40 €. Tienes 30 días para devolverlo y 3 años de garantía.">Spain (peninsula) in 2–4 working days, EU in 4–7. Free shipping over €40. 30-day returns and a 3-year warranty.</p></details>
+      <details><summary data-es="Tengo un gimnasio, ¿cómo funciona?">I own a gym — how does it work?</summary><p data-es="Visitamos tu gimnasio, etiquetamos cada máquina con NFC y QR, y damos de alta tu gimnasio en la app con rankings propios. Mira la página de <a href='gyms.html' class='teal'>gimnasios</a> para ver precios y pedir presupuesto.">We visit, tag every machine with NFC and QR, and add your gym to the app with its own leaderboards. See the <a href="gyms.html" class="teal">gyms page</a> for pricing and a quote.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <div style="position:relative;display:grid;gap:16px">
+        <h2 data-es="Tu próxima serie, <span class='teal'>medida.</span>">Your next set, <span class="teal">measured.</span></h2>
+        <p class="lede" data-es="Kit desde 29 €. Envío en 2–4 días. 30 días para devolverlo.">Kit from €29. Ships in 2–4 days. 30 days to return it.</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="shop.html" data-es="Comprar el kit →">Get the kit →</a>
+        <a class="btn ghost" href="gyms.html#quote" data-es="Presupuesto para gimnasio">Quote for my gym</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/home.js"></script>
+<script type="module">
+  import { mountViewer } from './assets/js/viewer.js';
+  const el = document.getElementById('collarViewer');
+  const go = () => mountViewer(el, {
+    parts: ['LeftHalf', 'RightHalf', 'Lever', 'Lid'].map((p, i) => ({ url: `assets/models/collar_${p}.stl`, color: ['#26292a', '#26292a', '#38f0d7', '#3a3f40'][i] })),
+    bar: 'z', cameraDist: 250, barLength: 150, tilt: 0.35,
+  }).catch(() => { document.getElementById('collarFallback').style.opacity = 1; });
+  new IntersectionObserver((e, o) => { if (e[0].isIntersecting) { o.disconnect(); go(); } }, { rootMargin: '300px' }).observe(el);
+</script>
+</body>
+</html>
