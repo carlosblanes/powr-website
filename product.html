@@ -55,14 +55,17 @@
   const p = P[id];
 
   const GALLERY = {
-    kit: ['3d', 'assets/img/clip-hero.jpg', 'assets/img/clip-strips.jpg', 'assets/img/clip-chalk.jpg', 'assets/img/ring.jpg'],
+    // Renders of rev J from the configurator itself (assets/js/configurator.js).
+    kit: ['3d', 'assets/img/kit-complete.jpg', 'assets/img/clip-navy.jpg', 'assets/img/clip-chalk.jpg', 'assets/img/ring.jpg'],
   };
   const SPECS = {
-    kit: [['Support', 'POWR Bar Clip, PETG, ≈ 42 g', 'POWR Bar Clip, PETG, ≈ 42 g', 'Soporte'], ['Fits', 'Olympic sleeves Ø50 mm', 'Manguitos olímpicos Ø50 mm', 'Compatible'], ['Magnet', 'Double-sided, N52 neodymium', 'Doble cara, neodimio N52', 'Imán'], ['Phone ring', 'Adhesive, MagSafe size (Ø46–54 mm)', 'Adhesivo, tamaño MagSafe (Ø46–54 mm)', 'Anillo'], ['Grip', '4 silicone strips in the bore, replaceable', '4 tiras de silicona en el interior, reemplazables', 'Agarre'], ['Anti-rotation', 'Designed for > 0.9 N·m on the sleeve', 'Diseñado para > 0,9 N·m sobre el manguito', 'Anti-giro'], ['Made in', 'Spain', 'España', 'Fabricado en']],
+    kit: [['Support', 'POWR Bar Clip rev J: clip + MagSafe plate, PETG, ≈ 36 g', 'POWR Bar Clip rev J: clip + placa MagSafe, PETG, ≈ 36 g', 'Soporte'], ['Fits', 'Olympic sleeves Ø49.2–50.8 mm', 'Manguitos olímpicos Ø49,2–50,8 mm', 'Compatible'], ['Hold', '≥ 28 N pull-off on the thinnest sleeve, sweaty', '≥ 28 N de arranque en el manguito más fino, con sudor', 'Sujeción'], ['Magnet ring', 'Metal, 55 × 45 mm, on a Ø56 plate', 'Metálico, 55 × 45 mm, sobre placa de Ø56', 'Anillo magnético'], ['Phone ring', 'Adhesive, MagSafe size (Ø46–54 mm)', 'Adhesivo, tamaño MagSafe (Ø46–54 mm)', 'Anillo del móvil'], ['Grip', '4 silicone strips in the bore, replaceable', '4 tiras de silicona en el interior, reemplazables', 'Agarre'], ['Colours', 'Clip and plate in any of 12 PETG colours, 4 ring finishes', 'Clip y placa en cualquiera de 12 colores de PETG, 4 acabados de anillo', 'Colores'], ['Made in', 'Spain, printed to order', 'España, impreso por encargo', 'Fabricado en']],
   };
 
   document.title = `${p.name} — POWR`;
-  let color = p.colors ? p.colors[0].id : null;
+  const K = p.custom || null;
+  let color = K ? K.presets[0].id : p.colors ? p.colors[0].id : null;
+  const partsOf = (cid) => POWR.customParts(id, cid);
   let qty = 1;
   let viewer = null;
 
@@ -77,7 +80,7 @@
         <p class="lede">${t(p.shortEn, p.shortEs)}</p>
       </div>
       <div class="price" style="font-size:40px">${money(p.price)}${p.compareAt ? `<s>${money(p.compareAt)}</s> <span class="tag solid" style="vertical-align:middle">−${Math.round((1 - p.price / p.compareAt) * 100)}%</span>` : ''}<small>${t('VAT included · Free shipping over €40', 'IVA incluido · Envío gratis desde 40 €')}</small></div>
-      ${p.colors ? `<div class="opt-group"><span>${t('Colour', 'Color')}: <b style="color:var(--text)" id="colorName">${POWR.colorName(id, color)}</b></span><div class="swatches">${p.colors.map((c) => `<button class="swatch${c.id === color ? ' on' : ''}" data-color="${c.id}" data-hex="${c.hex}"><i style="background:${c.hex}"></i>${t(c.en, c.es)}</button>`).join('')}</div></div>` : ''}
+      ${K ? cfgHTML() : p.colors ? `<div class="opt-group"><span>${t('Colour', 'Color')}: <b style="color:var(--text)" id="colorName">${POWR.colorName(id, color)}</b></span><div class="swatches">${p.colors.map((c) => `<button class="swatch${c.id === color ? ' on' : ''}" data-color="${c.id}" data-hex="${c.hex}"><i style="background:${c.hex}"></i>${t(c.en, c.es)}</button>`).join('')}</div></div>` : ''}
       <div class="buy-row">
         <div class="qty"><button id="qm" aria-label="-">−</button><span id="qv">${qty}</span><button id="qp" aria-label="+">+</button></div>
         <button class="btn" id="addBtn">${t('Add to cart', 'Añadir al carrito')} · <span id="addPrice">${money(p.price * qty)}</span></button>
@@ -99,7 +102,34 @@
     document.getElementById('sbPrice').textContent = money(p.price);
   }
 
+  /* ---- build your own: presets, then a colour per part ---- */
+  function cfgHTML() {
+    const k = partsOf(color);
+    const row = (part, list, metal) => `<div class="cfg-row"><span>${{ clip: t('Clip', 'Clip'), plate: t('Plate', 'Placa'), ring: t('Magnet ring', 'Anillo magnético') }[part]}: <b data-name="${part}">${t(k[part].en, k[part].es)}</b></span>
+      <div class="dots" role="radiogroup" aria-label="${part}">${list.map((c) => `<button class="dot${metal ? ' metal' : ''}${c.id === k[part].id ? ' on' : ''}" role="radio" aria-checked="${c.id === k[part].id}" data-part="${part}" data-id="${c.id}" title="${t(c.en, c.es)}" aria-label="${t(c.en, c.es)}"><i style="background-color:${c.hex}"></i></button>`).join('')}</div></div>`;
+    return `<div class="cfg">
+      <div class="cfg-row"><span>${t('Pick a combination', 'Elige una combinación')}</span><div class="cfg-presets">${K.presets.map((pr) => { const q = partsOf(pr.id); return `<button class="preset${pr.id === color ? ' on' : ''}" data-preset="${pr.id}"><span class="kit-swatch" aria-hidden="true"><i style="background:${q.clip.hex}"></i><i style="background:${q.plate.hex}"></i><i style="background:${q.ring.hex}"></i></span>${t(pr.en, pr.es)}</button>`; }).join('')}</div></div>
+      ${row('clip', K.plastics)}${row('plate', K.plastics)}${row('ring', K.rings, true)}
+      <p class="xs muted">${t('Printed in PETG to order, in the colours you choose. The silicone grip strips are black.', 'Impreso en PETG por encargo, en los colores que elijas. Las tiras de silicona son negras.')}</p>
+    </div>`;
+  }
+  function applyKit(next) {
+    color = next;
+    const k = partsOf(color);
+    ['clip', 'plate', 'ring'].forEach((part) => {
+      document.querySelectorAll(`.dot[data-part="${part}"]`).forEach((d) => { const on = d.dataset.id === k[part].id; d.classList.toggle('on', on); d.setAttribute('aria-checked', on); });
+      const n = document.querySelector(`[data-name="${part}"]`); if (n) n.textContent = t(k[part].en, k[part].es);
+    });
+    document.querySelectorAll('.preset').forEach((b) => b.classList.toggle('on', b.dataset.preset === color));
+    if (viewer) viewer.setColors({ clip: k.clip.hex, plate: k.plate.hex, ring: k.ring.hex });
+    if (items[0] === '3d' && viewerEl && viewerEl.style.display === 'none') show(0);
+  }
   function wire() {
+    document.querySelectorAll('.preset').forEach((b) => b.addEventListener('click', () => applyKit(b.dataset.preset)));
+    document.querySelectorAll('.dot').forEach((b) => b.addEventListener('click', () => {
+      const parts = color.split('.'); parts[{ clip: 0, plate: 1, ring: 2 }[b.dataset.part]] = b.dataset.id;
+      applyKit(parts.join('.'));
+    }));
     document.querySelectorAll('.swatch').forEach((b) => b.addEventListener('click', () => {
       color = b.dataset.color;
       document.querySelectorAll('.swatch').forEach((x) => x.classList.toggle('on', x === b));
@@ -130,13 +160,27 @@
         viewerEl = document.createElement('div'); viewerEl.style.cssText = 'position:absolute;inset:0';
         stage.appendChild(viewerEl);
         try {
-          const { mountViewer, CLIP_STRIPS, CLIP_BAR_RADIUS } = await import('./assets/js/viewer.js');
-          const hex = (p.colors.find((c) => c.id === color) || p.colors[0]).hex;
-          viewer = await mountViewer(viewerEl, { parts: [{ url: p.model, color: hex }], bar: 'x', cameraDist: 270, barLength: 150, tilt: 0.42, strips: CLIP_STRIPS, barRadius: CLIP_BAR_RADIUS });
+          if (K) {
+            const { mountConfigurator } = await import('./assets/js/configurator.js');
+            const k = partsOf(color);
+            viewer = await mountConfigurator(viewerEl, { clip: k.clip.hex, plate: k.plate.hex, ring: k.ring.hex });
+          } else {
+            const { mountViewer, CLIP_STRIPS, CLIP_BAR_RADIUS } = await import('./assets/js/viewer.js');
+            const hex = (p.colors.find((c) => c.id === color) || p.colors[0]).hex;
+            viewer = await mountViewer(viewerEl, { parts: [{ url: p.model, color: hex }], bar: 'x', cameraDist: 270, barLength: 150, tilt: 0.42, strips: CLIP_STRIPS, barRadius: CLIP_BAR_RADIUS });
+          }
         } catch { viewerEl.innerHTML = `<img src="${p.img}" alt="" style="width:100%;height:100%;object-fit:cover">`; }
       }
       viewerEl.style.display = '';
       stage.insertAdjacentHTML('beforeend', `<span class="tag solid">3D · ${t('real CAD', 'CAD real')}</span><span class="tag hint">${t('Drag to rotate', 'Arrastra para girar')}</span>`);
+      if (K && viewer && viewer.setApart) {
+        const b = document.createElement('button');
+        b.className = 'apart' + (viewer.isApart() ? ' on' : '');
+        const label = () => (viewer.isApart() ? t('Put it together', 'Montarlo') : t('Take it apart', 'Desmontarlo'));
+        b.textContent = label();
+        b.onclick = () => { viewer.setApart(!viewer.isApart()); b.textContent = label(); b.classList.toggle('on', viewer.isApart()); };
+        stage.appendChild(b);
+      }
     } else {
       if (viewerEl) viewerEl.style.display = 'none';
       stage.insertAdjacentHTML('beforeend', `<img src="${src}" alt="${p.name}">`);
@@ -150,9 +194,9 @@
     if (!id.includes('kit')) { ex.style.display = 'none'; return; }
     ex.innerHTML = `<div class="wrap"><div class="head center"><span class="eyebrow">${t('Designed to disappear', 'Diseñado para desaparecer')}</span><h2>${t('Engineered like a barbell collar.', 'Diseñado como un collarín.')}</h2></div>
       <div class="grid g3">
-        <div class="card reveal"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4"/></svg>'}</div><h3>${t('Wraps 200° of the bar', 'Abraza 200° de la barra')}</h3><p>${t('Snaps onto the sleeve and grips on four silicone strips, so it does not spin when the bar rolls.', 'Se engancha al manguito y agarra sobre cuatro tiras de silicona: no gira cuando la barra rueda.')}</p></div>
-        <div class="card reveal d1"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20h16M6 16l6-12 6 12"/></svg>'}</div><h3>${t('A flat face for the phone', 'Una cara plana para el móvil')}</h3><p>${t('Optimised in 1,600+ simulated shapes so the magnetic face stays flat under load — the phone sits flush and reads true.', 'Optimizado entre más de 1.600 formas simuladas para que la cara magnética siga plana con carga: el móvil apoya bien y mide bien.')}</p></div>
-        <div class="card reveal d2"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M5 8l7-5 7 5"/></svg>'}</div><h3>${t('42 grams', '42 gramos')}</h3><p>${t('Light enough to forget. Stays on between sets, comes off in a second.', 'Tan ligero que te olvidas. Se queda puesto entre series y se quita en un segundo.')}</p></div>
+        <div class="card reveal"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4"/></svg>'}</div><h3>${t('Wraps 230° of the bar', 'Abraza 230° de la barra')}</h3><p>${t('Snaps onto any Olympic sleeve from 49.2 to 50.8 mm and grips on four silicone strips. Sized to hold 28 N on the thinnest bar with sweaty hands.', 'Se engancha a cualquier manguito olímpico de 49,2 a 50,8 mm y agarra sobre cuatro tiras de silicona. Dimensionado para aguantar 28 N en la barra más fina con las manos sudadas.')}</p></div>
+        <div class="card reveal d1"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20h16M6 16l6-12 6 12"/></svg>'}</div><h3>${t('Two parts, each printed its best way', 'Dos piezas, cada una impresa a su manera')}</h3><p>${t('The clip prints on its side so its arms flex along the layers; the MagSafe plate prints face-down for a smooth face and slides onto a dovetail rail.', 'El clip se imprime de lado para que sus brazos flexen a lo largo de las capas; la placa MagSafe se imprime boca abajo para una cara lisa y entra en un carril de cola de milano.')}</p></div>
+        <div class="card reveal d2"><div class="ic">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v18M5 8l7-5 7 5"/></svg>'}</div><h3>${t('36 grams', '36 gramos')}</h3><p>${t('Light enough to forget. Stays on between sets, comes off in a second.', 'Tan ligero que te olvidas. Se queda puesto entre series y se quita en un segundo.')}</p></div>
       </div></div>`;
     observe(ex);
   }

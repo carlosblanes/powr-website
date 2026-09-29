@@ -154,11 +154,22 @@
   const saveCart = () => store.set('powr_cart', cart);
   const cartQty = () => cart.reduce((a, l) => a + l.qty, 0);
   const subtotal = () => cart.reduce((a, l) => a + P[l.id].price * l.qty, 0);
-  const colorName = (id, cid) => { const c = (P[id].colors || []).find((x) => x.id === cid); return c ? t(c.en, c.es) : ''; };
+  /* A built kit is "clip.plate.ring" (catalog.js, custom); older carts hold one colour id. */
+  const customParts = (id, cid) => {
+    const c = P[id] && P[id].custom; const parts = typeof cid === 'string' ? cid.split('.') : [];
+    if (!c || parts.length !== 3) return null;
+    const clip = c.plastics.find((x) => x.id === parts[0]), plate = c.plastics.find((x) => x.id === parts[1]), ring = c.rings.find((x) => x.id === parts[2]);
+    return clip && plate && ring ? { clip, plate, ring } : null;
+  };
+  const colorName = (id, cid) => {
+    const k = customParts(id, cid);
+    if (k) return `${t('Clip', 'Clip')} ${t(k.clip.en, k.clip.es)} · ${t('Plate', 'Placa')} ${t(k.plate.en, k.plate.es)} · ${t('Ring', 'Anillo')} ${t(k.ring.en, k.ring.es)}`;
+    const c = (P[id].colors || []).find((x) => x.id === cid); return c ? t(c.en, c.es) : '';
+  };
 
   function add(id, qty = 1, color = null) {
     if (!P[id]) return;
-    color = color || (P[id].colors ? P[id].colors[0].id : null);
+    color = color || (P[id].custom ? P[id].custom.presets[0].id : P[id].colors ? P[id].colors[0].id : null);
     const found = cart.find((l) => l.id === id && l.color === color);
     if (found) found.qty += qty; else cart.push({ id, color, qty });
     saveCart(); renderCart(); openDrawer();
@@ -170,8 +181,13 @@
   function lineHTML(l, i, editable = true) {
     const p = P[l.id];
     const img = ((p.colors || []).find((c) => c.id === l.color) || {}).img || p.img;
+    const k = customParts(l.id, l.color);
+    /* A built kit shows its three colours, not a photo of some other colour. */
+    const pic = k
+      ? `<span class="kit-swatch" aria-hidden="true"><i style="background:${k.clip.hex}"></i><i style="background:${k.plate.hex}"></i><i style="background:${k.ring.hex}"></i></span>`
+      : `<img src="${img}" alt="" loading="lazy">`;
     return `<div class="line-item">
-      <img src="${img}" alt="" loading="lazy">
+      ${pic}
       <div><h4>${p.name}</h4><div class="meta">${l.color ? colorName(l.id, l.color) + ' · ' : ''}${money(p.price)}</div>
         ${editable ? `<div class="qty"><button data-q="${i}" data-d="-1" aria-label="-">−</button><span>${l.qty}</span><button data-q="${i}" data-d="1" aria-label="+">+</button></div>` : `<div class="meta">× ${l.qty}</div>`}
       </div>
@@ -291,7 +307,7 @@
     </article>`;
   }
 
-  window.POWR = { t, money, card, add, cart: () => cart, subtotal, clearCart, lineHTML, applyLang, observe, toast, submitForm, lang: () => lang, colorName, fillRange, store };
+  window.POWR = { t, money, card, add, customParts, cart: () => cart, subtotal, clearCart, lineHTML, applyLang, observe, toast, submitForm, lang: () => lang, colorName, fillRange, store };
 
   applyLang(); renderCart(); observe();
   $$('input[type="range"]').forEach(fillRange);

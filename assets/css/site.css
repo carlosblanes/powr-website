@@ -762,3 +762,28 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
   .goal-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 520px) { .goal-seg button { font-size: 11px; padding: 8px 0; } }
+
+/* ---- build-your-own kit (product page) ---- */
+.cfg { display: grid; gap: 16px; }
+.cfg-presets { display: flex; gap: 8px; flex-wrap: wrap; }
+.preset { height: 40px; padding: 0 14px 0 6px; border-radius: 999px; border: 1px solid var(--line-2); background: transparent; color: var(--text); display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; transition: border-color .2s; }
+.preset.on { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-glow); }
+.kit-swatch { display: inline-flex; flex: none; }
+.kit-swatch i { width: 18px; height: 28px; border: 1px solid rgba(255,255,255,.18); }
+.kit-swatch i:first-child { border-radius: 99px 0 0 99px; }
+.kit-swatch i:last-child { border-radius: 0 99px 99px 0; background-image: linear-gradient(135deg, rgba(255,255,255,.45), transparent 55%); }
+.line-item .kit-swatch i { width: 25px; height: 76px; }
+.line-item .kit-swatch i:first-child { border-radius: 12px 0 0 12px; }
+.line-item .kit-swatch i:last-child { border-radius: 0 12px 12px 0; }
+.cfg-row { display: grid; gap: 8px; }
+.cfg-row > span { font-size: 13.5px; font-weight: 600; color: var(--text-2); }
+.cfg-row > span b { color: var(--text); }
+.dots { display: flex; gap: 8px; flex-wrap: wrap; }
+.dot { width: 36px; height: 36px; border-radius: 99px; border: 2px solid transparent; padding: 3px; background: transparent; }
+.dot i { display: block; width: 100%; height: 100%; border-radius: 99px; border: 1px solid rgba(255,255,255,.2); }
+.dot.metal i { background-image: linear-gradient(135deg, rgba(255,255,255,.55), transparent 55%, rgba(0,0,0,.25)); }
+.dot.on { border-color: var(--teal); }
+.dot:focus-visible, .preset:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.gallery-main .apart { position: absolute; bottom: 16px; right: 16px; z-index: 2; height: 38px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-2); background: rgba(7,9,9,.72); color: var(--text); font-size: 13px; backdrop-filter: blur(6px); }
+.gallery-main .apart.on { border-color: var(--teal); color: var(--teal); }
+@media (max-width: 520px) { .gallery-main .hint { display: none; } .dot { width: 40px; height: 40px; } }

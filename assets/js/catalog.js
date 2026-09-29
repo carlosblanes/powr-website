@@ -49,17 +49,56 @@ window.POWR_PRODUCTS = {
     tagEn: 'Everything you need', tagEs: 'Todo lo que necesitas',
     price: 29, compareAt: 0,
     img: 'assets/img/clip-hero.jpg',
-    model: 'assets/models/barclip.stl',
+    model: 'assets/models/POWR_Clip_RevJ.stl',
     stripeLink: '',
     shortEn: 'Your phone becomes a velocity tracker on any Olympic bar.',
     shortEs: 'Tu móvil se convierte en un medidor de velocidad en cualquier barra olímpica.',
-    boxEn: ['Phone ring — sticks to your phone or case', 'Double-sided N52 magnet', 'POWR Bar Clip support with 4 silicone grip strips — fits 50 mm Olympic sleeves'],
-    boxEs: ['Anillo para el móvil — se pega al móvil o a la funda', 'Imán N52 de doble cara', 'Soporte POWR Bar Clip con 4 tiras de silicona — manguitos olímpicos de 50 mm'],
+    boxEn: ['Phone ring — sticks to your phone or case', 'Metal magnet ring (55 × 45 mm) on the clip plate', 'POWR Bar Clip, two PETG parts in your colours, with 4 silicone grip strips — fits 50 mm Olympic sleeves'],
+    boxEs: ['Anillo para el móvil — se pega al móvil o a la funda', 'Anillo magnético metálico (55 × 45 mm) sobre la placa del clip', 'POWR Bar Clip, dos piezas de PETG en tus colores, con 4 tiras de silicona — manguitos olímpicos de 50 mm'],
+    // Older single-colour ids, still accepted in a saved cart.
     colors: [
       { id: 'black', en: 'Graphite', es: 'Grafito', hex: '#1d2021', img: 'assets/img/clip-hero.jpg' },
       { id: 'chalk', en: 'Chalk', es: 'Tiza', hex: '#e9e6df', img: 'assets/img/clip-chalk.jpg' },
       { id: 'teal', en: 'POWR Teal', es: 'Teal POWR', hex: '#38f0d7', img: 'assets/img/kit-complete.jpg' },
     ],
+    /*
+     * Build your own: a PETG colour for the clip, one for the plate, a finish for the
+     * magnet ring. The cart stores it as "clip.plate.ring" (e.g. "black.teal.silver").
+     * EDIT HERE to match the filament on the shelf, and mirror any id change in
+     * supabase/functions/_shared/shop.ts (the checkout refuses ids it does not know).
+     */
+    custom: {
+      plastics: [
+        { id: 'black', en: 'Black', es: 'Negro', hex: '#18191a' },
+        { id: 'white', en: 'White', es: 'Blanco', hex: '#ecebe7' },
+        { id: 'grey', en: 'Grey', es: 'Gris', hex: '#7d8285' },
+        { id: 'teal', en: 'POWR Teal', es: 'Teal POWR', hex: '#38f0d7' },
+        { id: 'red', en: 'Red', es: 'Rojo', hex: '#c8202f' },
+        { id: 'orange', en: 'Orange', es: 'Naranja', hex: '#f0671c' },
+        { id: 'yellow', en: 'Yellow', es: 'Amarillo', hex: '#f4c20d' },
+        { id: 'green', en: 'Green', es: 'Verde', hex: '#2f9e4a' },
+        { id: 'blue', en: 'Blue', es: 'Azul', hex: '#1f63c6' },
+        { id: 'navy', en: 'Navy', es: 'Azul marino', hex: '#1c2a4d' },
+        { id: 'purple', en: 'Purple', es: 'Morado', hex: '#6b3fa6' },
+        { id: 'pink', en: 'Pink', es: 'Rosa', hex: '#ef7aa9' },
+      ],
+      rings: [
+        { id: 'silver', en: 'Silver', es: 'Plata', hex: '#cfd3d6' },
+        { id: 'black', en: 'Black chrome', es: 'Cromo negro', hex: '#2b2d31' },
+        { id: 'gold', en: 'Gold', es: 'Oro', hex: '#d6ae4a' },
+        { id: 'rose', en: 'Rose gold', es: 'Oro rosa', hex: '#d9a08c' },
+      ],
+      presets: [
+        { id: 'black.teal.silver', en: 'POWR', es: 'POWR' },
+        { id: 'black.black.black', en: 'Stealth', es: 'Sigilo' },
+        { id: 'white.white.silver', en: 'Chalk', es: 'Tiza' },
+        { id: 'white.teal.silver', en: 'Arctic', es: 'Ártico' },
+        { id: 'navy.navy.gold', en: 'Navy & gold', es: 'Marino y oro' },
+        { id: 'red.yellow.gold', en: 'Roja', es: 'Roja' },
+        { id: 'black.orange.black', en: 'Ember', es: 'Brasa' },
+        { id: 'pink.white.rose', en: 'Blossom', es: 'Flor' },
+      ],
+    },
   },
 };
 
