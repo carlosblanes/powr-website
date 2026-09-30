@@ -54,21 +54,27 @@
   .trio .k { font: 600 12px/1 var(--f-mono); letter-spacing: .18em; color: var(--muted); }
   .trio h3 { margin-top: 10px; font-size: clamp(24px, 2.3vw, 30px); }
   .trio p { color: var(--text-2); margin-top: 8px; max-width: 32ch; }
-  .decide-mock { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; gap: 22px; justify-content: center; background: radial-gradient(circle at 50% 40%, #171717, #070707 75%); }
+  .decide-mock { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; gap: 22px; justify-content: center; background: #0a0a0a; }
   @media (max-width: 900px) { .trio { grid-template-columns: 1fr; gap: 48px; } .trio .ph { aspect-ratio: 4/3; } }
 
-  /* ---- numbers band ---- */
-  .nums { display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .nums div { padding: 34px 0 30px; display: grid; gap: 10px; }
-  .nums div + div { padding-left: 22px; border-left: 1px solid var(--line); }
-  .nums b { font: 600 clamp(38px, 4.2vw, 60px)/1 var(--f-num); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
-  .nums b small { font-size: .38em; color: var(--muted); margin-left: 4px; font-weight: 600; letter-spacing: .02em; }
-  .nums span { font: 600 12px/1 var(--f-mono); letter-spacing: .18em; color: var(--muted); }
-  @media (max-width: 1000px) { .nums { grid-template-columns: repeat(3, 1fr); } .nums div:nth-child(4) { border-left: 0; padding-left: 0; } .nums div:nth-child(n+4) { border-top: 1px solid var(--line); } }
-  @media (max-width: 560px) { .nums { grid-template-columns: repeat(2, 1fr); } .nums div { padding-left: 0 !important; border-left: 0 !important; } .nums div:nth-child(even) { padding-left: 18px !important; border-left: 1px solid var(--line) !important; } .nums div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+  /* ---- numbers: one lead reading with its shape, the rest as rows ---- */
+  .nums { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 6vw, 96px); align-items: end; }
+  .nums .ctx { font-size: 14px; color: var(--muted); }
+  .nums .lead-row { display: flex; align-items: flex-end; gap: 28px; margin: 14px 0 12px; }
+  .nums .lead b { font: 600 clamp(84px, 11vw, 150px)/.85 var(--f-num); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .nums .lead b small { font-size: .24em; color: var(--muted); margin-left: 8px; letter-spacing: .02em; }
+  .nums .reps { width: clamp(110px, 14vw, 170px); height: auto; margin-bottom: 10px; }
+  .nums .lbl { font: 600 12px/1 var(--f-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .nums .rest { margin: 0; }
+  .nums .rest div { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--line); }
+  .nums .rest div:last-child { border-bottom: 1px solid var(--line); }
+  .nums .rest dt { color: var(--text-2); }
+  .nums .rest dd { margin: 0; font: 600 26px/1 var(--f-num); font-variant-numeric: tabular-nums; }
+  .nums .rest dd small { font-size: .55em; color: var(--muted); margin-left: 4px; }
+  @media (max-width: 900px) { .nums { grid-template-columns: 1fr; gap: 36px; } }
 
   .app-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; margin-top: clamp(72px, 9vw, 120px); }
-  .app-row .stage { aspect-ratio: 4/5; border-radius: var(--radius); background: radial-gradient(circle at 50% 42%, #161616, #050505 72%); display: grid; place-items: center; }
+  .app-row .stage { aspect-ratio: 4/5; border-radius: var(--radius); background: #0a0a0a; display: grid; place-items: center; }
   .plain { list-style: none; margin: 30px 0 0; padding: 0; display: grid; }
   .plain li { padding: 20px 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 180px 1fr; gap: 20px; color: var(--text-2); }
   .plain li:last-child { border-bottom: 1px solid var(--line); }
@@ -202,15 +208,26 @@
   <div class="wrap">
     <div class="sh">
       <span class="eyebrow reveal" data-es="La app">The app</span>
-      <h2 class="reveal d1" data-es="Cinco números.<br>En cada rep.">Five numbers.<br>Every rep.</h2>
+      <h2 class="reveal d1" data-es="Un número manda.<br>Cinco lo explican.">One number leads.<br>Five explain it.</h2>
     </div>
     <div class="nums reveal">
-      <div><b>0.72<small>m/s</small></b><span>AVG</span></div>
-      <div><b>1.08<small>m/s</small></b><span>PEAK</span></div>
-      <div><b>0.78<small>m/s</small></b><span>MPV</span></div>
-      <div><b>424<small>W</small></b><span>POWER</span></div>
-      <div><b>51<small>cm</small></b><span>ROM</span></div>
-      <div><b style="color:var(--amber)">16<small>%</small></b><span>DROP</span></div>
+      <div class="lead">
+        <span class="ctx" data-es="Press banca · 60 kg · 8 reps">Bench press · 60 kg · 8 reps</span>
+        <div class="lead-row">
+          <b>0.72<small>m/s</small></b>
+          <svg class="reps" viewBox="0 0 160 56" aria-label="Mean velocity of each of the 8 reps">
+            <g fill="#38f0d7"><rect x="0" y="0" width="14" height="56" rx="2"/><rect x="20" y="8" width="14" height="48" rx="2" opacity=".7"/><rect x="40" y="3" width="14" height="53" rx="2" opacity=".7"/><rect x="60" y="5" width="14" height="51" rx="2" opacity=".7"/><rect x="80" y="3" width="14" height="53" rx="2" opacity=".7"/><rect x="100" y="11" width="14" height="45" rx="2" opacity=".7"/><rect x="120" y="9" width="14" height="47" rx="2" opacity=".7"/><rect x="140" y="13" width="14" height="43" rx="2" opacity=".7"/></g>
+          </svg>
+        </div>
+        <span class="lbl" data-es="Velocidad media">Mean velocity</span>
+      </div>
+      <dl class="rest">
+        <div><dt data-es="Pico">Peak</dt><dd>1.08<small>m/s</small></dd></div>
+        <div><dt data-es="Propulsiva">Propulsive</dt><dd>0.78<small>m/s</small></dd></div>
+        <div><dt data-es="Potencia">Power</dt><dd>424<small>W</small></dd></div>
+        <div><dt data-es="Recorrido">Range</dt><dd>51<small>cm</small></dd></div>
+        <div><dt data-es="Caída">Drop</dt><dd style="color:var(--amber)">16<small>%</small></dd></div>
+      </dl>
     </div>
 
     <div class="app-row">
