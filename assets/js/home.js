@@ -4,6 +4,7 @@
 
   const products = document.getElementById('homeProducts');
   function renderProducts() {
+    if (!products) return;
     products.innerHTML = card('kit', true) + gymCard();
     observe(products);
   }

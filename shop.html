@@ -6,12 +6,12 @@
 <title>Shop — POWR</title>
 <meta name="title-es" content="Tienda — POWR">
 <meta name="description" content="The POWR Kit: phone ring, magnet and bar support — everything you need to turn your phone into a velocity-based training coach. €29.">
-<meta name="theme-color" content="#070909">
+<meta name="theme-color" content="#000000">
 <meta property="og:image" content="assets/img/og.jpg">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body data-page="shop">
@@ -28,7 +28,7 @@
 <section class="section tight" style="padding-top:0">
   <div class="wrap">
     <div class="shop-hero reveal">
-      <a class="shop-media" href="product.html?id=kit"><img src="assets/img/clip-hero.jpg" alt="POWR Bar Clip on an Olympic sleeve" id="shopImg"><span class="tag solid" data-es="Todo lo que necesitas">Everything you need</span></a>
+      <a class="shop-media" href="product.html?id=kit"><img src="assets/img/kit-complete.jpg" alt="POWR Kit" id="shopImg"><span class="tag solid" data-es="Todo lo que necesitas">Everything you need</span></a>
       <div class="shop-info" id="shopInfo"></div>
     </div>
   </div>
@@ -38,7 +38,7 @@
   <div class="wrap">
     <div class="head center"><span class="eyebrow" data-es="Qué incluye">What's in the box</span><h2 data-es="Tres piezas. Diez segundos.">Three parts. Ten seconds.</h2></div>
     <div class="grid g3 box-grid">
-      <div class="card reveal"><div class="box-ill"><svg viewBox="0 0 120 120" fill="none"><rect x="30" y="8" width="60" height="104" rx="12" stroke="#b9c3c2" stroke-width="2.5"/><circle cx="60" cy="60" r="21" stroke="#38f0d7" stroke-width="4"/><circle cx="60" cy="60" r="13" stroke="#38f0d7" stroke-width="1.5" stroke-dasharray="2 3"/></svg></div><span class="tag teal" style="width:fit-content">01</span><h3 data-es="Anillo para el móvil">Phone ring</h3><p data-es="Se pega al móvil o a la funda. Si tu iPhone tiene MagSafe, no lo necesitas.">Sticks to your phone or case. If your iPhone has MagSafe, you don't even need it.</p></div>
+      <div class="card reveal"><div class="box-ill"><svg viewBox="0 0 120 120" fill="none"><rect x="30" y="8" width="60" height="104" rx="12" stroke="#b9c3c2" stroke-width="2.5"/><circle cx="60" cy="60" r="21" stroke="#ffffff" stroke-width="4"/><circle cx="60" cy="60" r="13" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="2 3"/></svg></div><span class="tag teal" style="width:fit-content">01</span><h3 data-es="Anillo para el móvil">Phone ring</h3><p data-es="Se pega al móvil o a la funda. Si tu iPhone tiene MagSafe, no lo necesitas.">Sticks to your phone or case. If your iPhone has MagSafe, you don't even need it.</p></div>
       <div class="card reveal d1"><div class="box-ill"><img src="assets/img/ring.jpg" alt=""></div><span class="tag teal" style="width:fit-content">02</span><h3 data-es="Imán">Magnet</h3><p data-es="Neodimio N52 de doble cara. Une el móvil al soporte y lo suelta con un giro.">Double-sided N52 neodymium. Joins phone and support, and lets go with a twist.</p></div>
       <div class="card reveal d2"><div class="box-ill"><img src="assets/img/clip-navy.jpg" alt="POWR Bar Clip rev J in navy with a gold magnet ring"></div><span class="tag teal" style="width:fit-content">03</span><h3 data-es="Soporte para la barra">Bar support</h3><p data-es="El POWR Bar Clip abraza el manguito olímpico de 50 mm sobre cuatro tiras de silicona, así agarra sin rayar y no gira cuando la barra rueda.">The POWR Bar Clip hugs any 50 mm Olympic sleeve on four silicone strips, so it grips without scratching and doesn't spin when the bar rolls.</p></div>
     </div>
@@ -73,32 +73,29 @@
 <script src="assets/js/app.js"></script>
 <script>
   (() => {
-    const { t, money, add } = window.POWR;
-    const p = POWR_PRODUCTS.kit;
-    let color = p.colors[0];
+    const { t, money } = window.POWR;
+    const p = POWR_PRODUCTS.kit, K = p.custom;
+    // Styles link into the configurator; the kit is always built there, so its colours are real.
     const render = () => {
       const box = POWR.lang() === 'es' ? p.boxEs : p.boxEn;
       document.getElementById('shopInfo').innerHTML = `
         <h2>${p.name}</h2>
         <p class="lede">${t(p.shortEn, p.shortEs)}</p>
         <ul class="ticks">${box.map((b) => `<li><span>${b}</span></li>`).join('')}</ul>
-        <div class="opt-group"><span>${t('Colour', 'Color')}: <b style="color:var(--text)">${t(color.en, color.es)}</b></span><div class="swatches">${p.colors.map((c) => `<button class="swatch${c.id === color.id ? ' on' : ''}" data-c="${c.id}"><i style="background:${c.hex}"></i>${t(c.en, c.es)}</button>`).join('')}</div></div>
+        <div class="opt-group"><span>${t('Styles', 'Estilos')}</span><div class="swatches">${K.presets.map((pr) => { const q = POWR.customParts('kit', pr.id); return `<a class="swatch" href="product.html?id=kit&c=${pr.id}" title="${t(pr.en, pr.es)}" aria-label="${t(pr.en, pr.es)}" style="padding:0 8px"><span class="kit-swatch" aria-hidden="true"><i style="background:${q.clip.hex}"></i><i style="background:${q.plate.hex}"></i><i style="background:${q.ring.hex}"></i></span></a>`; }).join('')}</div></div>
         <div class="price" style="font-size:44px">${money(p.price)}<small>${t('VAT included · Free returns', 'IVA incluido · Devolución gratis')}</small></div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn" id="shopAdd">${t('Add to cart', 'Añadir al carrito')}</button><a class="btn ghost" href="product.html?id=kit">${t('Details & 3D view', 'Detalles y vista 3D')}</a></div>`;
-      document.getElementById('shopImg').src = color.img;
-      document.querySelectorAll('[data-c]').forEach((b) => b.onclick = () => { color = p.colors.find((c) => c.id === b.dataset.c); render(); });
-      document.getElementById('shopAdd').onclick = () => add('kit', 1, color.id);
+        <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="product.html?id=kit">${t('Build your kit', 'Crea tu kit')}</a></div>`;
     };
     render(); document.addEventListener('powr:lang', render);
   })();
 </script>
 <style>
   .shop-hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
-  .shop-media { aspect-ratio: 4/3; border-radius: calc(var(--radius) + 6px); overflow: hidden; border: 1px solid var(--line); position: relative; background: #0e1112; }
+  .shop-media { aspect-ratio: 4/3; border-radius: calc(var(--radius) + 6px); overflow: hidden; border: 1px solid var(--line); position: relative; background: #0b0b0b; }
   .shop-media img { width: 100%; height: 100%; object-fit: cover; }
   .shop-media .tag { position: absolute; top: 16px; left: 16px; }
   .shop-info { display: grid; gap: 20px; }
-  .box-ill { aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; background: radial-gradient(circle at 50% 55%, #1a2122, #0e1112 70%); display: grid; place-items: center; margin-bottom: 18px; }
+  .box-ill { aspect-ratio: 4/3; border-radius: 14px; overflow: hidden; background: radial-gradient(circle at 50% 55%, #1a1a1a, #0a0a0a 70%); display: grid; place-items: center; margin-bottom: 18px; }
   .box-ill img { width: 100%; height: 100%; object-fit: cover; }
   .box-ill svg { width: 46%; }
   .box-grid .card h3 { margin-top: 12px; }

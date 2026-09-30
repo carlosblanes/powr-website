@@ -59,13 +59,13 @@
   const page = document.body.dataset.page || '';
   const cur = (p) => (page === p ? ' aria-current="page"' : '');
   const header = `
-  <div class="announce"><span data-es="POWR Kit por <b>29 €</b> · Envío gratis desde 40 € · <a href='gyms.html'>Programa gimnasios fundadores</a>">POWR Kit <b>€29</b> · Free shipping over €40 · <a href="gyms.html">Founding gyms programme</a></span></div>
+  <div class="announce"><span data-es="Envío gratis desde 40 € · Devolución en 30 días">Free shipping over €40 · 30-day returns</span></div>
   <header class="nav" id="nav">
     <div class="wrap">
       <a class="logo" href="index.html" aria-label="POWR home">${LOGO}</a>
       <nav class="nav-links" aria-label="Main">
         <a href="index.html#how"${cur('home')} data-es="Cómo funciona">How it works</a>
-        <a href="shop.html"${cur('shop')} data-es="Tienda">Shop</a>
+        <a href="product.html?id=kit"${cur('shop')} data-es="El kit">The kit</a>
         <a href="gyms.html"${cur('gyms')} data-es="Gimnasios">For gyms</a>
         <a href="index.html#app" data-es="La app">The app</a>
         <a href="contact.html"${cur('contact')} data-es="Contacto">Contact</a>
@@ -74,18 +74,18 @@
         <button class="lang" type="button" aria-label="Switch language">ES</button>
         <a class="icon-btn" href="${S.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a>
         <button class="icon-btn" type="button" id="cartBtn" aria-label="Cart" data-es-label="Carrito">${I.bag}<span class="cart-count" id="cartCount">0</span></button>
-        <a class="btn sm hide-m" href="gyms.html#quote" data-es="Para tu gimnasio">Bring POWR to your gym</a>
+        <a class="btn sm hide-m" href="product.html?id=kit" data-es="Comprar">Shop now</a>
         <button class="icon-btn burger" type="button" id="burger" aria-label="Menu" aria-expanded="false">${I.menu}</button>
       </div>
     </div>
   </header>
   <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
     <a href="index.html#how" data-es="Cómo funciona">How it works</a>
-    <a href="shop.html" data-es="Tienda">Shop</a>
+    <a href="product.html?id=kit" data-es="El kit">The kit</a>
     <a href="gyms.html" data-es="Gimnasios">For gyms</a>
     <a href="index.html#app" data-es="La app">The app</a>
     <a href="contact.html" data-es="Contacto">Contact</a>
-    <a class="btn block" href="shop.html" data-es="Comprar el kit · 29 €">Get the kit · €29</a>
+    <a class="btn block" href="product.html?id=kit" data-es="Crea tu kit · 29 €">Build your kit · €29</a>
     <div class="social-row"><a href="${S.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a>${S.email ? `<a href="mailto:${S.email}" aria-label="Email">${I.mail}</a>` : ''}</div>
   </nav>`;
 
@@ -109,7 +109,7 @@
           <li><a href="product.html?id=kit">POWR Kit</a></li>
           <li><a href="shop.html#box" data-es="Qué incluye">What's in the box</a></li>
           <li><a href="index.html#how" data-es="Cómo funciona">How it works</a></li>
-          <li><a href="index.html#sensors" data-es="POWR Collar (próximamente)">POWR Collar (coming later)</a></li>
+          <li><a href="index.html#collar" data-es="POWR Collar (próximamente)">POWR Collar (coming later)</a></li>
         </ul></div>
         <div><h4 data-es="Empresas">Business</h4><ul>
           <li><a href="gyms.html" data-es="POWR para gimnasios">POWR for gyms</a></li>
@@ -124,7 +124,6 @@
           <li><a href="${S.instagram}" target="_blank" rel="noopener">Instagram ${S.instagramHandle}</a></li>
         </ul></div>
       </div>
-      <div class="wordmark" aria-hidden="true">PO<span>W</span>R</div>
       <div class="foot-bottom">
         <span>© ${new Date().getFullYear()} POWR · <span data-es="Todos los derechos reservados">All rights reserved</span></span>
         <nav>
@@ -201,12 +200,12 @@
     const body = $('#drawerBody'), foot = $('#drawerFoot');
     if (!body) return;
     if (!cart.length) {
-      body.innerHTML = `<div class="empty">${I.bag}<p>${t('Your cart is empty.', 'Tu carrito está vacío.')}</p><a class="btn sm" href="shop.html">${t('Shop the kit', 'Ver la tienda')}</a></div>`;
+      body.innerHTML = `<div class="empty">${I.bag}<p>${t('Your cart is empty.', 'Tu carrito está vacío.')}</p><a class="btn sm" href="product.html?id=kit">${t('Build your kit', 'Crea tu kit')}</a></div>`;
       foot.innerHTML = '';
       return;
     }
     const sub = subtotal(), left = Math.max(0, S.freeShippingFrom - sub);
-    body.innerHTML = `<div class="ship-meter"><span>${left > 0 ? t(`You're <b>${money(left)}</b> away from free shipping`, `Te faltan <b>${money(left)}</b> para el envío gratis`) : t('🎉 You unlocked <b>free shipping</b>', '🎉 Tienes <b>envío gratis</b>')}</span><div class="bar"><i style="width:${Math.min(100, (sub / S.freeShippingFrom) * 100)}%"></i></div></div>` + cart.map((l, i) => lineHTML(l, i)).join('') + upsell();
+    body.innerHTML = `<div class="ship-meter"><span>${left > 0 ? t(`You're <b>${money(left)}</b> away from free shipping`, `Te faltan <b>${money(left)}</b> para el envío gratis`) : t('You have <b>free shipping</b>', 'Tienes <b>envío gratis</b>')}</span><div class="bar"><i style="width:${Math.min(100, (sub / S.freeShippingFrom) * 100)}%"></i></div></div>` + cart.map((l, i) => lineHTML(l, i)).join('') + upsell();
     foot.innerHTML = `<div class="sum-row total"><span>${t('Subtotal', 'Subtotal')}</span><b>${money(sub)}</b></div>
       <p class="xs muted">${t('VAT included. Shipping calculated at checkout.', 'IVA incluido. Envío calculado en el pago.')}</p>
       <a class="btn block" href="checkout.html">${t('Checkout', 'Finalizar pedido')} →</a>
