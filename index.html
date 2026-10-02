@@ -17,21 +17,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/site.css">
 <style>
-  /* ---- hero: full-bleed photograph, one line of copy ---- */
+  /* ---- hero: real footage on the right (barbell row, phone flat on the sleeve), one line of copy ---- */
   .h-hero { position: relative; min-height: min(92vh, 900px); display: flex; align-items: center; overflow: hidden; background: #000; }
-  .h-hero .bg { position: absolute; inset: 0; background: url(assets/img/hero-gym.jpg) 68% center / cover no-repeat; opacity: .62; transform: scale(1.04); animation: heroIn 2.4s var(--ease) forwards; }
-  .h-hero .bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #000 6%, rgba(0,0,0,.75) 40%, rgba(0,0,0,.15) 72%, rgba(0,0,0,.45)), linear-gradient(0deg, #000 0%, transparent 28%); }
-  @keyframes heroIn { to { transform: none; } }
-  .h-hero .wrap { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding-top: 60px; padding-bottom: 80px; }
+  .h-hero .media { position: absolute; top: 0; right: 0; bottom: 0; width: min(54%, 820px); }
+  .h-hero .media video, .h-hero .media img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 62%; display: block; }
+  .h-hero .media::after { content: ""; position: absolute; inset: -1px -1px -2px -1px; background: linear-gradient(90deg, #000 0%, rgba(0,0,0,.55) 18%, rgba(0,0,0,0) 46%), linear-gradient(0deg, #000 0%, transparent 22%); pointer-events: none; }
+  .h-hero .wrap { position: relative; padding-top: 60px; padding-bottom: 80px; }
+  .h-hero .copy { max-width: 620px; }
   .h-hero h1 { font-size: clamp(52px, 8vw, 116px); }
   .h-hero .lede { margin-top: 26px; max-width: 40ch; color: #d0d0d0; }
   .h-hero .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 40px; }
-  .h-hero .phone-slot { display: grid; place-items: center; }
-  .h-hero .note { position: absolute; left: var(--gutter); bottom: 28px; font: 600 12px/1 var(--f-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .h-hero .note { position: absolute; right: var(--gutter); bottom: 28px; font: 600 12px/1 var(--f-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
   @media (max-width: 1000px) {
-    .h-hero .wrap { grid-template-columns: 1fr; padding-top: 48px; }
-    .h-hero .bg { background-position: 78% top; opacity: .4; }
-    .h-hero .bg::after { background: linear-gradient(180deg, rgba(0,0,0,.4), #000 72%); }
+    .h-hero { flex-direction: column; align-items: stretch; min-height: 0; }
+    .h-hero .media { position: relative; width: 100%; height: min(72vh, 125vw); overflow: hidden; }
+    .h-hero .media::after { background: linear-gradient(0deg, #000 0%, rgba(0,0,0,0) 34%); }
+    .h-hero .wrap { margin-top: -72px; padding-top: 0; padding-bottom: 56px; }
     .h-hero .note { display: none; }
   }
 
@@ -49,13 +50,23 @@
   .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .trio figure { margin: 0; display: grid; gap: 22px; align-content: start; }
   .trio .ph { aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; background: #0c0c0c; position: relative; }
-  .trio .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+  .trio .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease); }
+  .trio .ph picture { display: contents; }
   .trio figure:hover .ph img { transform: scale(1.04); }
   .trio .k { font: 600 12px/1 var(--f-mono); letter-spacing: .18em; color: var(--muted); }
   .trio h3 { margin-top: 10px; font-size: clamp(24px, 2.3vw, 30px); }
   .trio p { color: var(--text-2); margin-top: 8px; max-width: 32ch; }
   .decide-mock { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; gap: 22px; justify-content: center; background: #0a0a0a; }
   @media (max-width: 900px) { .trio { grid-template-columns: 1fr; gap: 48px; } .trio .ph { aspect-ratio: 4/3; } }
+
+
+  /* ---- true usage: two real photos ---- */
+  .real-row { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; }
+  .real-row figure { margin: 0; border-radius: var(--radius); overflow: hidden; background: #0c0c0c; }
+  .real-row figure:first-child { aspect-ratio: 4/5; }
+  .real-row img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .real-row picture { display: contents; }
+  @media (max-width: 900px) { .real-row { grid-template-columns: 1fr; } .real-row figure { aspect-ratio: 4/5; } .real-row figure + figure { aspect-ratio: 1; } }
 
   /* ---- numbers: one lead reading with its shape, the rest as rows ---- */
   .nums { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 6vw, 96px); align-items: end; }
@@ -112,7 +123,7 @@
 
   /* ---- gyms band ---- */
   .gym-band { position: relative; min-height: 640px; display: flex; align-items: center; overflow: hidden; }
-  .gym-band > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; }
+  .gym-band > picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% center; opacity: .5; }
   .gym-band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #000 10%, rgba(0,0,0,.4) 60%, rgba(0,0,0,.2)); }
   .gym-band .wrap { position: relative; z-index: 1; display: grid; gap: 22px; }
   .gym-band h2 { max-width: 13ch; }
@@ -128,40 +139,20 @@
 
 <!-- ================= HERO ================= -->
 <section class="h-hero">
-  <div class="bg" aria-hidden="true"></div>
+  <div class="media" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" poster="assets/video/row-on-bar-poster.webp"><source src="assets/video/row-on-bar.mp4" type="video/mp4"></video>
+  </div>
   <div class="wrap">
-    <div>
+    <div class="copy">
       <h1 class="reveal" data-es="Cada rep,<br>medida.">Every rep,<br>measured.</h1>
-      <p class="lede reveal d1" data-es="Engancha el móvil a la barra. POWR mide la velocidad de cada repetición y te dice cuándo parar y cuánto cargar.">Clip your phone to the bar. POWR measures the speed of every rep and tells you when to stop and what to load next.</p>
+      <p class="lede reveal d1" data-es="El móvil va plano sobre la barra. POWR mide la velocidad de cada repetición y te dice cuándo parar y cuánto cargar.">Your phone rides flat on the bar. POWR measures the speed of every rep and tells you when to stop and what to load next.</p>
       <div class="cta reveal d2">
         <a class="btn" href="product.html?id=kit" data-es="Crea tu kit · 29 €">Build your kit · €29</a>
         <a class="btn ghost" href="gyms.html" data-es="Para gimnasios">For gyms</a>
       </div>
     </div>
-    <div class="phone-slot reveal d2">
-      <div class="phone" aria-label="POWR app recording a set">
-        <div class="screen" id="liveScreen">
-          <div class="app-top"><span class="back">←</span><span data-es="Press banca">Bench Press</span></div>
-          <div style="text-align:center"><span class="app-pill"><i></i><span data-es="GRABANDO">RECORDING</span></span></div>
-          <div class="app-sub"><span class="hz">100 Hz</span><span class="wchip">60 kg</span><span class="edit">EDIT</span></div>
-          <div class="app-card">
-            <div class="app-big" id="liveBig">--</div>
-            <div class="app-lbl" data-es="ÚLTIMA REP M/S">LAST REP M/S</div>
-            <div class="app-meta" id="liveMeta">0 reps</div>
-            <div class="app-stats">
-              <div class="app-stat"><small data-es="FATIGA">FATIGUE</small><b id="liveLoss">--</b></div>
-              <div class="app-stat"><small data-es="PICO">PEAK</small><b id="livePeak">--</b></div>
-              <div class="app-stat"><small>ROM</small><b id="liveRom">--</b></div>
-            </div>
-            <div class="app-bars" id="liveBars"><div class="cut"></div></div>
-          </div>
-          <div class="app-foot"><div class="app-btn" data-es="Deshacer serie">Undo set</div><div class="app-btn red" data-es="TERMINAR SERIE">FINISH SET</div></div>
-        </div>
-      </div>
-      <!-- home.js writes the live velocity and audio cue here; not shown -->
-      <span id="chipVel" hidden></span><span id="chipCue" hidden></span>
-    </div>
   </div>
+  <span class="note" data-es="Vídeo real · remo con barra">Real footage · barbell row</span>
 </section>
 
 <!-- ================= STATEMENT ================= -->
@@ -180,11 +171,11 @@
     </div>
     <div class="trio">
       <figure class="reveal">
-        <div class="ph"><img src="assets/img/clip-hero.jpg" alt="POWR Bar Clip on an Olympic sleeve" loading="lazy"></div>
+        <div class="ph"><picture><source type="image/webp" srcset="assets/img/real/clip-sleeve-480.webp 480w, assets/img/real/clip-sleeve-800.webp 800w, assets/img/real/clip-sleeve-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw"><img src="assets/img/real/clip-sleeve-800.jpg" alt="POWR Bar Clip on an Olympic sleeve, next to the collar" loading="lazy"></picture></div>
         <figcaption><span class="k">01</span><h3 data-es="Engánchalo.">Clip it.</h3><p data-es="El clip abraza el manguito. El móvil se pega con el imán.">The clip hugs the sleeve. Your phone snaps on with the magnet.</p></figcaption>
       </figure>
       <figure class="reveal d1">
-        <div class="ph"><img src="assets/img/hero-gym.jpg" alt="Phone on a loaded barbell" loading="lazy" style="object-position:72% center"></div>
+        <div class="ph"><picture><source type="image/webp" srcset="assets/img/real/bar-side-480.webp 480w, assets/img/real/bar-side-800.webp 800w, assets/img/real/bar-side-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw"><img src="assets/img/real/bar-side-800.jpg" alt="Phone lying flat on the clip, screen up, along the barbell sleeve" loading="lazy" style="object-position:center 45%"></picture></div>
         <figcaption><span class="k">02</span><h3 data-es="Levanta.">Lift.</h3><p data-es="Oyes la velocidad de cada rep. La serie se cierra sola al dejar la barra.">You hear every rep's speed. The set closes itself when you rack.</p></figcaption>
       </figure>
       <figure class="reveal d2">
@@ -199,6 +190,20 @@
         </div>
         <figcaption><span class="k">03</span><h3 data-es="Decide.">Decide.</h3><p data-es="Ves tu serie en números y el peso de la siguiente, ya ajustado.">See the set in numbers, and your next weight — already adjusted.</p></figcaption>
       </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT REALLY SITS ================= -->
+<section class="section" id="on-the-bar" style="padding-top:0">
+  <div class="wrap">
+    <div class="sh">
+      <h2 class="reveal" data-es="Plano en el manguito.<br>Pantalla arriba.">Flat on the sleeve.<br>Screen up.</h2>
+      <p class="reveal d1" data-es="El clip va junto al collarín. El móvil va encima, a lo largo de la barra, donde lo lees entre series.">The clip sits next to the collar. Your phone lies on top, along the bar, where you read it between sets.</p>
+    </div>
+    <div class="real-row reveal">
+      <figure><picture><source type="image/webp" srcset="assets/img/real/screen-on-bar-480.webp 480w, assets/img/real/screen-on-bar-800.webp 800w, assets/img/real/screen-on-bar-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 58vw"><img src="assets/img/real/screen-on-bar-800.jpg" alt="Looking down at the POWR app on a phone that sits on the barbell sleeve" loading="lazy" style="object-position:center 40%"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/img/real/clip-top-480.webp 480w, assets/img/real/clip-top-800.webp 800w, assets/img/real/clip-top-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 38vw"><img src="assets/img/real/clip-top-800.jpg" alt="The clip on the sleeve from above: magnet ring around the textured plate with the W mark" loading="lazy"></picture></figure>
     </div>
   </div>
 </section>
@@ -356,7 +361,7 @@
 
 <!-- ================= GYMS ================= -->
 <section class="gym-band">
-  <img src="assets/img/gym-board.jpg" alt="" loading="lazy">
+  <picture><source media="(max-width: 700px)" type="image/webp" srcset="assets/img/real/clip-sleeve-480.webp 480w, assets/img/real/clip-sleeve-800.webp 800w, assets/img/real/clip-sleeve-1200.webp 1200w" sizes="100vw"><source type="image/webp" srcset="assets/img/real/rack-clip-wide-800.webp 800w, assets/img/real/rack-clip-wide-1280.webp 1280w, assets/img/real/rack-clip-wide-1800.webp 1800w" sizes="100vw"><img src="assets/img/real/rack-clip-wide-1280.jpg" alt="" loading="lazy"></picture>
   <div class="wrap">
     <span class="eyebrow reveal" data-es="Para gimnasios">For gyms</span>
     <h2 class="reveal d1" data-es="Tu sala de fuerza, convertida en una liga.">Turn your gym floor into a league.</h2>
@@ -373,7 +378,7 @@
       <details><summary data-es="¿La app es gratis?">Is the app free?</summary><p data-es="Sí. Medición, coaching, historial, progreso y rankings. Solo compras el kit una vez (29 €).">Yes. Tracking, coaching, history, progress and leaderboards. You only buy the kit once (€29).</p></details>
       <details><summary data-es="¿Cómo puede un móvil medir con precisión?">How can a phone be accurate?</summary><p data-es="Lleva el mismo tipo de sensores de movimiento que los dispositivos VBT dedicados. POWR quita la gravedad, filtra el ruido y corrige el error cada vez que la barra se para. Como cualquier sensor de movimiento, pierde precisión en repeticiones muy lentas cerca del máximo.">It carries the same kind of motion sensors as dedicated VBT devices. POWR removes gravity, filters the noise and cancels the error every time the bar stops. Like every motion sensor, it is less precise on very slow reps near your max.</p></details>
       <details><summary data-es="¿Con qué móviles funciona?">Which phones does it work with?</summary><p data-es="Los iPhone con MagSafe (12 o posterior) se enganchan directamente; los demás, con el anillo incluido pegado a la funda. La app está en beta para iPhone y cada kit incluye acceso.">MagSafe iPhones (12 or later) snap on directly; other phones use the included ring stuck to the case. The app is in beta on iPhone and every kit includes access.</p></details>
-      <details><summary data-es="¿Se cae el móvil al levantar?">Will my phone fall off?</summary><p data-es="El clip agarra sobre cuatro tiras de silicona y el imán es N52. No lo recomendamos para halterofilia con caídas de barra desde arriba.">The clip grips on four silicone strips and the magnet is N52. We don't recommend it for Olympic lifts where the bar is dropped from overhead.</p></details>
+      <details><summary data-es="¿Se cae el móvil al levantar?">Will my phone fall off?</summary><p data-es="El clip agarra sobre cuatro tiras de silicona y el móvil se queda pegado al anillo magnético por MagSafe. No lo recomendamos para halterofilia con caídas de barra desde arriba.">The clip grips on four silicone strips, and the phone holds to the magnet ring by MagSafe. We don't recommend it for Olympic lifts where the bar is dropped from overhead.</p></details>
       <details><summary data-es="¿Cuánto tarda el envío? ¿Puedo devolverlo?">Shipping and returns?</summary><p data-es="España península en 2–4 días laborables, UE en 4–7. Envío gratis desde 40 €. 30 días para devolverlo y 3 años de garantía.">Spain (peninsula) 2–4 working days, EU 4–7. Free shipping over €40. 30-day returns and a 3-year warranty.</p></details>
     </div>
 
@@ -410,6 +415,12 @@
       }).join('');
     };
     render(); document.addEventListener('powr:lang', render);
+  })();
+
+  /* Real footage: with reduced motion the hero clip does not play and its poster frame stays. */
+  (() => {
+    const v = document.querySelector('.h-hero video');
+    if (v && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
   })();
 </script>
 </body>

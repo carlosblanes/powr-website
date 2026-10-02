@@ -29,12 +29,13 @@
    * Real 60 kg bench trace for the first 7 reps (fixtures/traces), then two slow reps.
    * Chart top = max(fastest, 0.5); STOP line at (100 - cutoff)% of the chart height;
    * FATIGUE = loss vs the fastest rep; the set stops after two consecutive reps past the cutoff. */
-  const big = document.getElementById('liveBig');
-  if (!big) return;
-  const bars = document.getElementById('liveBars'), loss = document.getElementById('liveLoss'), peak = document.getElementById('livePeak'),
-    rom = document.getElementById('liveRom'), meta = document.getElementById('liveMeta'), chipVel = document.getElementById('chipVel'), chipCue = document.getElementById('chipCue');
   const reps = [[0.80, 49], [0.68, 51], [0.75, 50], [0.72, 52], [0.75, 50], [0.64, 53], [0.67, 51], [0.61, 52], [0.59, 50]];
   const CUT = 20;
+  const big = document.getElementById('liveBig');
+  // The hero now shows real footage instead of this mock; the live set only runs where #liveBig exists.
+  if (big) {
+  const bars = document.getElementById('liveBars'), loss = document.getElementById('liveLoss'), peak = document.getElementById('livePeak'),
+    rom = document.getElementById('liveRom'), meta = document.getElementById('liveMeta'), chipVel = document.getElementById('chipVel'), chipCue = document.getElementById('chipCue');
   const zone = (v) => v < 0.5 ? 'Absolute Strength' : v < 0.75 ? 'Accelerative' : v < 1 ? 'Strength-Speed' : v < 1.3 ? 'Speed-Strength' : 'Starting Strength';
   const cutEl = bars.querySelector('.cut');
   let i = 0, over = 0;
@@ -68,6 +69,7 @@
     setTimeout(step, over >= 2 ? 1800 : 1250);
   }
   reset(); setTimeout(step, 900);
+  }
 
   /* ---- set-analysis chart: Mean / Peak / MPV / Power / ROM, same bars as the app ---- */
   const saChart = document.getElementById('saChart'), saSeg = document.getElementById('saSeg');

@@ -7,7 +7,7 @@
 <meta name="title-es" content="POWR para gimnasios — Máquinas con NFC y rankings de socios">
 <meta name="description" content="We tag every machine in your gym with NFC and QR, list your gym in the POWR app and give your members leaderboards by age, weight and machine. Transparent pricing and on-site installation.">
 <meta name="theme-color" content="#000000">
-<meta property="og:image" content="assets/img/gym-board.jpg">
+<meta property="og:image" content="assets/img/og.jpg">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="assets/css/site.css">
 <style>
   .gym-hero { position: relative; min-height: min(86vh, 820px); display: flex; align-items: flex-end; overflow: hidden; }
-  .gym-hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .gym-hero > picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 30%; }
   .gym-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,9,.3) 0%, rgba(7,9,9,.55) 45%, #070909 96%), linear-gradient(90deg, rgba(7,9,9,.85), transparent 70%); }
   .gym-hero .wrap { position: relative; z-index: 2; padding-bottom: clamp(48px, 7vw, 96px); display: grid; gap: 24px; }
   .gym-hero h1 { max-width: 14ch; }
@@ -52,7 +52,7 @@
 <body data-page="gyms">
 
 <section class="gym-hero">
-  <img src="assets/img/gym-board.jpg" alt="Live POWR leaderboard on a screen in a strength gym">
+  <picture><source media="(max-width: 700px)" type="image/webp" srcset="assets/img/real/clip-sleeve-480.webp 480w, assets/img/real/clip-sleeve-800.webp 800w, assets/img/real/clip-sleeve-1200.webp 1200w" sizes="100vw"><source type="image/webp" srcset="assets/img/real/rack-clip-wide-800.webp 800w, assets/img/real/rack-clip-wide-1280.webp 1280w, assets/img/real/rack-clip-wide-1800.webp 1800w" sizes="100vw"><img src="assets/img/real/rack-clip-wide-1280.jpg" alt="POWR Bar Clip on a barbell sleeve in a rack"></picture>
   <div class="wrap">
     <span class="eyebrow" data-es="POWR para gimnasios">POWR for gyms</span>
     <h1 data-es="Convierte cada máquina en un marcador.">Turn every machine into a scoreboard.</h1>

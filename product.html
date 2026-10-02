@@ -59,7 +59,7 @@
     <div class="gallery">
       <div class="gallery-main" id="stage"></div>
       <div class="thumbs" id="thumbs"></div>
-      <p class="xs muted" data-es="Renders del CAD de producción. El acabado final puede variar ligeramente.">Renders from the production CAD. Final finish may vary slightly.</p>
+      <p class="xs muted" data-es="Fotos: un clip impreso en negro, en el gimnasio. Vista 3D y última imagen: CAD de producción.">Photos: a printed clip in black, at the gym. 3D view and last image: the production CAD.</p>
     </div>
     <div class="pdp-info" id="info"></div>
   </div>
@@ -93,8 +93,9 @@
   const p = P[id];
 
   const GALLERY = {
-    // Renders of rev J from the configurator itself (assets/js/configurator.js).
-    kit: ['3d', 'assets/img/kit-complete.jpg', 'assets/img/clip-navy.jpg', 'assets/img/clip-chalk.jpg', 'assets/img/ring.jpg'],
+    // 3D = the configurator (rev J STL). Then real photos of a printed rev J at the gym (2-Oct-2026,
+    // docs/media/gym_2026-10-02), and one CAD render of the parts apart.
+    kit: ['3d', 'assets/img/real/bar-side-1200.webp', 'assets/img/real/clip-sleeve-1200.webp', 'assets/img/real/clip-top-1200.webp', 'assets/img/kit-complete.jpg'],
   };
   const SPECS = {
     kit: [['Support', 'POWR Bar Clip rev J: clip + MagSafe plate, PETG, ≈ 36 g', 'POWR Bar Clip rev J: clip + placa MagSafe, PETG, ≈ 36 g', 'Soporte'], ['Fits', 'Olympic sleeves Ø49.2–50.8 mm', 'Manguitos olímpicos Ø49,2–50,8 mm', 'Compatible'], ['Hold', '≥ 28 N pull-off on the thinnest sleeve, sweaty', '≥ 28 N de arranque en el manguito más fino, con sudor', 'Sujeción'], ['Magnet ring', 'Metal, 55 × 45 mm, on a Ø56 plate', 'Metálico, 55 × 45 mm, sobre placa de Ø56', 'Anillo magnético'], ['Phone ring', 'Adhesive, MagSafe size (Ø46–54 mm)', 'Adhesivo, tamaño MagSafe (Ø46–54 mm)', 'Anillo del móvil'], ['Grip', '4 silicone strips in the bore, replaceable', '4 tiras de silicona en el interior, reemplazables', 'Agarre'], ['Colours', 'Clip and plate in any of 12 PETG colours, 4 ring finishes', 'Clip y placa en cualquiera de 12 colores de PETG, 4 acabados de anillo', 'Colores'], ['Made in', 'Spain, printed to order', 'España, impreso por encargo', 'Fabricado en']],
@@ -199,7 +200,7 @@
   const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs');
   const items = GALLERY[id] || [p.img];
   let viewerEl = null;
-  thumbs.innerHTML = items.map((src, i) => `<button class="thumb${i === 0 ? ' on' : ''}" data-i="${i}" aria-label="View ${i + 1}">${src === '3d' ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg>' : `<img src="${src}" alt="" loading="lazy">`}</button>`).join('');
+  thumbs.innerHTML = items.map((src, i) => `<button class="thumb${i === 0 ? ' on' : ''}" data-i="${i}" aria-label="View ${i + 1}">${src === '3d' ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg>' : `<img src="${src.replace('-1200.webp', '-480.webp')}" alt="" loading="lazy">`}</button>`).join('');
   thumbs.addEventListener('click', (e) => { const b = e.target.closest('.thumb'); if (b) show(+b.dataset.i); });
 
   async function show(i) {

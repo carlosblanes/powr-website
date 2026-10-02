@@ -28,7 +28,7 @@
 <section class="section tight" style="padding-top:0">
   <div class="wrap">
     <div class="shop-hero reveal">
-      <a class="shop-media" href="product.html?id=kit"><img src="assets/img/kit-complete.jpg" alt="POWR Kit" id="shopImg"><span class="tag solid" data-es="Todo lo que necesitas">Everything you need</span></a>
+      <a class="shop-media" href="product.html?id=kit"><picture><source type="image/webp" srcset="assets/img/real/bar-side-wide-800.webp 800w, assets/img/real/bar-side-wide-1280.webp 1280w" sizes="(max-width: 900px) 100vw, 55vw"><img src="assets/img/real/bar-side-wide-1280.jpg" alt="Phone lying flat on the POWR Bar Clip, on a barbell sleeve in a rack" id="shopImg"></picture><span class="tag solid" data-es="Todo lo que necesitas">Everything you need</span></a>
       <div class="shop-info" id="shopInfo"></div>
     </div>
   </div>
@@ -39,8 +39,8 @@
     <div class="head center"><span class="eyebrow" data-es="Qué incluye">What's in the box</span><h2 data-es="Tres piezas. Diez segundos.">Three parts. Ten seconds.</h2></div>
     <div class="grid g3 box-grid">
       <div class="card reveal"><div class="box-ill"><svg viewBox="0 0 120 120" fill="none"><rect x="30" y="8" width="60" height="104" rx="12" stroke="#b9c3c2" stroke-width="2.5"/><circle cx="60" cy="60" r="21" stroke="#ffffff" stroke-width="4"/><circle cx="60" cy="60" r="13" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="2 3"/></svg></div><span class="tag teal" style="width:fit-content">01</span><h3 data-es="Anillo para el móvil">Phone ring</h3><p data-es="Se pega al móvil o a la funda. Si tu iPhone tiene MagSafe, no lo necesitas.">Sticks to your phone or case. If your iPhone has MagSafe, you don't even need it.</p></div>
-      <div class="card reveal d1"><div class="box-ill"><img src="assets/img/ring.jpg" alt=""></div><span class="tag teal" style="width:fit-content">02</span><h3 data-es="Imán">Magnet</h3><p data-es="Neodimio N52 de doble cara. Une el móvil al soporte y lo suelta con un giro.">Double-sided N52 neodymium. Joins phone and support, and lets go with a twist.</p></div>
-      <div class="card reveal d2"><div class="box-ill"><img src="assets/img/clip-navy.jpg" alt="POWR Bar Clip rev J in navy with a gold magnet ring"></div><span class="tag teal" style="width:fit-content">03</span><h3 data-es="Soporte para la barra">Bar support</h3><p data-es="El POWR Bar Clip abraza el manguito olímpico de 50 mm sobre cuatro tiras de silicona, así agarra sin rayar y no gira cuando la barra rueda.">The POWR Bar Clip hugs any 50 mm Olympic sleeve on four silicone strips, so it grips without scratching and doesn't spin when the bar rolls.</p></div>
+      <div class="card reveal d1"><div class="box-ill"><picture><source type="image/webp" srcset="assets/img/real/clip-top-480.webp 480w, assets/img/real/clip-top-800.webp 800w" sizes="(max-width: 900px) 100vw, 30vw"><img src="assets/img/real/clip-top-800.jpg" alt="The clip plate from above: magnet ring around the textured face with the W mark" loading="lazy"></picture></div><span class="tag teal" style="width:fit-content">02</span><h3 data-es="Anillo magnético">Magnet ring</h3><p data-es="Va en el soporte. El móvil se pega por MagSafe y se quita tirando.">Sits on the support. Your phone snaps on by MagSafe and pulls off.</p></div>
+      <div class="card reveal d2"><div class="box-ill"><picture><source type="image/webp" srcset="assets/img/real/clip-sleeve-480.webp 480w, assets/img/real/clip-sleeve-800.webp 800w" sizes="(max-width: 900px) 100vw, 30vw"><img src="assets/img/real/clip-sleeve-800.jpg" alt="POWR Bar Clip on an Olympic sleeve, next to the collar" loading="lazy"></picture></div><span class="tag teal" style="width:fit-content">03</span><h3 data-es="Soporte para la barra">Bar support</h3><p data-es="El POWR Bar Clip abraza el manguito olímpico de 50 mm sobre cuatro tiras de silicona, así agarra sin rayar y no gira cuando la barra rueda.">The POWR Bar Clip hugs any 50 mm Olympic sleeve on four silicone strips, so it grips without scratching and doesn't spin when the bar rolls.</p></div>
     </div>
   </div>
 </section>
@@ -92,11 +92,11 @@
 <style>
   .shop-hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
   .shop-media { aspect-ratio: 4/3; border-radius: calc(var(--radius) + 6px); overflow: hidden; border: 1px solid var(--line); position: relative; background: #0b0b0b; }
-  .shop-media img { width: 100%; height: 100%; object-fit: cover; }
+  .shop-media picture, .shop-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .shop-media .tag { position: absolute; top: 16px; left: 16px; }
   .shop-info { display: grid; gap: 20px; }
   .box-ill { aspect-ratio: 4/3; border-radius: var(--radius-sm); overflow: hidden; background: #0a0a0a; display: grid; place-items: center; margin-bottom: 18px; }
-  .box-ill img { width: 100%; height: 100%; object-fit: cover; }
+  .box-ill picture, .box-ill img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .box-ill svg { width: 46%; }
   .box-grid .card h3 { margin-top: 12px; }
   @media (max-width: 900px) { .shop-hero { grid-template-columns: 1fr; } }
