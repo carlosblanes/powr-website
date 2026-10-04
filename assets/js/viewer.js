@@ -39,7 +39,7 @@ export async function mountViewer(el, opts = {}) {
 
   const camera = new THREE.PerspectiveCamera(30, 1, 1, 5000);
   const key = new THREE.DirectionalLight('#ffffff', 2.2); key.position.set(160, 150, 120); scene.add(key);
-  const rim = new THREE.DirectionalLight('#38f0d7', 1.8); rim.position.set(-200, -10, -150); scene.add(rim);
+  const rim = new THREE.DirectionalLight('#23ebc6', 1.8); rim.position.set(-200, -10, -150); scene.add(rim);
   const fill = new THREE.DirectionalLight('#9fb7b4', 0.5); fill.position.set(-100, -60, 140); scene.add(fill);
 
   // Everything lives in a group whose frame is: bar axis along world X, up = world Y.

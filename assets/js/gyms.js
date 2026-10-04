@@ -15,7 +15,7 @@
       if (!inF && rnd() > 0.52) r += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
     }
     finder(0, 0); finder(22, 0); finder(0, 22);
-    r += '<rect x="11.5" y="11.5" width="6" height="6" rx="1.5" fill="#fff"/><path d="M12.8 15.6 L13.8 14.4 L14.6 16 L15.6 13 L16.4 14.6" fill="none" stroke="#17cfb6" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>';
+    r += '<rect x="11.5" y="11.5" width="6" height="6" rx="1.5" fill="#fff"/><path d="M12.8 15.6 L13.8 14.4 L14.6 16 L15.6 13 L16.4 14.6" fill="none" stroke="#15c4a6" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>';
     svg.innerHTML = `<g fill="#0d0d0d">${r}</g>`;
   })();
 
