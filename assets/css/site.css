@@ -115,8 +115,7 @@ p { margin: 0; }
 .nav.scrolled { border-bottom-color: var(--line); }
 .nav .wrap { display: flex; align-items: center; height: 68px; gap: 28px; }
 .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 900; font-stretch: 125%; font-size: 22px; letter-spacing: 0.02em; }
-.logo .logo-mark { width: 34px; height: 34px; }
-.logo .logo-word { height: 23px; width: auto; }
+.logo .logo-word { height: 26px; width: auto; }
 .products.two, .plans.two { grid-template-columns: repeat(2, 1fr); max-width: 920px; margin: 0 auto; }
 @media (max-width: 640px) { .products.two, .plans.two { grid-template-columns: 1fr; } }
 .nav-links { display: flex; gap: 26px; margin-left: 12px; }
