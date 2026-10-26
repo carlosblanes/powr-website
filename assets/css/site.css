@@ -592,6 +592,48 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .prose a { color: var(--text); text-decoration: underline; }
 .placeholder { background: rgba(251,191,36,.12); color: var(--amber); padding: 0 4px; border-radius: 4px; }
 
+/* ---------- legal documents (terms.html, privacy.html) ---------- */
+/* Both language versions sit in the page; html[lang] (set by app.js, and early by an inline script) picks one. */
+html[lang="es"] .legal-doc[data-doc-lang="en"], html:not([lang="es"]) .legal-doc[data-doc-lang="es"] { display: none; }
+.legal-page .page-hero h1 { font-size: clamp(36px, 6vw, 64px); max-width: 20ch; }
+.legal-meta { font: 500 13px/1.5 var(--f-body); color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.legal-switch { display: inline-flex; border: 1px solid var(--line-2); border-radius: 999px; padding: 3px; gap: 2px; justify-self: start; }
+.legal-switch button { height: 32px; min-width: 52px; padding: 0 14px; border-radius: 999px; border: 0; background: transparent; color: var(--text-2); font: 600 13px/1 var(--f-mono); letter-spacing: .1em; }
+.legal-switch button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+.legal-doc { max-width: 720px; font-size: 16px; line-height: 1.65; overflow-wrap: anywhere; }
+.legal-doc h2 { font-size: clamp(22px, 3.2vw, 28px); line-height: 1.2; margin: 52px 0 14px; scroll-margin-top: 84px; letter-spacing: -0.02em; }
+.legal-doc h3 { font-size: 18px; line-height: 1.3; margin: 28px 0 10px; scroll-margin-top: 84px; letter-spacing: -0.01em; }
+.legal-doc p, .legal-doc li { color: var(--text-2); margin: 0 0 12px; }
+.legal-doc ul, .legal-doc ol { padding-left: 1.25em; margin: 0 0 14px; }
+.legal-doc strong { color: var(--text); font-weight: 600; }
+.legal-doc a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
+.legal-doc hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+.legal-doc blockquote { margin: 0 0 16px; padding: 12px 16px; border-left: 2px solid var(--line-2); background: var(--surface); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.legal-doc blockquote p { margin: 0; }
+.legal-doc code { font: 500 .9em/1 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--surface-2); padding: 2px 5px; border-radius: 4px; color: var(--text); overflow-wrap: anywhere; }
+.legal-doc .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 18px; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.legal-doc table { border-collapse: collapse; width: 100%; font-size: 14px; line-height: 1.5; }
+.legal-doc th, .legal-doc td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); color: var(--text-2); min-width: 120px; overflow-wrap: normal; word-break: normal; }
+.legal-doc th { color: var(--text); font: 600 12px/1.3 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; background: var(--surface); }
+.legal-doc tr:last-child td { border-bottom: 0; }
+.legal-doc thead:empty, .legal-doc th:empty { display: none; }
+.legal-lede { color: var(--text-2); font-size: 15px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px 16px; margin: 0 0 28px; }
+.legal-toc { border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; margin: 0 0 36px; background: var(--bg-2); }
+.legal-toc h2 { font: 600 12px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+.legal-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; font-size: 14.5px; }
+.legal-toc a { color: var(--text-2); text-decoration: none; }
+.legal-toc a:hover { color: var(--text); text-decoration: underline; }
+.legal-top { display: inline-block; margin-top: 40px; font-size: 13px; color: var(--muted); }
+@media (max-width: 640px) {
+  .legal-doc { font-size: 15.5px; }
+  .legal-doc th, .legal-doc td { padding: 9px 10px; font-size: 13.5px; }
+}
+@media print {
+  .nav, .announce, .footer, .legal-switch, .legal-toc, .legal-top, .scrim, .drawer { display: none !important; }
+  body { background: #fff; color: #000; }
+  .legal-doc p, .legal-doc li, .legal-doc td { color: #000; }
+}
+
 /* ---------- reveal ---------- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .reveal.in { opacity: 1; transform: none; }

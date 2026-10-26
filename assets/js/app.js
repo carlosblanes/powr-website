@@ -52,7 +52,7 @@
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   };
   window.POWR_ICONS = I;
-  const LOGO = `<img class="logo-word" src="assets/img/logo-wordmark.png?v=20261004b" alt="POWR" width="141" height="26">`;
+  const LOGO = `<img class="logo-word" src="assets/img/logo-wordmark.png?v=20261026" alt="POWR" width="141" height="26">`;
   window.POWR_LOGO = LOGO;
 
   /* ---------------- header / footer ---------------- */
@@ -121,14 +121,17 @@
           <li><a href="index.html#faq">FAQ</a></li>
           <li><a href="legal.html#shipping" data-es="Envíos y devoluciones">Shipping &amp; returns</a></li>
           <li><a href="contact.html" data-es="Contacto">Contact</a></li>
+          <li><a href="delete-account.html" data-es="Borrar tu cuenta de la app">Delete your app account</a></li>
           <li><a href="${S.instagram}" target="_blank" rel="noopener">Instagram ${S.instagramHandle}</a></li>
         </ul></div>
       </div>
       <div class="foot-bottom">
         <span>© ${new Date().getFullYear()} POWR · <span data-es="Todos los derechos reservados">All rights reserved</span></span>
         <nav>
-          <a href="legal.html#privacy" data-es="Privacidad">Privacy</a>
-          <a href="legal.html#terms" data-es="Condiciones">Terms</a>
+          <a href="privacy.html" data-es="Privacidad">Privacy</a>
+          <a href="terms.html" data-es="Condiciones de uso">Terms of use</a>
+          <a href="legal.html#terms" data-es="Condiciones de venta">Terms of sale</a>
+          <a href="legal.html#notice" data-es="Aviso legal">Legal notice</a>
           <a href="legal.html#shipping" data-es="Envíos">Shipping</a>
           <a href="legal.html#cookies">Cookies</a>
         </nav>

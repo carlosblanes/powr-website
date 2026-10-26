@@ -7,12 +7,12 @@
 <meta name="title-es" content="POWR para gimnasios — Máquinas con NFC y rankings de socios">
 <meta name="description" content="We tag every machine in your gym with NFC and QR, list your gym in the POWR app and give your members leaderboards by age, weight and machine. Transparent pricing and on-site installation.">
 <meta name="theme-color" content="#000000">
-<meta property="og:image" content="assets/img/og.jpg?v=20261004b">
-<link rel="icon" href="assets/img/favicon.png?v=20261004b" type="image/png">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=20261004b">
+<meta property="og:image" content="assets/img/og.jpg?v=20261026">
+<link rel="icon" href="assets/img/favicon.png?v=20261026" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=20261026">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=20261004b">
+<link rel="stylesheet" href="assets/css/site.css?v=20261026">
 <style>
   .gym-hero { position: relative; min-height: min(86vh, 820px); display: flex; align-items: flex-end; overflow: hidden; }
   .gym-hero > picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 30%; }
@@ -133,8 +133,8 @@
         <ul class="ticks">
           <li><span data-es="<b>Justo:</b> categorías por edad y por peso corporal, como en competición.">
             <b>Fair:</b> age and body-weight categories, like in competition.</span></li>
-          <li><span data-es="<b>Privado por defecto:</b> cada socio decide si aparece (cumple RGPD).">
-            <b>Private by default:</b> each member opts in (GDPR-compliant).</span></li>
+          <li><span data-es="<b>Solo si lo activan:</b> un socio aparece en los rankings únicamente si activa «Permitir comparar» en la app. Viene desactivado.">
+            <b>Only if they opt in:</b> a member appears on the leaderboards only after switching on "Allow comparison" in the app. It starts off.</span></li>
           <li><span data-es="<b>Retos:</b> lanza el reto del mes y premia al ganador en recepción.">
             <b>Challenges:</b> run a monthly challenge and reward the winner at reception.</span></li>
         </ul>
@@ -253,7 +253,7 @@
           </div>
           <div class="field"><label for="q-when" data-es="¿Cuándo te gustaría empezar?">When would you like to start?</label><select id="q-when" name="timeline"><option data-es="Lo antes posible">As soon as possible</option><option data-es="En 1–3 meses">In 1–3 months</option><option data-es="Solo estoy mirando">Just exploring</option></select></div>
           <div class="field"><label for="q-msg"><span data-es="Mensaje">Message</span> <span class="opt" data-es="(opcional)">(optional)</span></label><textarea id="q-msg" name="message" placeholder="Tell us about your gym" data-es-ph="Cuéntanos sobre tu gimnasio"></textarea></div>
-          <label class="check"><input type="checkbox" name="privacy" required><span data-es="Acepto la <a href='legal.html#privacy'>política de privacidad</a>.">I accept the <a href="legal.html#privacy">privacy policy</a>.</span></label>
+          <label class="check"><input type="checkbox" name="privacy" required><span data-es="Acepto la <a href='privacy.html'>política de privacidad</a>.">I accept the <a href="privacy.html">privacy policy</a>.</span></label>
           <button class="btn block" type="submit" data-es="Enviar solicitud">Send request</button>
           <p class="form-status"></p>
         </form>
@@ -269,7 +269,7 @@
     <div class="faq">
       <details><summary data-es="¿Mis socios tienen que pagar algo?">Do my members have to pay?</summary><p data-es="No. La app y los rankings son gratis para tus socios. Pueden comprar su propio kit o usar los clips que tú prestes o vendas en recepción.">No. The app and leaderboards are free for your members. They can buy their own kit or use the clips you lend or sell at reception.</p></details>
       <details><summary data-es="¿Necesito wifi o instalar algo eléctrico?">Do I need wifi or any wiring?</summary><p data-es="No. Las etiquetas NFC no llevan batería y la app usa los datos del móvil del socio. Solo las pantallas de ranking necesitan una TV con navegador.">No. NFC tags have no battery and the app runs on each member's phone. Only the leaderboard screens need a TV with a browser.</p></details>
-      <details><summary data-es="¿Qué pasa con la privacidad?">What about privacy?</summary><p data-es="Cada socio decide si aparece en los rankings y con qué nombre. Los datos se tratan según el RGPD y tú solo ves datos agregados de uso.">Each member chooses whether to appear on the leaderboards and under what name. Data is handled under GDPR, and you see aggregated usage only.</p></details>
+      <details><summary data-es="¿Qué pasa con la privacidad?">What about privacy?</summary><p data-es="Ningún socio aparece en los rankings hasta que lo activa él mismo, y aparece con el nombre que elige en su perfil. El gimnasio solo ve datos de uso agregados.">No member appears on the leaderboards until they switch it on themselves, and then under the name they chose for their profile. The gym sees aggregated usage only.</p></details>
       <details><summary data-es="¿Estropea las máquinas?">Will it damage my machines?</summary><p data-es="No. Las etiquetas se pegan con adhesivo industrial resistente al sudor y se retiran sin dejar marca.">No. Tags use a sweat-proof industrial adhesive and come off without marks.</p></details>
       <details><summary data-es="¿Instaláis fuera de Madrid?">Do you install outside Madrid?</summary><p data-es="Sí, en toda España. Fuera de Madrid puede aplicarse un suplemento de desplazamiento, que verás en el presupuesto.">Yes, across Spain. Outside Madrid a travel fee may apply — it will be in your quote.</p></details>
       <details><summary data-es="¿Hay permanencia?">Is there a minimum term?</summary><p data-es="La cuota es mensual. Te proponemos 12 meses para amortizar la instalación, pero lo hablamos en el presupuesto.">The plan is monthly. We suggest 12 months to make the installation worthwhile, but we'll agree it in your quote.</p></details>
@@ -277,8 +277,8 @@
   </div>
 </section>
 
-<script src="assets/js/catalog.js?v=20261004b"></script>
-<script src="assets/js/app.js?v=20261004b"></script>
-<script src="assets/js/gyms.js?v=20261004b"></script>
+<script src="assets/js/catalog.js?v=20261026"></script>
+<script src="assets/js/app.js?v=20261026"></script>
+<script src="assets/js/gyms.js?v=20261026"></script>
 </body>
 </html>
