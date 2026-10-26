@@ -1,25 +1,26 @@
 /*
- * The POWR Bar Clip rev J, as sold: clip + MagSafe plate (two PETG parts), the metal
+ * The POWR Bar Clip (rev K.4), as sold: clip + MagSafe plate (two PETG parts), the metal
  * magnet ring on the plate, four black silicone strips in the bore. Colours per part,
  * and an "apart" view that slides the plate off its dovetail rail and lifts the ring.
  *
- * Geometry is the production CAD (hardware/bar_clip/revJ, J.3): Z up, bar along X,
- * bore centred on the origin. Plate face at Z 33.85; its dovetail slot opens at +X,
+ * Geometry is the production CAD (hardware/bar_clip/revK/k4, decimated to 15k triangles
+ * for the web): Z up, bar along X, bore centred on the origin. Plate face at Z 33.9; its
+ * slot opens at +X in the assembled CAD (probed on the K.4 plate, 27-oct-2026),
  * so the plate comes off by sliding along the bar. Ring 55 x 45 mm on the plate face.
  * Strips: 6 x 42 x 1.0 mm at ±40° and ±105° from the top, in 0.3 mm pockets of the
- * Ø48.7 bore (0.7 mm proud).
+ * Ø48.8 bore.
  */
 import * as THREE from 'three';
 import { STLLoader } from 'three/addons/loaders/STLLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
-const REV_J = {
-  clip: 'assets/models/POWR_Clip_RevJ.stl',
-  plate: 'assets/models/POWR_Plate_RevJ.stl',
-  plateFaceZ: 33.85,
+const CLIP = {
+  clip: 'assets/models/POWR_Clip_RevK4.stl',
+  plate: 'assets/models/POWR_Plate_RevK4.stl',
+  plateFaceZ: 33.9,
   ring: { od: 55, id: 45, t: 1.2 },
-  strips: { bore: 48.7, pocket: 0.3, width: 6, length: 42, thickness: 1.0, angles: [-105, -40, 40, 105] },
+  strips: { bore: 48.8, pocket: 0.3, width: 6, length: 42, thickness: 1.0, angles: [-105, -40, 40, 105] },
   barRadius: 49.2 / 2,
 };
 
@@ -55,24 +56,24 @@ export async function mountConfigurator(el, colors, view = {}) {
   // World frame: bar along X, up = Y. The CAD is Z-up, so the model is turned -90° about X.
   const model = new THREE.Group(); model.rotation.x = -Math.PI / 2; scene.add(model);
 
-  const [clipGeo, plateGeo] = await Promise.all([loadSTL(REV_J.clip), loadSTL(REV_J.plate)]);
+  const [clipGeo, plateGeo] = await Promise.all([loadSTL(CLIP.clip), loadSTL(CLIP.plate)]);
   clipGeo.computeVertexNormals(); plateGeo.computeVertexNormals();
   const clip = new THREE.Mesh(clipGeo, plastic(colors.clip));
   const plate = new THREE.Mesh(plateGeo, plastic(colors.plate));
   model.add(clip, plate);
 
   // Magnet ring on the plate face.
-  const { od, id, t } = REV_J.ring;
+  const { od, id, t } = CLIP.ring;
   const shape = new THREE.Shape(); shape.absarc(0, 0, od / 2, 0, Math.PI * 2, false);
   const hole = new THREE.Path(); hole.absarc(0, 0, id / 2, 0, Math.PI * 2, true); shape.holes.push(hole);
   const ringGeo = new THREE.ExtrudeGeometry(shape, { depth: t, bevelEnabled: true, bevelThickness: 0.25, bevelSize: 0.25, bevelSegments: 3, curveSegments: 96 });
   const ring = new THREE.Mesh(ringGeo, metal(colors.ring));
-  ring.position.z = REV_J.plateFaceZ;
+  ring.position.z = CLIP.plateFaceZ;
   model.add(ring);
 
   // Silicone strips (always black: that is the silicone).
   const rubber = new THREE.MeshPhysicalMaterial({ color: '#0b0c0c', roughness: 0.9 });
-  const s = REV_J.strips;
+  const s = CLIP.strips;
   s.angles.forEach((angle) => {
     const g = new THREE.Group();
     const m = new THREE.Mesh(new THREE.BoxGeometry(s.length, s.width, s.thickness), rubber);
@@ -83,7 +84,7 @@ export async function mountConfigurator(el, colors, view = {}) {
 
   // Barbell sleeve for scale.
   const sleeve = new THREE.Mesh(
-    new THREE.CylinderGeometry(REV_J.barRadius, REV_J.barRadius, 120, 64, 1, true),
+    new THREE.CylinderGeometry(CLIP.barRadius, CLIP.barRadius, 120, 64, 1, true),
     new THREE.MeshPhysicalMaterial({ color: '#9aa4a4', metalness: 1, roughness: 0.3, side: THREE.DoubleSide }),
   );
   sleeve.rotation.z = Math.PI / 2; scene.add(sleeve);
@@ -106,7 +107,7 @@ export async function mountConfigurator(el, colors, view = {}) {
     const e = apart * apart * (3 - 2 * apart);          // smoothstep
     plate.position.x = e * 62;
     ring.position.x = e * 62;
-    ring.position.z = REV_J.plateFaceZ + e * 16;
+    ring.position.z = CLIP.plateFaceZ + e * 16;
   };
 
   const resize = () => {

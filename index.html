@@ -56,11 +56,12 @@
   .trio .k { font: 600 12px/1 var(--f-mono); letter-spacing: .18em; color: var(--muted); }
   .trio h3 { margin-top: 10px; font-size: clamp(24px, 2.3vw, 30px); }
   .trio p { color: var(--text-2); margin-top: 8px; max-width: 32ch; }
+  .decide-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
   .decide-mock { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; gap: 22px; justify-content: center; background: #0a0a0a; }
   @media (max-width: 900px) { .trio { grid-template-columns: 1fr; gap: 48px; } .trio .ph { aspect-ratio: 4/3; } }
 
 
-  /* ---- true usage: two real photos ---- */
+  /* ---- true usage: two renders of the K.4 clip on the sleeve ---- */
   .real-row { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; }
   .real-row figure { margin: 0; border-radius: var(--radius); overflow: hidden; background: #0c0c0c; }
   .real-row figure:first-child { aspect-ratio: 4/5; }
@@ -152,7 +153,6 @@
       </div>
     </div>
   </div>
-  <span class="note" data-es="Vídeo real · remo con barra">Real footage · barbell row</span>
 </section>
 
 <!-- ================= STATEMENT ================= -->
@@ -171,22 +171,16 @@
     </div>
     <div class="trio">
       <figure class="reveal">
-        <div class="ph"><picture><source type="image/webp" srcset="assets/img/real/clip-sleeve-480.webp 480w, assets/img/real/clip-sleeve-800.webp 800w, assets/img/real/clip-sleeve-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw"><img src="assets/img/real/clip-sleeve-800.jpg" alt="POWR Bar Clip on an Olympic sleeve, next to the collar" loading="lazy"></picture></div>
+        <div class="ph"><picture><source type="image/webp" srcset="assets/img/render/clip-sleeve-480.webp 480w, assets/img/render/clip-sleeve-800.webp 800w, assets/img/render/clip-sleeve-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw"><img src="assets/img/render/clip-sleeve-800.jpg" alt="POWR Bar Clip on an Olympic sleeve, next to the collar" loading="lazy"></picture></div>
         <figcaption><span class="k">01</span><h3 data-es="Engánchalo.">Clip it.</h3><p data-es="El clip abraza el manguito. El móvil se pega con el imán.">The clip hugs the sleeve. Your phone snaps on with the magnet.</p></figcaption>
       </figure>
       <figure class="reveal d1">
-        <div class="ph"><picture><source type="image/webp" srcset="assets/img/real/bar-side-480.webp 480w, assets/img/real/bar-side-800.webp 800w, assets/img/real/bar-side-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw"><img src="assets/img/real/bar-side-800.jpg" alt="Phone lying flat on the clip, screen up, along the barbell sleeve" loading="lazy" style="object-position:center 45%"></picture></div>
+        <div class="ph"><picture><source type="image/webp" srcset="assets/img/render/bar-side-480.webp 480w, assets/img/render/bar-side-800.webp 800w, assets/img/render/bar-side-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw"><img src="assets/img/render/bar-side-800.jpg" alt="Phone lying flat on the clip, screen up, along the barbell sleeve" loading="lazy" style="object-position:center 45%"></picture></div>
         <figcaption><span class="k">02</span><h3 data-es="Levanta.">Lift.</h3><p data-es="Oyes la velocidad de cada rep. La serie se cierra sola al dejar la barra.">You hear every rep's speed. The set closes itself when you rack.</p></figcaption>
       </figure>
       <figure class="reveal d2">
         <div class="ph">
-          <div class="decide-mock">
-            <div class="sa-grid">
-              <div><b>0.72</b><i>m/s</i><small>AVG</small></div><div><b>1.08</b><i>m/s</i><small>PEAK</small></div><div><b>8</b><small>REPS</small></div>
-              <div><b>51</b><i>cm</i><small>ROM</small></div><div><b>6</b><i>%</i><small>LOSS</small></div><div><b style="color:var(--amber)">16</b><i>%</i><small>DROP</small></div>
-            </div>
-            <div class="sa-next"><small data-es="PESO PRÓXIMA SERIE (KG)">NEXT SET WEIGHT (KG)</small><div><span>−</span><b>62.5</b><span>+</span></div><em data-es="antes 60">was 60</em></div>
-          </div>
+          <video class="decide-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/app-result-poster.webp" aria-label="Checking the set result in the POWR app, next to the bar"><source src="assets/video/app-result.mp4" type="video/mp4"></video>
         </div>
         <figcaption><span class="k">03</span><h3 data-es="Decide.">Decide.</h3><p data-es="Ves tu serie en números y el peso de la siguiente, ya ajustado.">See the set in numbers, and your next weight — already adjusted.</p></figcaption>
       </figure>
@@ -202,8 +196,8 @@
       <p class="reveal d1" data-es="El clip va junto al collarín. El móvil va encima, a lo largo de la barra, donde lo lees entre series.">The clip sits next to the collar. Your phone lies on top, along the bar, where you read it between sets.</p>
     </div>
     <div class="real-row reveal">
-      <figure><picture><source type="image/webp" srcset="assets/img/real/screen-on-bar-480.webp 480w, assets/img/real/screen-on-bar-800.webp 800w, assets/img/real/screen-on-bar-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 58vw"><img src="assets/img/real/screen-on-bar-800.jpg" alt="Looking down at the POWR app on a phone that sits on the barbell sleeve" loading="lazy" style="object-position:center 40%"></picture></figure>
-      <figure><picture><source type="image/webp" srcset="assets/img/real/clip-top-480.webp 480w, assets/img/real/clip-top-800.webp 800w, assets/img/real/clip-top-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 38vw"><img src="assets/img/real/clip-top-800.jpg" alt="The clip on the sleeve from above: magnet ring around the textured plate with the W mark" loading="lazy"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/img/render/screen-on-bar-480.webp 480w, assets/img/render/screen-on-bar-800.webp 800w, assets/img/render/screen-on-bar-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 58vw"><img src="assets/img/render/screen-on-bar-800.jpg" alt="Looking down at the POWR app on a phone that sits on the barbell sleeve" loading="lazy" style="object-position:center 40%"></picture></figure>
+      <figure><picture><source type="image/webp" srcset="assets/img/render/clip-top-480.webp 480w, assets/img/render/clip-top-800.webp 800w, assets/img/render/clip-top-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 38vw"><img src="assets/img/render/clip-top-800.jpg" alt="The clip on the sleeve from above: magnet ring around the textured plate with the W mark" loading="lazy"></picture></figure>
     </div>
   </div>
 </section>
@@ -319,7 +313,7 @@
 <section class="section" id="kit" style="padding-top:0">
   <div class="wrap">
     <div class="kit-band reveal">
-      <img src="assets/img/kit-complete.jpg" alt="POWR Kit: bar clip, MagSafe plate and magnet ring" loading="lazy">
+      <img src="assets/img/clip-hero.jpg" alt="POWR Bar Clip on a barbell sleeve: clip, MagSafe plate and magnet ring" loading="lazy">
       <div class="body">
         <div style="display:grid;gap:16px">
           <span class="eyebrow" style="color:#cfcfcf">POWR Kit</span>
@@ -361,7 +355,7 @@
 
 <!-- ================= GYMS ================= -->
 <section class="gym-band">
-  <picture><source media="(max-width: 700px)" type="image/webp" srcset="assets/img/real/clip-sleeve-480.webp 480w, assets/img/real/clip-sleeve-800.webp 800w, assets/img/real/clip-sleeve-1200.webp 1200w" sizes="100vw"><source type="image/webp" srcset="assets/img/real/rack-clip-wide-800.webp 800w, assets/img/real/rack-clip-wide-1280.webp 1280w, assets/img/real/rack-clip-wide-1800.webp 1800w" sizes="100vw"><img src="assets/img/real/rack-clip-wide-1280.jpg" alt="" loading="lazy"></picture>
+  <picture><source media="(max-width: 700px)" type="image/webp" srcset="assets/img/render/clip-sleeve-480.webp 480w, assets/img/render/clip-sleeve-800.webp 800w, assets/img/render/clip-sleeve-1200.webp 1200w" sizes="100vw"><source type="image/webp" srcset="assets/img/render/rack-clip-wide-800.webp 800w, assets/img/render/rack-clip-wide-1280.webp 1280w, assets/img/render/rack-clip-wide-1800.webp 1800w" sizes="100vw"><img src="assets/img/render/rack-clip-wide-1280.jpg" alt="" loading="lazy"></picture>
   <div class="wrap">
     <span class="eyebrow reveal" data-es="Para gimnasios">For gyms</span>
     <h2 class="reveal d1" data-es="Tu sala de fuerza, convertida en una liga.">Turn your gym floor into a league.</h2>
@@ -417,10 +411,10 @@
     render(); document.addEventListener('powr:lang', render);
   })();
 
-  /* Real footage: with reduced motion the hero clip does not play and its poster frame stays. */
+  /* With reduced motion the clips (hero row, step 03 app) do not play; their poster frames stay. */
   (() => {
-    const v = document.querySelector('.h-hero video');
-    if (v && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('.h-hero video, .decide-video').forEach((v) => { v.removeAttribute('autoplay'); v.pause(); });
   })();
 </script>
 </body>
