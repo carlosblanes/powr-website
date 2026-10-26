@@ -59,7 +59,7 @@
     <div class="gallery">
       <div class="gallery-main" id="stage"></div>
       <div class="thumbs" id="thumbs"></div>
-      <p class="xs muted" data-es="Fotos: un clip impreso en negro, en el gimnasio. Vista 3D y última imagen: CAD de producción.">Photos: a printed clip in black, at the gym. 3D view and last image: the production CAD.</p>
+      <p class="xs muted" data-es="Imágenes: renders del diseño de producción.">Images: renders of the production design.</p>
     </div>
     <div class="pdp-info" id="info"></div>
   </div>
@@ -93,12 +93,12 @@
   const p = P[id];
 
   const GALLERY = {
-    // 3D = the configurator (rev J STL). Then real photos of a printed rev J at the gym (2-Oct-2026,
-    // docs/media/gym_2026-10-02), and one CAD render of the parts apart.
-    kit: ['3d', 'assets/img/real/bar-side-1200.webp', 'assets/img/real/clip-sleeve-1200.webp', 'assets/img/real/clip-top-1200.webp', 'assets/img/kit-complete.jpg'],
+    // 3D = the configurator (rev K.4 STL). Then Cycles renders of the K.4 CAD on a bar
+    // (27-oct-2026, ~/Powr/.render-work/scene.py), replacing the 2-oct gym photos of rev J.
+    kit: ['3d', 'assets/img/render/bar-side-1200.webp', 'assets/img/render/clip-sleeve-1200.webp', 'assets/img/render/clip-top-1200.webp', 'assets/img/kit-complete.jpg'],
   };
   const SPECS = {
-    kit: [['Support', 'POWR Bar Clip rev J: clip + MagSafe plate, PETG, ≈ 36 g', 'POWR Bar Clip rev J: clip + placa MagSafe, PETG, ≈ 36 g', 'Soporte'], ['Fits', 'Olympic sleeves Ø49.2–50.8 mm', 'Manguitos olímpicos Ø49,2–50,8 mm', 'Compatible'], ['Hold', '≥ 28 N pull-off on the thinnest sleeve, sweaty', '≥ 28 N de arranque en el manguito más fino, con sudor', 'Sujeción'], ['Magnet ring', 'Metal, 55 × 45 mm, on a Ø56 plate', 'Metálico, 55 × 45 mm, sobre placa de Ø56', 'Anillo magnético'], ['Phone ring', 'Adhesive, MagSafe size (Ø46–54 mm)', 'Adhesivo, tamaño MagSafe (Ø46–54 mm)', 'Anillo del móvil'], ['Grip', '4 silicone strips in the bore, replaceable', '4 tiras de silicona en el interior, reemplazables', 'Agarre'], ['Colours', 'Clip and plate in any of 12 PETG colours, 4 ring finishes', 'Clip y placa en cualquiera de 12 colores de PETG, 4 acabados de anillo', 'Colores'], ['Made in', 'Spain, printed to order', 'España, impreso por encargo', 'Fabricado en']],
+    kit: [['Support', 'POWR Bar Clip: clip + MagSafe plate, PETG, ≈ 41 g', 'POWR Bar Clip: clip + placa MagSafe, PETG, ≈ 41 g', 'Soporte'], ['Fits', 'Olympic sleeves Ø49.2–50.8 mm', 'Manguitos olímpicos Ø49,2–50,8 mm', 'Compatible'], ['Hold', '≥ 28 N pull-off on the thinnest sleeve, sweaty', '≥ 28 N de arranque en el manguito más fino, con sudor', 'Sujeción'], ['Magnet ring', 'Metal, 55 × 45 mm, on a Ø56 plate', 'Metálico, 55 × 45 mm, sobre placa de Ø56', 'Anillo magnético'], ['Phone ring', 'Adhesive, MagSafe size (Ø46–54 mm)', 'Adhesivo, tamaño MagSafe (Ø46–54 mm)', 'Anillo del móvil'], ['Grip', '4 silicone strips in the bore, replaceable', '4 tiras de silicona en el interior, reemplazables', 'Agarre'], ['Colours', 'Clip and plate in any of 12 PETG colours, 4 ring finishes', 'Clip y placa en cualquiera de 12 colores de PETG, 4 acabados de anillo', 'Colores'], ['Made in', 'Spain, printed to order', 'España, impreso por encargo', 'Fabricado en']],
   };
 
   document.title = `${p.name} — POWR`;

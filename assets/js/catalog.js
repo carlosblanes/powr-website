@@ -49,7 +49,7 @@ window.POWR_PRODUCTS = {
     tagEn: 'Everything you need', tagEs: 'Todo lo que necesitas',
     price: 29, compareAt: 0,
     img: 'assets/img/clip-hero.jpg',
-    model: 'assets/models/POWR_Clip_RevJ.stl',
+    model: 'assets/models/POWR_Clip_RevK4.stl',
     stripeLink: '',
     shortEn: 'Your phone becomes a velocity tracker on any Olympic bar.',
     shortEs: 'Tu móvil se convierte en un medidor de velocidad en cualquier barra olímpica.',
@@ -59,7 +59,7 @@ window.POWR_PRODUCTS = {
     colors: [
       { id: 'black', en: 'Graphite', es: 'Grafito', hex: '#1d2021', img: 'assets/img/clip-hero.jpg' },
       { id: 'chalk', en: 'Chalk', es: 'Tiza', hex: '#e9e6df', img: 'assets/img/clip-chalk.jpg' },
-      { id: 'teal', en: 'POWR Teal', es: 'Teal POWR', hex: '#38f0d7', img: 'assets/img/kit-complete.jpg' },
+      { id: 'teal', en: 'POWR Teal', es: 'Teal POWR', hex: '#38f0d7', img: 'assets/img/clip-teal.jpg' },
     ],
     /*
      * Build your own: a PETG colour for the clip, one for the plate, a finish for the
