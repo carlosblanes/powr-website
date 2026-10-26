@@ -74,6 +74,7 @@
         <button class="lang" type="button" aria-label="Switch language">ES</button>
         <a class="icon-btn" href="${S.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a>
         <button class="icon-btn" type="button" id="cartBtn" aria-label="Cart" data-es-label="Carrito">${I.bag}<span class="cart-count" id="cartCount">0</span></button>
+        <a class="btn sm ghost hide-m" href="app/" data-es="Iniciar sesión">Log in</a>
         <a class="btn sm hide-m" href="product.html?id=kit" data-es="Comprar">Shop now</a>
         <button class="icon-btn burger" type="button" id="burger" aria-label="Menu" aria-expanded="false">${I.menu}</button>
       </div>
@@ -85,6 +86,7 @@
     <a href="gyms.html" data-es="Gimnasios">For gyms</a>
     <a href="index.html#app" data-es="La app">The app</a>
     <a href="contact.html" data-es="Contacto">Contact</a>
+    <a href="app/" data-es="Iniciar sesión">Log in</a>
     <a class="btn block" href="product.html?id=kit" data-es="Crea tu kit · 29 €">Build your kit · €29</a>
     <div class="social-row"><a href="${S.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${I.ig}</a>${S.email ? `<a href="mailto:${S.email}" aria-label="Email">${I.mail}</a>` : ''}</div>
   </nav>`;
