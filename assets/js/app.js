@@ -59,7 +59,7 @@
   const page = document.body.dataset.page || '';
   const cur = (p) => (page === p ? ' aria-current="page"' : '');
   const header = `
-  <div class="announce"><span data-es="Envío gratis desde 40 € · Devolución en 30 días">Free shipping over €40 · 30-day returns</span></div>
+  <div class="announce"><span data-es="Envío gratis desde 40 €">Free shipping over €40</span></div>
   <header class="nav" id="nav">
     <div class="wrap">
       <a class="logo" href="index.html" aria-label="POWR home">${LOGO}</a>
@@ -304,7 +304,7 @@
         <p>${t(p.shortEn, p.shortEs)}</p>
         <ul>${box.slice(0, 4).map((b) => `<li>${b}</li>`).join('')}</ul>
         <div class="price-row">
-          <div class="price">${money(p.price)}${p.compareAt ? `<s>${money(p.compareAt)}</s>` : ''}<small>${t('VAT incl. · Free returns', 'IVA incl. · Devolución gratis')}</small></div>
+          <div class="price">${money(p.price)}${p.compareAt ? `<s>${money(p.compareAt)}</s>` : ''}<small>${t('VAT incl.', 'IVA incl.')}</small></div>
           <button class="btn sm" data-add="${id}">${t('Add to cart', 'Añadir')}</button>
         </div>
       </div>

@@ -129,12 +129,12 @@
         <div class="qty"><button id="qm" aria-label="-">−</button><span id="qv">${qty}</span><button id="qp" aria-label="+">+</button></div>
         <button class="btn" id="addBtn">${t('Add to bag', 'Añadir a la cesta')} · <span id="addPrice">${money(p.price * qty)}</span></button>
       </div>
-      <div class="fine"><span>${t('Ships in 2–4 days', 'Envío en 2–4 días')}</span><span>${t('30-day returns', '30 días de devolución')}</span><span>${t('3-year warranty', '3 años de garantía')}</span></div>
+      <div class="fine"><span>${t('Ships in 2–4 days', 'Envío en 2–4 días')}</span><span>${t('3-year warranty', '3 años de garantía')}</span></div>
       <div class="acc">
         <details><summary>${t("What's in the box", 'Qué incluye')}</summary><div class="acc-body"><ul class="ticks">${box.map((b) => `<li><span>${b}</span></li>`).join('')}</ul></div></details>
         ${specs ? `<details><summary>${t('Specifications', 'Especificaciones')}</summary><div class="acc-body"><table class="spec">${specs.map((s) => `<tr><td>${t(s[0], s[3] || s[0])}</td><td>${t(s[1], s[2])}</td></tr>`).join('')}</table></div></details>` : ''}
         <details><summary>${t('Compatibility', 'Compatibilidad')}</summary><div class="acc-body"><p>${t('MagSafe iPhones (12 and later) snap on directly. Any other phone works with the magnetic ring stuck to its case. The POWR app is in beta on iPhone — every order includes access.', 'Los iPhone con MagSafe (12 y posteriores) se enganchan directamente. Cualquier otro móvil funciona con el anillo magnético pegado a su funda. La app POWR está en beta para iPhone — cada pedido incluye acceso.')}</p></div></details>
-        <details><summary>${t('Shipping & returns', 'Envíos y devoluciones')}</summary><div class="acc-body"><p>${t('Spain (peninsula) 2–4 working days · EU 4–7 days · free pickup in Madrid. Free shipping over €40. Return within 30 days for a full refund.', 'España península 2–4 días laborables · UE 4–7 días · recogida gratis en Madrid. Envío gratis desde 40 €. Devuélvelo en 30 días y te reembolsamos todo.')} <a style="text-decoration:underline" href="legal.html#shipping">${t('Details', 'Detalles')}</a></p></div></details>
+        <details><summary>${t('Shipping & returns', 'Envíos y devoluciones')}</summary><div class="acc-body"><p>${t('Spain (peninsula) 2–4 working days · EU 4–7 days · free pickup in Madrid. Free shipping over €40. 14-day right of withdrawal; return postage is paid by the buyer.', 'España península 2–4 días laborables · UE 4–7 días · recogida gratis en Madrid. Envío gratis desde 40 €. 14 días de desistimiento; el envío de vuelta lo paga el comprador.')} <a style="text-decoration:underline" href="legal.html#shipping">${t('Details', 'Detalles')}</a></p></div></details>
       </div>`;
     wire();
     renderSticky();
