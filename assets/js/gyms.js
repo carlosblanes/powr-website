@@ -1,7 +1,7 @@
 /* Gyms page: tap demo, leaderboard demo, usage chart, plans, estimator. */
 (() => {
-  const { t, money, observe, fillRange } = window.POWR;
-  const G = window.POWR_GYM;
+  const { t, money, observe, fillRange } = window.WizeLift;
+  const G = window.WIZELIFT_GYM;
   const $ = (id) => document.getElementById(id);
 
   /* ---- decorative QR (finder squares + seeded noise) ---- */
@@ -111,5 +111,5 @@
 
   function all() { renderBoard(); renderUsage(); renderPlans(); estimate(); }
   all();
-  document.addEventListener('powr:lang', all);
+  document.addEventListener('wizelift:lang', all);
 })();

@@ -1,6 +1,6 @@
 /* Home page: product cards + the live "recording a set" phone in the hero. */
 (() => {
-  const { t, card, observe } = window.POWR;
+  const { t, card, observe } = window.WizeLift;
 
   const products = document.getElementById('homeProducts');
   function renderProducts() {
@@ -23,9 +23,9 @@
     </article>`;
   }
   renderProducts();
-  document.addEventListener('powr:lang', renderProducts);
+  document.addEventListener('wizelift:lang', renderProducts);
 
-  /* ---- live set: mirrors powr-native active-set + RepVelocityChart ----
+  /* ---- live set: mirrors wizelift-native active-set + RepVelocityChart ----
    * Real 60 kg bench trace for the first 7 reps (fixtures/traces), then two slow reps.
    * Chart top = max(fastest, 0.5); STOP line at (100 - cutoff)% of the chart height;
    * FATIGUE = loss vs the fastest rep; the set stops after two consecutive reps past the cutoff. */
@@ -93,10 +93,10 @@
       saSeg.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.m === m));
     };
     saSeg.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { m = b.dataset.m; renderSA(); } });
-    renderSA(); document.addEventListener('powr:lang', renderSA);
+    renderSA(); document.addEventListener('wizelift:lang', renderSA);
   }
 
-  /* ---- goals: what powr-native changes per training goal ---- */
+  /* ---- goals: what wizelift-native changes per training goal ---- */
   const goalSeg = document.getElementById('goalSeg'), goalBody = document.getElementById('goalBody');
   if (goalSeg) {
     const G = [
@@ -122,6 +122,6 @@
         ${x.id === 'strength' || x.id === 'power' ? `<p class="cite">${t('Stopping at 20% loss gave similar strength gains to 40%, with less fatigue', 'Parar al 20 % dio ganancias de fuerza similares a llegar al 40 %, con menos fatiga')} — Pareja-Blanco et al., Scand J Med Sci Sports, 2017</p>` : ''}`;
     };
     goalSeg.addEventListener('click', (e) => { const b = e.target.closest('[data-g]'); if (b) { g = b.dataset.g; renderGoal(); } });
-    renderGoal(); document.addEventListener('powr:lang', renderGoal);
+    renderGoal(); document.addEventListener('wizelift:lang', renderGoal);
   }
 })();

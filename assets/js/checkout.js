@@ -1,14 +1,14 @@
 /* Checkout: 3 steps, summary, promo, order emailed via FormSubmit (form "order"). */
 (() => {
-  const { t, money, cart, subtotal, clearCart, lineHTML, applyLang, submitForm, store } = window.POWR;
-  const S = window.POWR_SETTINGS, P = window.POWR_PRODUCTS;
+  const { t, money, cart, subtotal, clearCart, lineHTML, applyLang, submitForm, store } = window.WizeLift;
+  const S = window.WIZELIFT_SETTINGS, P = window.WIZELIFT_PRODUCTS;
   const $ = (id) => document.getElementById(id);
   const form = $('orderForm');
-  let step = 1, promo = store.get('powr_promo', null);
+  let step = 1, promo = store.get('wizelift_promo', null);
   let ship = 'es', pay = 'card';
 
   if (!cart().length && !location.hash.includes('done') && !location.search.includes('paid=1')) {
-    $('checkout').innerHTML = `<div class="empty" style="grid-column:1/-1;padding:120px 0">${window.POWR_ICONS.bag}<h2 style="font-size:32px">${t('Your cart is empty', 'Tu carrito está vacío')}</h2><a class="btn" href="shop.html">${t('Go to the shop', 'Ir a la tienda')}</a></div>`;
+    $('checkout').innerHTML = `<div class="empty" style="grid-column:1/-1;padding:120px 0">${window.WIZELIFT_ICONS.bag}<h2 style="font-size:32px">${t('Your cart is empty', 'Tu carrito está vacío')}</h2><a class="btn" href="shop.html">${t('Go to the shop', 'Ir a la tienda')}</a></div>`;
     return;
   }
 
@@ -72,12 +72,12 @@
   }
   document.addEventListener('click', (e) => { const b = e.target.closest('[data-next]'); if (b) go(+b.dataset.next); });
   $('editCart').addEventListener('click', () => document.getElementById('cartBtn').click());
-  document.addEventListener('powr:cart', () => { if (!cart().length) location.reload(); renderSummary(); renderOptions(); });
+  document.addEventListener('wizelift:cart', () => { if (!cart().length) location.reload(); renderSummary(); renderOptions(); });
 
   $('promoBtn').addEventListener('click', () => {
     const code = $('promo').value.trim().toUpperCase();
-    if (S.promo[code]) { promo = code; store.set('powr_promo', code); $('promoMsg').innerHTML = `<span class="teal">✓ ${code} · −${Math.round(S.promo[code] * 100)}%</span>`; }
-    else { promo = null; store.set('powr_promo', null); $('promoMsg').innerHTML = `<span style="color:var(--red)">${t('That code is not valid.', 'Ese código no es válido.')}</span>`; }
+    if (S.promo[code]) { promo = code; store.set('wizelift_promo', code); $('promoMsg').innerHTML = `<span class="teal">✓ ${code} · −${Math.round(S.promo[code] * 100)}%</span>`; }
+    else { promo = null; store.set('wizelift_promo', null); $('promoMsg').innerHTML = `<span style="color:var(--red)">${t('That code is not valid.', 'Ese código no es válido.')}</span>`; }
     renderSummary();
   });
 
@@ -88,7 +88,7 @@
       items: cart().map((l) => ({ id: l.id, color: l.color, qty: l.qty })),
       email: fd.get('email'),
       shipping: { method: ship, name: `${fd.get('first_name')} ${fd.get('last_name')}`.trim(), address: fd.get('address'), city: fd.get('city'), postcode: fd.get('postcode'), country: fd.get('country'), phone: fd.get('phone') },
-      lang: window.POWR.lang(),
+      lang: window.WizeLift.lang(),
     };
     if (promo) body.promo = promo;
     let res;
@@ -115,26 +115,26 @@
     try {
       if (pay === 'card') {
         const s = await stripeCheckout(fd);
-        if (s) { store.set('powr_last_order', { orderId: s.orderId, total: s.totalCents / 100, pay, email }); location.href = s.url; return; }
+        if (s) { store.set('wizelift_last_order', { orderId: s.orderId, total: s.totalCents / 100, pay, email }); location.href = s.url; return; }
       }
       const orderId = 'PWR-' + Date.now().toString(36).toUpperCase().slice(-6);
-      const items = cart().map((l) => `${l.qty} × ${P[l.id].name}${l.color ? ' (' + window.POWR.colorName(l.id, l.color) + ')' : ''} @ ${P[l.id].price} €`).join(' | ');
+      const items = cart().map((l) => `${l.qty} × ${P[l.id].name}${l.color ? ' (' + window.WizeLift.colorName(l.id, l.color) + ')' : ''} @ ${P[l.id].price} €`).join(' | ');
       await submitForm(form, {
         order_id: orderId, items, subtotal: sub.toFixed(2), discount: disc.toFixed(2), shipping_cost: shipCost.toFixed(2), total: total.toFixed(2),
-        language: window.POWR.lang(), shipping_method: ship, payment_method: pay, promo_code: promo || '',
+        language: window.WizeLift.lang(), shipping_method: ship, payment_method: pay, promo_code: promo || '',
       });
-      store.set('powr_last_order', { orderId, total, pay, email, manual: true });
-      clearCart(); store.set('powr_promo', null);
+      store.set('wizelift_last_order', { orderId, total, pay, email, manual: true });
+      clearCart(); store.set('wizelift_promo', null);
       done();
     } catch (err) {
       $('coStatus').className = 'form-status err';
-      $('coStatus').textContent = err.shown ? err.message : t('We could not send your order. Please try again, or message us on Instagram @powr.app.', 'No hemos podido enviar tu pedido. Inténtalo de nuevo o escríbenos por Instagram @powr.app.');
+      $('coStatus').textContent = err.shown ? err.message : t('We could not send your order. Please try again, or message us on Instagram @wizelift.app.', 'No hemos podido enviar tu pedido. Inténtalo de nuevo o escríbenos por Instagram @wizelift.app.');
       btn.disabled = false; renderSummary();
     }
   });
 
   function done() {
-    const o = store.get('powr_last_order', {});
+    const o = store.get('wizelift_last_order', {});
     document.querySelectorAll('.co-panel').forEach((p) => p.classList.toggle('on', p.dataset.p === 'done'));
     $('stepper').style.display = 'none'; $('summary').style.display = 'none';
     $('checkout').style.gridTemplateColumns = '1fr';
@@ -152,11 +152,11 @@
   const qs = new URLSearchParams(location.search);
   if (qs.get('paid') === '1') {
     // Back from Stripe. Not proof of payment (anyone can type the URL) — the webhook is the truth.
-    const last = store.get('powr_last_order', {}) || {};
-    store.set('powr_last_order', { ...last, orderId: qs.get('order') || last.orderId, pay: 'card', manual: false });
-    clearCart(); store.set('powr_promo', null); done();
+    const last = store.get('wizelift_last_order', {}) || {};
+    store.set('wizelift_last_order', { ...last, orderId: qs.get('order') || last.orderId, pay: 'card', manual: false });
+    clearCart(); store.set('wizelift_promo', null); done();
   } else if (qs.get('cancelled') === '1') {
-    window.POWR.toast(t('Payment cancelled — your cart is still here.', 'Pago cancelado — tu carrito sigue aquí.'));
-  } else if (location.hash === '#done' && store.get('powr_last_order', null)) done();
-  document.addEventListener('powr:lang', () => { renderOptions(); renderSummary(); if (step === 3) renderReview(); });
+    window.WizeLift.toast(t('Payment cancelled — your cart is still here.', 'Pago cancelado — tu carrito sigue aquí.'));
+  } else if (location.hash === '#done' && store.get('wizelift_last_order', null)) done();
+  document.addEventListener('wizelift:lang', () => { renderOptions(); renderSummary(); if (step === 3) renderReview(); });
 })();

@@ -16,8 +16,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const CLIP = {
-  clip: 'assets/models/POWR_Clip_RevK4.stl',
-  plate: 'assets/models/POWR_Plate_RevK4.stl',
+  clip: 'assets/models/WIZELIFT_Clip_RevK4.stl',
+  plate: 'assets/models/WIZELIFT_Plate_RevK4.stl',
   plateFaceZ: 33.9,
   ring: { od: 55, id: 45, t: 1.2 },
   strips: { bore: 48.8, pocket: 0.3, width: 6, length: 42, thickness: 1.0, angles: [-105, -40, 40, 105] },

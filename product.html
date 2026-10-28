@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><script>(function(){var p=location.pathname.replace(/^\/powr-website/,"");location.replace("https://wizelift.com"+p+location.search+location.hash);})();</script><link rel="canonical" href="https://wizelift.com/product">
+<head><script>(function(){var p=location.pathname.replace(/^\/wizelift-website/,"");location.replace("https://wizelift.com"+p+location.search+location.hash);})();</script><link rel="canonical" href="https://wizelift.com/product">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>WizeLift Kit — WizeLift</title>
@@ -85,8 +85,8 @@
 <script src="assets/js/catalog.js?v=20261028b"></script>
 <script src="assets/js/app.js?v=20261028b"></script>
 <script type="module">
-  const { t, money, add, observe } = window.POWR;
-  const P = window.POWR_PRODUCTS;
+  const { t, money, add, observe } = window.WizeLift;
+  const P = window.WIZELIFT_PRODUCTS;
   const qs = new URLSearchParams(location.search);
   let id = qs.get('id');
   if (!P[id]) id = 'kit';
@@ -94,7 +94,7 @@
 
   const GALLERY = {
     // 3D = the configurator (rev K.4 STL). Then Cycles renders of the K.4 CAD on a bar
-    // (27-oct-2026, ~/Powr/.render-work/scene.py), replacing the 2-oct gym photos of rev J.
+    // (27-oct-2026, ~/WizeLift/.render-work/scene.py), replacing the 2-oct gym photos of rev J.
     kit: ['3d', 'assets/img/render/bar-side-1200.webp', 'assets/img/render/clip-sleeve-1200.webp', 'assets/img/render/clip-top-1200.webp', 'assets/img/kit-complete.jpg'],
   };
   const SPECS = {
@@ -103,7 +103,7 @@
 
   document.title = `${p.name} — WizeLift`;
   const K = p.custom || null;
-  const partsOf = (cid) => POWR.customParts(id, cid);
+  const partsOf = (cid) => WizeLift.customParts(id, cid);
   // ?c=clip.plate.ring opens on that combination (the home page's preset swatches link here).
   const asked = qs.get('c');
   let color = K ? (partsOf(asked) ? asked : K.presets[0].id) : p.colors ? p.colors[0].id : null;
@@ -112,11 +112,11 @@
 
   const swatchOf = (cid) => { const k = partsOf(cid); return k ? `<span class="kit-swatch" aria-hidden="true"><i style="background:${k.clip.hex}"></i><i style="background:${k.plate.hex}"></i><i style="background:${k.ring.hex}"></i></span>` : ''; };
   const styleName = (cid) => { const pr = K && K.presets.find((x) => x.id === cid); return pr ? t(pr.en, pr.es) : t('Custom', 'Personalizado'); };
-  const comboText = (cid) => { const k = partsOf(cid); return k ? [k.clip, k.plate, k.ring].map((x) => t(x.en, x.es)).join(' · ') : POWR.colorName(id, cid); };
+  const comboText = (cid) => { const k = partsOf(cid); return k ? [k.clip, k.plate, k.ring].map((x) => t(x.en, x.es)).join(' · ') : WizeLift.colorName(id, cid); };
 
   function renderInfo() {
     document.getElementById('crumbName').textContent = p.name;
-    const box = (POWR.lang() === 'es' ? p.boxEs : p.boxEn) || [];
+    const box = (WizeLift.lang() === 'es' ? p.boxEs : p.boxEn) || [];
     const specs = SPECS[id];
     document.getElementById('info').innerHTML = `
       <div style="display:grid;gap:14px">
@@ -124,7 +124,7 @@
         <p class="lede">${t(p.shortEn, p.shortEs)}</p>
         <div class="price" style="font-size:40px;margin-top:6px">${money(p.price)}<small>${t('VAT included · Free shipping over €40', 'IVA incluido · Envío gratis desde 40 €')}</small></div>
       </div>
-      ${K ? cfgHTML() : p.colors ? `<div class="opt-group"><span>${t('Colour', 'Color')}: <b style="color:var(--text)" id="colorName">${POWR.colorName(id, color)}</b></span><div class="swatches">${p.colors.map((c) => `<button class="swatch${c.id === color ? ' on' : ''}" data-color="${c.id}" data-hex="${c.hex}"><i style="background:${c.hex}"></i>${t(c.en, c.es)}</button>`).join('')}</div></div>` : ''}
+      ${K ? cfgHTML() : p.colors ? `<div class="opt-group"><span>${t('Colour', 'Color')}: <b style="color:var(--text)" id="colorName">${WizeLift.colorName(id, color)}</b></span><div class="swatches">${p.colors.map((c) => `<button class="swatch${c.id === color ? ' on' : ''}" data-color="${c.id}" data-hex="${c.hex}"><i style="background:${c.hex}"></i>${t(c.en, c.es)}</button>`).join('')}</div></div>` : ''}
       <div class="buy-row">
         <div class="qty"><button id="qm" aria-label="-">−</button><span id="qv">${qty}</span><button id="qp" aria-label="+">+</button></div>
         <button class="btn" id="addBtn">${t('Add to bag', 'Añadir a la cesta')} · <span id="addPrice">${money(p.price * qty)}</span></button>
@@ -179,7 +179,7 @@
     document.querySelectorAll('.swatch').forEach((b) => b.addEventListener('click', () => {
       color = b.dataset.color;
       document.querySelectorAll('.swatch').forEach((x) => x.classList.toggle('on', x === b));
-      document.getElementById('colorName').textContent = POWR.colorName(id, color);
+      document.getElementById('colorName').textContent = WizeLift.colorName(id, color);
       if (viewer) { viewer.setColor(b.dataset.hex); show(0); }
       renderSticky();
     }));
@@ -258,7 +258,7 @@
   }
   function all() { renderInfo(); renderExtra(); }
   all();
-  document.addEventListener('powr:lang', all);
+  document.addEventListener('wizelift:lang', all);
 
   /* ---- sticky bag bar once the main button scrolls away ---- */
   const sb = document.getElementById('stickyBuy');

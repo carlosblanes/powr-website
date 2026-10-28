@@ -7,7 +7,7 @@
  * payment straight after the order is placed. Leave '' and the customer gets a payment
  * link by email instead (manual, no account needed to start).
  */
-window.POWR_SETTINGS = {
+window.WIZELIFT_SETTINGS = {
   brand: 'WizeLift',
   currency: 'EUR',
   locale: 'es-ES',
@@ -20,8 +20,8 @@ window.POWR_SETTINGS = {
   // in supabase/functions/_shared/shop.ts — change a price in BOTH places). 503 = Stripe not configured
   // yet, in which case checkout falls back to emailing the order.
   shopCheckoutEndpoint: 'https://nkvmnwehztaovkldfprq.supabase.co/functions/v1/shop-checkout',
-  instagram: 'https://www.instagram.com/powr.app/',
-  instagramHandle: '@powr.app',
+  instagram: 'https://www.instagram.com/wizelift.app/',
+  instagramHandle: '@wizelift.app',
   freeShippingFrom: 40,
   shipping: [
     { id: 'es', en: 'Spain (peninsula) · 2–4 days', es: 'España (península) · 2–4 días', price: 3.95 },
@@ -39,17 +39,17 @@ window.POWR_SETTINGS = {
       noteEn: 'IBAN sent with your confirmation. Ships when received.',
       noteEs: 'Te enviamos el IBAN con la confirmación. Se envía al recibirla.' },
   ],
-  promo: { POWR10: 0.10, FOUNDER: 0.15 },
+  promo: { WIZELIFT10: 0.10, FOUNDER: 0.15 },
 };
 
-window.POWR_PRODUCTS = {
+window.WIZELIFT_PRODUCTS = {
   // The individual kit: everything one lifter needs. Three parts: phone ring, magnet, bar support.
   'kit': {
     name: 'WizeLift Kit',
     tagEn: 'Everything you need', tagEs: 'Todo lo que necesitas',
     price: 29, compareAt: 0,
     img: 'assets/img/clip-hero.jpg',
-    model: 'assets/models/POWR_Clip_RevK4.stl',
+    model: 'assets/models/WIZELIFT_Clip_RevK4.stl',
     stripeLink: '',
     shortEn: 'Your phone becomes a velocity tracker on any Olympic bar.',
     shortEs: 'Tu móvil se convierte en un medidor de velocidad en cualquier barra olímpica.',
@@ -103,13 +103,13 @@ window.POWR_PRODUCTS = {
 };
 
 // Order shown in the shop grid.
-window.POWR_SHOP_ORDER = ['kit'];
+window.WIZELIFT_SHOP_ORDER = ['kit'];
 
 /*
  * Gym plans and estimator rates — indicative, VAT excluded. The final quote is written by hand.
  * Plans are picked by station count; Gym Pro adds perStationOver for each station above includedStations.
  */
-window.POWR_GYM = {
+window.WIZELIFT_GYM = {
   plans: [
     { id: 'gym', name: 'Gym', maxStations: 30, monthly: 49 },
     { id: 'pro', name: 'Gym Pro', maxStations: Infinity, monthly: 99, includedStations: 100, perStationOver: 1 },

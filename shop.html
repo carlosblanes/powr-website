@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><script>(function(){var p=location.pathname.replace(/^\/powr-website/,"");location.replace("https://wizelift.com"+p+location.search+location.hash);})();</script><link rel="canonical" href="https://wizelift.com/shop">
+<head><script>(function(){var p=location.pathname.replace(/^\/wizelift-website/,"");location.replace("https://wizelift.com"+p+location.search+location.hash);})();</script><link rel="canonical" href="https://wizelift.com/shop">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Shop — WizeLift</title>
@@ -72,20 +72,20 @@
 <script src="assets/js/app.js?v=20261028b"></script>
 <script>
   (() => {
-    const { t, money } = window.POWR;
-    const p = POWR_PRODUCTS.kit, K = p.custom;
+    const { t, money } = window.WizeLift;
+    const p = WIZELIFT_PRODUCTS.kit, K = p.custom;
     // Styles link into the configurator; the kit is always built there, so its colours are real.
     const render = () => {
-      const box = POWR.lang() === 'es' ? p.boxEs : p.boxEn;
+      const box = WizeLift.lang() === 'es' ? p.boxEs : p.boxEn;
       document.getElementById('shopInfo').innerHTML = `
         <h2>${p.name}</h2>
         <p class="lede">${t(p.shortEn, p.shortEs)}</p>
         <ul class="ticks">${box.map((b) => `<li><span>${b}</span></li>`).join('')}</ul>
-        <div class="opt-group"><span>${t('Styles', 'Estilos')}</span><div class="swatches">${K.presets.map((pr) => { const q = POWR.customParts('kit', pr.id); return `<a class="swatch" href="product.html?id=kit&c=${pr.id}" title="${t(pr.en, pr.es)}" aria-label="${t(pr.en, pr.es)}" style="padding:0 8px"><span class="kit-swatch" aria-hidden="true"><i style="background:${q.clip.hex}"></i><i style="background:${q.plate.hex}"></i><i style="background:${q.ring.hex}"></i></span></a>`; }).join('')}</div></div>
+        <div class="opt-group"><span>${t('Styles', 'Estilos')}</span><div class="swatches">${K.presets.map((pr) => { const q = WizeLift.customParts('kit', pr.id); return `<a class="swatch" href="product.html?id=kit&c=${pr.id}" title="${t(pr.en, pr.es)}" aria-label="${t(pr.en, pr.es)}" style="padding:0 8px"><span class="kit-swatch" aria-hidden="true"><i style="background:${q.clip.hex}"></i><i style="background:${q.plate.hex}"></i><i style="background:${q.ring.hex}"></i></span></a>`; }).join('')}</div></div>
         <div class="price" style="font-size:44px">${money(p.price)}<small>${t('VAT included', 'IVA incluido')}</small></div>
         <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="product.html?id=kit">${t('Build your kit', 'Crea tu kit')}</a></div>`;
     };
-    render(); document.addEventListener('powr:lang', render);
+    render(); document.addEventListener('wizelift:lang', render);
   })();
 </script>
 <style>

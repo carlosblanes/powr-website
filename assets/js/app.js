@@ -1,7 +1,7 @@
 /* WizeLift site — shared shell: header/footer, language, cart drawer, forms, reveal. */
 (() => {
-  const S = window.POWR_SETTINGS;
-  const P = window.POWR_PRODUCTS;
+  const S = window.WIZELIFT_SETTINGS;
+  const P = window.WIZELIFT_PRODUCTS;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
@@ -11,7 +11,7 @@
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } },
   };
   const urlLang = new URLSearchParams(location.search).get('lang');
-  let lang = urlLang || store.get('powr_lang', (navigator.language || 'en').toLowerCase().startsWith('es') ? 'es' : 'en');
+  let lang = urlLang || store.get('wizelift_lang', (navigator.language || 'en').toLowerCase().startsWith('es') ? 'es' : 'en');
   const t = (en, es) => (lang === 'es' && es != null ? es : en);
   const money = (n) => new Intl.NumberFormat(lang === 'es' ? 'es-ES' : 'en-IE', { style: 'currency', currency: S.currency, minimumFractionDigits: n % 1 ? 2 : 0 }).format(n);
 
@@ -38,8 +38,8 @@
     $$('.lang').forEach((b) => (b.textContent = lang === 'es' ? 'EN' : 'ES'));
   }
   function setLang(l) {
-    lang = l; store.set('powr_lang', l); applyLang(); renderCart();
-    document.dispatchEvent(new CustomEvent('powr:lang', { detail: l }));
+    lang = l; store.set('wizelift_lang', l); applyLang(); renderCart();
+    document.dispatchEvent(new CustomEvent('wizelift:lang', { detail: l }));
   }
 
   /* ---------------- icons ---------------- */
@@ -51,9 +51,9 @@
     mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   };
-  window.POWR_ICONS = I;
+  window.WIZELIFT_ICONS = I;
   const LOGO = `<img class="logo-word" src="assets/img/logo-wordmark.png?v=20261028b" alt="WizeLift" width="144" height="26">`;
-  window.POWR_LOGO = LOGO;
+  window.WIZELIFT_LOGO = LOGO;
 
   /* ---------------- header / footer ---------------- */
   const page = document.body.dataset.page || '';
@@ -98,7 +98,7 @@
         <div>
           <a class="logo" href="index.html" aria-label="WizeLift home">${LOGO}</a>
           <p class="muted small" style="margin-top:16px;max-width:36ch" data-es="Entrenamiento basado en la velocidad con el móvil que ya llevas. Hecho en Madrid.">Velocity-based training with the phone you already own. Made in Madrid.</p>
-          <form class="newsletter" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-powr-form>
+          <form class="newsletter" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-wizelift-form>
             <input type="hidden" name="form-name" value="newsletter">
             <p class="hp"><label>Leave empty <input name="bot-field"></label></p>
             <input type="email" name="email" required placeholder="Your email" data-es-ph="Tu email" aria-label="Email">
@@ -154,8 +154,8 @@
   document.body.insertAdjacentHTML('beforeend', footer + drawer);
 
   /* ---------------- cart ---------------- */
-  let cart = store.get('powr_cart', []).filter((l) => P[l.id]);
-  const saveCart = () => store.set('powr_cart', cart);
+  let cart = store.get('wizelift_cart', []).filter((l) => P[l.id]);
+  const saveCart = () => store.set('wizelift_cart', cart);
   const cartQty = () => cart.reduce((a, l) => a + l.qty, 0);
   const subtotal = () => cart.reduce((a, l) => a + P[l.id].price * l.qty, 0);
   /* A built kit is "clip.plate.ring" (catalog.js, custom); older carts hold one colour id. */
@@ -224,11 +224,11 @@
 
   document.addEventListener('click', (e) => {
     const q = e.target.closest('[data-q]');
-    if (q) { const i = +q.dataset.q; setQty(i, cart[i].qty + +q.dataset.d); document.dispatchEvent(new Event('powr:cart')); return; }
+    if (q) { const i = +q.dataset.q; setQty(i, cart[i].qty + +q.dataset.d); document.dispatchEvent(new Event('wizelift:cart')); return; }
     const rm = e.target.closest('[data-rm]');
-    if (rm) { setQty(+rm.dataset.rm, 0); document.dispatchEvent(new Event('powr:cart')); return; }
+    if (rm) { setQty(+rm.dataset.rm, 0); document.dispatchEvent(new Event('wizelift:cart')); return; }
     const ad = e.target.closest('[data-add]');
-    if (ad) { e.preventDefault(); add(ad.dataset.add, 1, ad.dataset.color || null); document.dispatchEvent(new Event('powr:cart')); }
+    if (ad) { e.preventDefault(); add(ad.dataset.add, 1, ad.dataset.color || null); document.dispatchEvent(new Event('wizelift:cart')); }
   });
   $('#cartBtn').addEventListener('click', openDrawer);
   $('#drawerClose').addEventListener('click', closeDrawer);
@@ -269,7 +269,7 @@
     if (!res.ok || j.success === false || j.success === 'false') throw new Error(j.message || 'HTTP ' + res.status);
     return true;
   }
-  $$('form[data-powr-form]').forEach((form) => {
+  $$('form[data-wizelift-form]').forEach((form) => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = form.nextElementSibling?.classList.contains('form-status') ? form.nextElementSibling : $('.form-status', form);
@@ -311,7 +311,7 @@
     </article>`;
   }
 
-  window.POWR = { t, money, card, add, customParts, cart: () => cart, subtotal, clearCart, lineHTML, applyLang, observe, toast, submitForm, lang: () => lang, colorName, fillRange, store };
+  window.WizeLift = { t, money, card, add, customParts, cart: () => cart, subtotal, clearCart, lineHTML, applyLang, observe, toast, submitForm, lang: () => lang, colorName, fillRange, store };
 
   applyLang(); renderCart(); observe();
   $$('input[type="range"]').forEach(fillRange);

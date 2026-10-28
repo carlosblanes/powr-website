@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><script>(function(){var p=location.pathname.replace(/^\/wizelift-website/,"");location.replace("https://wizelift.com"+p+location.search+location.hash);})();</script><link rel="canonical" href="https://wizelift.com/community-user"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A lifter on WizeLift</title><meta name="robots" content="noindex"><link rel="icon" href="/assets/img/favicon.png?v=20261028" type="image/png"><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/site.css?v=20261028b"></head>
+<body><section class="page-hero" style="min-height:70vh;display:grid;align-items:center"><div class="grid-bg"></div><div class="wrap" style="text-align:center;justify-items:center"><h1 style="font-size:clamp(32px,5vw,56px)" data-es="Un perfil de WizeLift">A WizeLift profile</h1><p class="lede" data-es="Ábrelo en la app para ver a este atleta y seguirle.">Open it in the app to see this lifter and follow them.</p><div class="hero-cta" style="justify-content:center"><a class="btn" id="open" href="/" data-es="Abrir en WizeLift">Open in WizeLift</a><a class="btn ghost" href="/" data-es="Qué es WizeLift">What is WizeLift</a></div></div></section>
+<script>
+// /community/user/<uuid> is rewritten here (_redirects). The QR codes and share
+// links the app makes carry this URL; the app's own scanner reads the id out of it.
+(function(){var m=/\/community\/user\/([0-9a-f-]{36})/i.exec(location.pathname);if(!m)return;
+var deep='wizelift://community/user/'+m[1];document.getElementById('open').href=deep;location.href=deep;})();
+</script>
+<script src="/assets/js/catalog.js?v=20261028b"></script><script src="/assets/js/app.js?v=20261028b"></script></body></html>

@@ -691,7 +691,7 @@ html[lang="es"] .legal-doc[data-doc-lang="en"], html:not([lang="es"]) .legal-doc
   .co-actions .btn { flex: 1 1 100%; }
 }
 
-/* ---------- app-faithful mockups (match powr-native) ---------- */
+/* ---------- app-faithful mockups (match wizelift-native) ---------- */
 .demo-note { font: 600 11px/1 var(--f-mono); letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
 .app-sub { display: flex; justify-content: center; align-items: center; gap: .6em; margin-top: 3%; font-size: .72em; }
 .app-sub .hz { color: #737373; }
