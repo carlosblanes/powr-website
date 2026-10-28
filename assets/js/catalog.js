@@ -1,5 +1,5 @@
 /*
- * POWR catalogue and store settings — THE ONE FILE TO EDIT for prices, products,
+ * WHIZREP catalogue and store settings — THE ONE FILE TO EDIT for prices, products,
  * shipping and payment. Every page reads from here.
  *
  * Prices are in EUR, VAT included.
@@ -8,7 +8,7 @@
  * link by email instead (manual, no account needed to start).
  */
 window.POWR_SETTINGS = {
-  brand: 'POWR',
+  brand: 'WHIZREP',
   currency: 'EUR',
   locale: 'es-ES',
   email: '',   // public contact email shown on the site; leave '' to hide it
@@ -45,7 +45,7 @@ window.POWR_SETTINGS = {
 window.POWR_PRODUCTS = {
   // The individual kit: everything one lifter needs. Three parts: phone ring, magnet, bar support.
   'kit': {
-    name: 'POWR Kit',
+    name: 'WHIZREP Kit',
     tagEn: 'Everything you need', tagEs: 'Todo lo que necesitas',
     price: 29, compareAt: 0,
     img: 'assets/img/clip-hero.jpg',
@@ -53,13 +53,13 @@ window.POWR_PRODUCTS = {
     stripeLink: '',
     shortEn: 'Your phone becomes a velocity tracker on any Olympic bar.',
     shortEs: 'Tu móvil se convierte en un medidor de velocidad en cualquier barra olímpica.',
-    boxEn: ['Phone ring — sticks to your phone or case', 'Metal magnet ring (55 × 45 mm) on the clip plate', 'POWR Bar Clip, two PETG parts in your colours, with 4 silicone grip strips — fits 50 mm Olympic sleeves'],
-    boxEs: ['Anillo para el móvil — se pega al móvil o a la funda', 'Anillo magnético metálico (55 × 45 mm) sobre la placa del clip', 'POWR Bar Clip, dos piezas de PETG en tus colores, con 4 tiras de silicona — manguitos olímpicos de 50 mm'],
+    boxEn: ['Phone ring — sticks to your phone or case', 'Metal magnet ring (55 × 45 mm) on the clip plate', 'WHIZREP Bar Clip, two PETG parts in your colours, with 4 silicone grip strips — fits 50 mm Olympic sleeves'],
+    boxEs: ['Anillo para el móvil — se pega al móvil o a la funda', 'Anillo magnético metálico (55 × 45 mm) sobre la placa del clip', 'WHIZREP Bar Clip, dos piezas de PETG en tus colores, con 4 tiras de silicona — manguitos olímpicos de 50 mm'],
     // Older single-colour ids, still accepted in a saved cart.
     colors: [
       { id: 'black', en: 'Graphite', es: 'Grafito', hex: '#1d2021', img: 'assets/img/clip-hero.jpg' },
       { id: 'chalk', en: 'Chalk', es: 'Tiza', hex: '#e9e6df', img: 'assets/img/clip-chalk.jpg' },
-      { id: 'teal', en: 'POWR Teal', es: 'Teal POWR', hex: '#38f0d7', img: 'assets/img/clip-teal.jpg' },
+      { id: 'teal', en: 'WHIZREP Teal', es: 'Teal WHIZREP', hex: '#38f0d7', img: 'assets/img/clip-teal.jpg' },
     ],
     /*
      * Build your own: a PETG colour for the clip, one for the plate, a finish for the
@@ -72,7 +72,7 @@ window.POWR_PRODUCTS = {
         { id: 'black', en: 'Black', es: 'Negro', hex: '#18191a' },
         { id: 'white', en: 'White', es: 'Blanco', hex: '#ecebe7' },
         { id: 'grey', en: 'Grey', es: 'Gris', hex: '#7d8285' },
-        { id: 'teal', en: 'POWR Teal', es: 'Teal POWR', hex: '#38f0d7' },
+        { id: 'teal', en: 'WHIZREP Teal', es: 'Teal WHIZREP', hex: '#38f0d7' },
         { id: 'red', en: 'Red', es: 'Rojo', hex: '#c8202f' },
         { id: 'orange', en: 'Orange', es: 'Naranja', hex: '#f0671c' },
         { id: 'yellow', en: 'Yellow', es: 'Amarillo', hex: '#f4c20d' },
@@ -89,7 +89,7 @@ window.POWR_PRODUCTS = {
         { id: 'rose', en: 'Rose gold', es: 'Oro rosa', hex: '#d9a08c' },
       ],
       presets: [
-        { id: 'black.teal.silver', en: 'POWR', es: 'POWR' },
+        { id: 'black.teal.silver', en: 'WHIZREP', es: 'WHIZREP' },
         { id: 'black.black.black', en: 'Stealth', es: 'Sigilo' },
         { id: 'white.white.silver', en: 'Chalk', es: 'Tiza' },
         { id: 'white.teal.silver', en: 'Arctic', es: 'Ártico' },

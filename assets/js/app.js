@@ -1,4 +1,4 @@
-/* POWR site — shared shell: header/footer, language, cart drawer, forms, reveal. */
+/* WHIZREP site — shared shell: header/footer, language, cart drawer, forms, reveal. */
 (() => {
   const S = window.POWR_SETTINGS;
   const P = window.POWR_PRODUCTS;
@@ -52,7 +52,7 @@
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   };
   window.POWR_ICONS = I;
-  const LOGO = `<img class="logo-word" src="assets/img/logo-wordmark.png?v=20261026" alt="POWR" width="141" height="26">`;
+  const LOGO = `<img class="logo-word" src="assets/img/logo-wordmark.png?v=20261028" alt="WHIZREP" width="197" height="26">`;
   window.POWR_LOGO = LOGO;
 
   /* ---------------- header / footer ---------------- */
@@ -62,7 +62,7 @@
   <div class="announce"><span data-es="Envío gratis desde 40 €">Free shipping over €40</span></div>
   <header class="nav" id="nav">
     <div class="wrap">
-      <a class="logo" href="index.html" aria-label="POWR home">${LOGO}</a>
+      <a class="logo" href="index.html" aria-label="WHIZREP home">${LOGO}</a>
       <nav class="nav-links" aria-label="Main">
         <a href="index.html#how"${cur('home')} data-es="Cómo funciona">How it works</a>
         <a href="product.html?id=kit"${cur('shop')} data-es="El kit">The kit</a>
@@ -96,7 +96,7 @@
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <a class="logo" href="index.html" aria-label="POWR home">${LOGO}</a>
+          <a class="logo" href="index.html" aria-label="WHIZREP home">${LOGO}</a>
           <p class="muted small" style="margin-top:16px;max-width:36ch" data-es="Entrenamiento basado en la velocidad con el móvil que ya llevas. Hecho en Madrid.">Velocity-based training with the phone you already own. Made in Madrid.</p>
           <form class="newsletter" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-powr-form>
             <input type="hidden" name="form-name" value="newsletter">
@@ -108,13 +108,13 @@
           <p class="xs muted" style="margin-top:10px" data-es="Lanzamientos y acceso anticipado. Sin spam.">Launches and early access. No spam.</p>
         </div>
         <div><h4 data-es="Producto">Product</h4><ul>
-          <li><a href="product.html?id=kit">POWR Kit</a></li>
+          <li><a href="product.html?id=kit">WHIZREP Kit</a></li>
           <li><a href="shop.html#box" data-es="Qué incluye">What's in the box</a></li>
           <li><a href="index.html#how" data-es="Cómo funciona">How it works</a></li>
-          <li><a href="index.html#collar" data-es="POWR Collar (próximamente)">POWR Collar (coming later)</a></li>
+          <li><a href="index.html#collar" data-es="WHIZREP Collar (próximamente)">WHIZREP Collar (coming later)</a></li>
         </ul></div>
         <div><h4 data-es="Empresas">Business</h4><ul>
-          <li><a href="gyms.html" data-es="POWR para gimnasios">POWR for gyms</a></li>
+          <li><a href="gyms.html" data-es="WHIZREP para gimnasios">WHIZREP for gyms</a></li>
           <li><a href="gyms.html#pricing" data-es="Precios gimnasios">Gym pricing</a></li>
           <li><a href="gyms.html#quote" data-es="Pedir presupuesto">Request a quote</a></li>
           <li><a href="contact.html?topic=coach" data-es="Entrenadores y equipos">Coaches &amp; teams</a></li>
@@ -128,7 +128,7 @@
         </ul></div>
       </div>
       <div class="foot-bottom">
-        <span>© ${new Date().getFullYear()} POWR · <span data-es="Todos los derechos reservados">All rights reserved</span></span>
+        <span>© ${new Date().getFullYear()} WHIZREP · <span data-es="Todos los derechos reservados">All rights reserved</span></span>
         <nav>
           <a href="privacy.html" data-es="Privacidad">Privacy</a>
           <a href="terms.html" data-es="Condiciones de uso">Terms of use</a>
@@ -254,7 +254,7 @@
   function toast(msg) { const el = $('#toast'); el.innerHTML = msg; el.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => el.classList.remove('on'), 2600); }
 
   /* ---------------- forms (FormSubmit -> email) ---------------- */
-  const SUBJECTS = { order: '🛒 New POWR order', 'gym-quote': '🏋️ Gym quote request', contact: '✉️ POWR contact', waitlist: '⏳ Pro sensor waitlist', newsletter: '📬 Newsletter sign-up' };
+  const SUBJECTS = { order: '🛒 New WHIZREP order', 'gym-quote': '🏋️ Gym quote request', contact: '✉️ WHIZREP contact', waitlist: '⏳ Pro sensor waitlist', newsletter: '📬 Newsletter sign-up' };
   async function submitForm(form, extra = {}) {
     const fd = new FormData(form);
     Object.entries(extra).forEach(([k, v]) => fd.set(k, v));
@@ -262,7 +262,7 @@
     const name = fd.get('form-name') || form.getAttribute('name') || 'form';
     const data = {};
     for (const [k, v] of fd.entries()) if (typeof v === 'string' && !['form-name', 'bot-field'].includes(k) && v !== '') data[k] = v;
-    const body = { _subject: `${SUBJECTS[name] || 'POWR form'}${data.order_id ? ' · ' + data.order_id : ''}${data.gym ? ' · ' + data.gym : ''}`, _template: 'table', _captcha: 'false', form: name, ...data };
+    const body = { _subject: `${SUBJECTS[name] || 'WHIZREP form'}${data.order_id ? ' · ' + data.order_id : ''}${data.gym ? ' · ' + data.gym : ''}`, _template: 'table', _captcha: 'false', form: name, ...data };
     if (data.email) body._replyto = data.email;
     const res = await fetch(S.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) });
     const j = await res.json().catch(() => ({}));
