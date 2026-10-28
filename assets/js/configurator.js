@@ -1,5 +1,5 @@
 /*
- * The WHIZREP Bar Clip (rev K.4), as sold: clip + MagSafe plate (two PETG parts), the metal
+ * The WizeLift Bar Clip (rev K.4), as sold: clip + MagSafe plate (two PETG parts), the metal
  * magnet ring on the plate, four black silicone strips in the bore. Colours per part,
  * and an "apart" view that slides the plate off its dovetail rail and lifts the ring.
  *
