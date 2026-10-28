@@ -1,5 +1,5 @@
 /*
- * Interactive 3D viewer for WizeLift hardware, straight from the CAD STL files.
+ * Interactive 3D viewer for Wizelift hardware, straight from the CAD STL files.
  * mountViewer(el, { parts: [{url, color}], bar: 'x'|'z', autoRotate, cameraDist })
  * Model frames: bar clip = Z up, bar along X (see hardware/bar_clip/analysis/revF/revF_build.py);
  * collar = bar along Z. Both centred on the bar axis.
@@ -112,7 +112,7 @@ export async function mountViewer(el, opts = {}) {
   };
 }
 
-/* The WizeLift Bar Clip rev F as installed: four silicone strips, bar resting on them. */
+/* The Wizelift Bar Clip rev F as installed: four silicone strips, bar resting on them. */
 export const CLIP_STRIPS = {
   bore: 49.8, width: 6.0, thickness: 1.0, depth: 0.4,
   list: [-90.4, -63.3, 63.3, 90.4].map((angle) => ({ angle, half: 27 })),

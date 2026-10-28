@@ -1,5 +1,5 @@
 /*
- * Runs Cloudflare Turnstile and hands each token to the WizeLift app
+ * Runs Cloudflare Turnstile and hands each token to the Wizelift app
  * (wizelift-native/src/auth/captcha.ts parses these messages). docs/security/CAPTCHA.md.
  *
  * The site key comes in the query string so this page never needs a rebuild:

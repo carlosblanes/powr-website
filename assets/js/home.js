@@ -12,7 +12,7 @@
     return `<article class="product reveal">
       <a class="product-media" href="gyms.html"><img src="assets/img/gym-nfc.jpg" alt="" loading="lazy"><span class="tag teal">${t('Business', 'Empresas')}</span></a>
       <div class="product-body">
-        <h3><a href="gyms.html">WizeLift for Gyms</a></h3>
+        <h3><a href="gyms.html">Wizelift for Gyms</a></h3>
         <p>${t('Tagged machines, member leaderboards and on-site installation.', 'Máquinas etiquetadas, rankings de socios e instalación en tu gimnasio.')}</p>
         <ul><li>${t('NFC + QR tag on every station', 'Etiqueta NFC + QR en cada estación')}</li><li>${t('Your gym listed in the app', 'Tu gimnasio dado de alta en la app')}</li><li>${t('Leaderboards by age, weight, machine', 'Rankings por edad, peso y máquina')}</li><li>${t('Installation by our team', 'Instalación por nuestro equipo')}</li></ul><p class="small muted">${t('Two plans: Gym and Gym Pro.', 'Dos planes: Gym y Gym Pro.')}</p>
         <div class="price-row">
@@ -101,15 +101,15 @@
   if (goalSeg) {
     const G = [
       { id: 'power', en: 'Power', es: 'Potencia', q: ['IS THE BAR MOVING FASTER?', '¿SE MUEVE MÁS RÁPIDA LA BARRA?'], a: ['Moving faster', 'Más rápida'], cut: '10 %', lead: ['Peak velocity', 'Velocidad pico'], board: ['Fastest rep', 'Rep más rápida'],
-        txt: ['Every rep has to be explosive. WizeLift stops the set at 10% velocity loss, before fatigue makes you slow, and tracks whether the bar gets faster at the same weight.', 'Cada rep tiene que ser explosiva. WizeLift para la serie al 10 % de pérdida de velocidad, antes de que la fatiga te frene, y vigila si la barra va más rápida con el mismo peso.'] },
+        txt: ['Every rep has to be explosive. Wizelift stops the set at 10% velocity loss, before fatigue makes you slow, and tracks whether the bar gets faster at the same weight.', 'Cada rep tiene que ser explosiva. Wizelift para la serie al 10 % de pérdida de velocidad, antes de que la fatiga te frene, y vigila si la barra va más rápida con el mismo peso.'] },
       { id: 'strength', en: 'Strength', es: 'Fuerza', q: ['ARE YOUR LIFTS GOING UP?', '¿SUBEN TUS LEVANTAMIENTOS?'], a: ['Rising', 'Suben'], cut: '20 %', lead: ['Mean velocity', 'Velocidad media'], board: ['Strength score', 'Puntuación de fuerza'],
-        txt: ['Heavy, high-quality reps. WizeLift stops the set at 20% loss, adjusts the weight of your next set, and tracks your estimated 1RM session by session.', 'Reps pesadas y de calidad. WizeLift para la serie al 20 % de pérdida, ajusta el peso de tu siguiente serie y sigue tu 1RM estimado sesión a sesión.'] },
+        txt: ['Heavy, high-quality reps. Wizelift stops the set at 20% loss, adjusts the weight of your next set, and tracks your estimated 1RM session by session.', 'Reps pesadas y de calidad. Wizelift para la serie al 20 % de pérdida, ajusta el peso de tu siguiente serie y sigue tu 1RM estimado sesión a sesión.'] },
       { id: 'hypertrophy', en: 'Muscle', es: 'Músculo', q: ['ARE YOUR MUSCLES GETTING ENOUGH?', '¿RECIBEN TUS MÚSCULOS LO SUFICIENTE?'], a: ['Well dosed', 'Bien dosificado'], cut: ['No cutoff', 'Sin límite'], lead: ['Range of motion', 'Recorrido'], board: ['Stimulating sets', 'Series efectivas'],
-        txt: ['Muscle grows from hard sets through full range. WizeLift counts the sets that were really hard (20%+ velocity loss) for each muscle and shows whether you are in the 4–10 sets-a-week band.', 'El músculo crece con series duras y recorrido completo. WizeLift cuenta las series realmente duras (más del 20 % de pérdida) de cada músculo y te dice si estás entre 4 y 10 series por semana.'] },
+        txt: ['Muscle grows from hard sets through full range. Wizelift counts the sets that were really hard (20%+ velocity loss) for each muscle and shows whether you are in the 4–10 sets-a-week band.', 'El músculo crece con series duras y recorrido completo. Wizelift cuenta las series realmente duras (más del 20 % de pérdida) de cada músculo y te dice si estás entre 4 y 10 series por semana.'] },
       { id: 'endurance', en: 'Endurance', es: 'Resistencia', q: ['ARE YOU DOING MORE WORK?', '¿HACES MÁS TRABAJO?'], a: ['On track', 'En camino'], cut: ['No cutoff', 'Sin límite'], lead: ['Reps & volume', 'Reps y volumen'], board: ['Most reps', 'Más repeticiones'],
-        txt: ['More work at moderate loads. WizeLift tracks volume and reps at 40–60% of your max, and whether you do more of it week after week.', 'Más trabajo con cargas moderadas. WizeLift sigue el volumen y las reps al 40–60 % de tu máximo, y si haces más semana tras semana.'] },
+        txt: ['More work at moderate loads. Wizelift tracks volume and reps at 40–60% of your max, and whether you do more of it week after week.', 'Más trabajo con cargas moderadas. Wizelift sigue el volumen y las reps al 40–60 % de tu máximo, y si haces más semana tras semana.'] },
       { id: 'general', en: 'Fitness', es: 'Forma', q: ['ARE YOU KEEPING IT UP?', '¿MANTIENES EL RITMO?'], a: ['On track', 'En camino'], cut: '20 %', lead: ['Mean velocity', 'Velocidad media'], board: ['Sessions', 'Sesiones'],
-        txt: ['Staying consistent is the win. WizeLift keeps sets safe with a 20% cutoff and tracks sessions a week, your streak and a 12-week consistency grid.', 'Ser constante es ganar. WizeLift mantiene las series seguras con un límite del 20 % y sigue tus sesiones por semana, tu racha y 12 semanas de constancia.'] },
+        txt: ['Staying consistent is the win. Wizelift keeps sets safe with a 20% cutoff and tracks sessions a week, your streak and a 12-week consistency grid.', 'Ser constante es ganar. Wizelift mantiene las series seguras con un límite del 20 % y sigue tus sesiones por semana, tu racha y 12 semanas de constancia.'] },
     ];
     let g = 'strength';
     const L = (v) => Array.isArray(v) ? t(v[0], v[1]) : v;
