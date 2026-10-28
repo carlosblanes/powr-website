@@ -1,0 +1,20 @@
+<!doctype html>
+<!--
+  The WizeLift app's bot check (docs/security/CAPTCHA.md). Loaded by the native app
+  in a hidden WebView; posts Cloudflare Turnstile tokens back to it. Turnstile
+  only runs on a page served from a hostname listed on the widget, which is why
+  this lives on the web app's domain rather than inside the app bundle.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="robots" content="noindex">
+  <title>WizeLift</title>
+  <link rel="stylesheet" href="/captcha/turnstile.css">
+  <script src="/captcha/turnstile.js"></script>
+</head>
+<body>
+  <div id="widget"></div>
+</body>
+</html>
