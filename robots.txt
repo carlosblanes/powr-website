@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /checkout.html
+
+Sitemap: https://wizelift.com/sitemap.xml
