@@ -11,7 +11,7 @@ window.POWR_SETTINGS = {
   brand: 'WizeLift',
   currency: 'EUR',
   locale: 'es-ES',
-  email: '',   // public contact email shown on the site; leave '' to hide it
+  email: 'support@wizelift.com',   // public contact email shown on the site; leave '' to hide it
   // Where orders, quotes and messages are emailed (FormSubmit, free, no account).
   // After the first submission FormSubmit emails an activation link; once activated you can
   // swap the address for the random alias it gives you, so the email is not in the page source.
