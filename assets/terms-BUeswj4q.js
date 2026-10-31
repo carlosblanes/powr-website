@@ -1,4 +1,4 @@
-import{d as e,f as t,h as n,m as r,p as i,t as a}from"./Providers-mDg3GdUq.js";import{t as o}from"./Layout-CWXXeEhN.js";import{t as s}from"./LegalDoc-Jzrtu0j7.js";var c=n(),l=r(),u=`  <p class="legal-lede">These terms exist in English and Spanish. If they differ, the Spanish version prevails, unless the English one is more favourable to you as a consumer.</p>
+import{d as e,f as t,h as n,m as r,p as i,t as a}from"./Providers-D71jCqFi.js";import{t as o}from"./Layout-BOioSYKd.js";import{t as s}from"./LegalDoc-Cbt7cjvA.js";var c=n(),l=r(),u=`  <p class="legal-lede">These terms exist in English and Spanish. If they differ, the Spanish version prevails, unless the English one is more favourable to you as a consumer.</p>
   <nav class="legal-toc" aria-label="Contents">
     <h2>Contents</h2>
     <ol>
